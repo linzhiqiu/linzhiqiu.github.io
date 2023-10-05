@@ -4,15 +4,14 @@
 
 <html>
   <head>
-    <title>VisualGPTScore:
-      Visio-Linguistic Reasoning with Multimodal Generative Pre-Training Scores</title>
+    <title>Revisiting the Role of Language Priors in Vision-Language Models</title>
     <meta property="og:title" content="VisualGPTScore" />
   </head>
 
   <body>
     <br>
     <center>
-    <span style="font-size:42px">Visio-Linguistic Reasoning with Multimodal Generative Pre-Training Scores
+    <span style="font-size:42px">Revisiting the Role of Language Priors in Vision-Language Models
 </span>
     </center>
 
@@ -80,15 +79,17 @@
       </table>
         <!-- <br> -->
     <p align=left style="width:1000px; padding: 0px 0px 0px 60px">
-      Vision-language models (VLMs) discriminatively pre-trained with contrastive image-text matching losses such as P(match|text, image) have been criticized for lacking compositional understanding. 
-      This means they might output similar scores even if the original caption is rearranged into a different semantic statement. 
-      To address this, we propose to use the <b>V</b>isual <b>G</b>enerative <b>P</b>re-<b>T</b>raining Score (<b>VisualGPTScore</b>) of P(text|image), 
-      a <i>multimodal generative</i> score that captures the likelihood of a text caption conditioned on an image using an image-conditioned language model. 
-      Contrary to the belief that VLMs are mere bag-of-words models, our off-the-shelf VisualGPTScore demonstrates top-tier performance on recently proposed 
-      image-text retrieval benchmarks like ARO and Crepe that assess compositional reasoning. Furthermore, we factorize VisualGPTScore into a product of 
-      the <i>marginal</i> P(text) and the <i>Pointwise Mutual Information</i> (PMI). This helps to (a) diagnose datasets with strong language bias, 
-      and (b) debias results on other benchmarks like Winoground using an information-theoretic framework. 
-      VisualGPTScore provides valuable insights and serves as a strong baseline for future evaluation of visio-linguistic compositionality.
+      Vision-language models (VLMs) are impactful in part because they can be applied to a variety of visual understanding tasks in a zero-shot fashion, 
+      without any fine-tuning. We study \textit{generative VLMs} that are trained for next-word generation given an image. We explore their zero-shot performance on the 
+      illustrative task of image-text retrieval across 8 popular vision-language benchmarks. Our first observation is that they can be repurposed for discriminative tasks 
+      (such as image-text retrieval) by simply computing the match score of generating a particular text string given an image. We call this probabilistic score the <i>Visual Generative Pre-Training Score</i> (VisualGPTScore). 
+      While the VisualGPTScore produces near-perfect accuracy on some retrieval benchmarks, it produces poor accuracy on others. 
+      We analyze this behavior through a probabilistic lens, pointing out that some benchmarks inadvertently capture unnatural language distributions 
+      by creating adversarial but unlikely text captions. In fact, we demonstrate that even a "blind" language model that ignores any image evidence 
+      can sometimes outperform all prior art, reminiscent of similar challenges faced by the visual-question answering (VQA) community many 
+      years ago. We derive a probabilistic post-processing scheme that controls for the amount of linguistic bias in generative VLMs at 
+      test time without having to retrain or fine-tune the model. We show that the VisualGPTScore, when appropriately debiased, is a 
+      strong zero-shot baseline for vision-language understanding, oftentimes producing state-of-the-art accuracy.
       </p>
       <table align=center width=400px>
         <tr>
@@ -106,10 +107,13 @@
       <br>
       <hr>
       <table align=center width=800>
-       <center><h1>Generative Score for Visio-Linguistic Compositionality</h1></center>
-       <p align=left style="width:1000px; padding: 0px 0px 0px 60px">Mainstream VLMs evaluated with discriminative scores that model
-        P(match|text, image) like the ITMScore fail to generalize to compositional reasoning benchmarks. 
-        We show that our off-the-shelf VisualGPTScore trained with generative language modelling loss achieves top-tier performance on these benchmarks without additional fine-tuning.</p>
+       <center><h1>Visual Generative Pre-Training Score for Visio-Linguistic Reasoning</h1></center>
+       <p align=left style="width:1000px; padding: 0px 0px 0px 60px">While vision-language models (VLMs) such as CLIP show impressive performance, recent analyses show VLMs still struggle with <i>compositional reasoning</i> of objects, attributes, and their relations. 
+        But somewhat interestingly, large-scale language models (LLMs) trained for autoregressive next-token prediction such as GPT seem to be able to discern such distinctions. 
+        This motivates us to study <i>generative VLMs</i>, or image-conditioned language generation models, for image-text retrieval tasks (e.g., ARO/SugarCrepe/Winoground) designed to assess visio-linguistic reasoning capabilities. 
+        We first demonstrate that generative VLMs can be easily repurposed for discriminative tasks (like retrieval) by setting the match score for an image-text pair to be the probability that the VLM would generate that text from the given image, or P(text|image). 
+      We call this probability score the Visual Generative Pre-Training Score, or VisualGPTScore. We observe that the VisualGPTScore performs surprisingly well on many benchmarks, e.g., producing near-perfect accuracy on ARO. However, it still struggles on other benchmarks such as Winoground. 
+      We analyze this performance discrepancy through a probabilistic lens by deriving the language prior P(text) from VLMs via Monte-Carlo sampling of trainset or Gaussian noise images.</p>
          <center><img style="width:500px" src="./images/tab1.png" /></center>
          <br>
       </table>
@@ -198,7 +202,7 @@ images is potentially imprecise, and we encourage future VLMs to directly model 
           <tr>
             <td><a href="./images/teaser.png"><img style="width:200px" src="./images/teaser.png"/></a></td>
             <td><span style="font-size:14pt">Zhiqiu Lin, Xinyue Chen, Deepak Pathak, Pengchuan Zhang, Deva Ramanan.<br>
-                <i>Visio-Linguistic Reasoning with Multimodal Generative Pre-Training Scores</i><br>
+                <i>Revisiting the Role of Language Priors in Vision-Language Models</i><br>
               In submission.<br>
                 <a href="http://arxiv.org/abs/2306.01879">[Arxiv]</a> &nbsp; &nbsp;
                 <a href="https://github.com/linzhiqiu/visual_gpt_score">[Code]</a> &nbsp; &nbsp;

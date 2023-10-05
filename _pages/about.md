@@ -22,7 +22,7 @@ Hi! I am a third year PhD student at Robotics Institute of Carnegie Mellon Unive
 <!-- My research interest includes neural machine translation and computer vision. I have published more than 100 papers at the top international AI conferences with total <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'>google scholar citations <strong><span id='total_cit'>260000+</span></strong></a> (You can also use google scholar badge <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>). -->
 
 # 🔥 News
-- *2023.05*: My recent work [VisualGPTScore: Visio-Linguistic Reasoning with Multimodal Generative Pre-Training Scores](http://arxiv.org/abs/2306.01879) challenges the prevailing belief that VLMs are mere bag-of-word models and demonstrate top-tier performance on compositionality benchmarks such as ARO/Crepe!
+- *2023.09*: My recent work [Revisiting the Role of Language Priors in Vision-Language Models](http://arxiv.org/abs/2306.01879) demonstrates top-tier performance across recent vision-language benchmarks like ARO/SugarCrepe/Winoground.
 - *2023.04*: I will be interning at Meta GenAI this summer on vision-language models.
 - *2023.02*: [Multimodality Helps Unimodality: Cross-Modal Few-Shot Learning with Multimodal Models](https://linzhiqiu.github.io/papers/cross_modal/) accepted by CVPR'23.
 - *2022.09*: [LECO: Continual Learning with Evolving Class Ontologies](https://linzhiqiu.github.io/papers/leco/) was accepted by NeurIPS'22. Check out the [website](https://linzhiqiu.github.io/papers/leco/) and [slides](/papers/leco/LECO.pdf) for a quick overview!
@@ -32,17 +32,17 @@ Hi! I am a third year PhD student at Robotics Institute of Carnegie Mellon Unive
 <!-- - *2020.06*: &nbsp;🎉🎉 Best Paper Nomination at CVPR'20 for [Visual Chirality](https://linzhiqiu.github.io/papers/chirality/)! -->
 
 # 📝 Publications 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">In submission.</div><img src='papers/visual_gpt_score/images/teaser_small.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">In submission.</div><img src='papers/visual_gpt_score/images/teaser_small_new.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**VisualGPTScore: Visio-Linguistic Reasoning with Multimodal Generative Pre-Training Scores**
+**Revisiting the Role of Language Priors in Vision-Language Models (VisualGPTScore)**
 
 **Zhiqiu Lin**\*, [Xinyue Chen\*](https://www.linkedin.com/in/xinyue-chen-073a4114b/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Pengchuan Zhang](https://pzzhang.github.io/pzzhang/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
 
 [Website](https://linzhiqiu.github.io/papers/visual_gpt_score/) \| [Arxiv](http://arxiv.org/abs/2306.01879) \| [![](https://img.shields.io/github/stars/linzhiqiu/visual_gpt_score?style=social&label=Code+Stars)](https://github.com/linzhiqiu/visual_gpt_score)
-- We propose to use **Visual** **G**enerative **P**re-**T**raining Score (**VisualGPTScore**), the likelihood of a text conditioned on an image to address visio-linguistic compositionality benchmarks, such as ARO and Crepe.
-- Such multimodal generative scores achieve top-tier image-text retrieval performance, surpassing the SOTA discriminative score (such as ITMScore) by a great margin without incurring computational overhead.
-- Furthermore, we factorize VisualGPTScore into a product of the marginal P(text) and the Pointwise Mutual Information (PMI), in order to (a) diagnose datasets with strong language bias, and (b) debias results on other benchmarks like Winoground.
+- We use generative VLMs to implement **Visual** **G**enerative **P**re-**T**raining Score (**VisualGPTScore**), i.e., the probablity score of generating a text given an image.
+- Such a generative score achieves top-tier image-text retrieval performance on multiple compositionality benchmarks, surpassing all discriminative approaches by a great margin. 
+- We further investigate the role of language prior P(text) through a probablistic lens, and introduce a debiasing solution that consistently improves the VisualGPTScore under train-test distribution shifts over text.
 
 </div>
 </div>
