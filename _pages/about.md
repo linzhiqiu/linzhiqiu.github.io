@@ -17,14 +17,16 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-Hi! I am a third year PhD student at Robotics Institute of Carnegie Mellon University, advised by Prof. [Deva Ramanan](https://www.cs.cmu.edu/~deva/). I did my undergrad in Computer Science and Maths at Cornell University and served as college symbol bearer (top 5 of the college). My current research focuses on computer vision and learning, especially robustness to distribution shifts (continual/lifelong vision) and data-efficient adaptation with multi-modalities.
+Hi! I am a fourth year PhD student at Robotics Institute of Carnegie Mellon University, advised by Prof. [Deva Ramanan](https://www.cs.cmu.edu/~deva/). I did my undergrad in Computer Science and Maths at Cornell University and served as college symbol bearer (top 5 of the college). My current research focuses on computer vision and language, especially evaluating and improving multimodal generative models.
 
 <!-- My research interest includes neural machine translation and computer vision. I have published more than 100 papers at the top international AI conferences with total <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'>google scholar citations <strong><span id='total_cit'>260000+</span></strong></a> (You can also use google scholar badge <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>). -->
 
 # 🔥 News
-- *2023.09*: My recent work [Revisiting the Role of Language Priors in Vision-Language Models](http://arxiv.org/abs/2306.01879) demonstrates top-tier performance across recent vision-language benchmarks like ARO/SugarCrepe/Winoground.
-- *2023.04*: I will be interning at Meta GenAI this summer on vision-language models.
-- *2023.02*: [Multimodality Helps Unimodality: Cross-Modal Few-Shot Learning with Multimodal Models](https://linzhiqiu.github.io/papers/cross_modal/) accepted by CVPR'23.
+- *2024.04*: We introduced VQAScore for evaluating the prompt alignment of text-to-image/video/3D models: [Evaluating Text-to-Visual Generation with Image-to-Text Generation](https://arxiv.org/pdf/2404.01291.pdf).
+- *2024.02*: Two papers accepted to CVPR'24: [Language Models as Black-Box Optimizers for Vision-Language Models](https://arxiv.org/abs/2309.05950) and [The Neglected Tails of Vision-Language Models](https://arxiv.org/abs/2401.12425).
+- *2023.12*: Finished my internship at Meta GenAI. Many thanks to my great mentors [Pengchuan Zhang](https://pzzhang.github.io/pzzhang/) and [Xide Xia](https://xidexia.github.io/)!
+- *2023.09*: My recent work [Revisiting the Role of Language Priors in Vision-Language Models](http://arxiv.org/abs/2306.01879) demonstrates top-tier performance across retrieval benchmarks like ARO/SugarCrepe/Winoground.
+- *2023.02*: [Multimodality Helps Unimodality: Cross-Modal Few-Shot Learning with Multimodal Models](https://linzhiqiu.github.io/papers/cross_modal/) was accepted by CVPR'23.
 - *2022.09*: [LECO: Continual Learning with Evolving Class Ontologies](https://linzhiqiu.github.io/papers/leco/) was accepted by NeurIPS'22. Check out the [website](https://linzhiqiu.github.io/papers/leco/) and [slides](/papers/leco/LECO.pdf) for a quick overview!
 - *2022.06*: [The 1st CLEAR Challenge](http://clear-benchmark.github.io) was hosted on CVPR'22 [2nd Workshop on Open World Vision](https://www.cs.cmu.edu/~shuk/vplow.html). Check out the [slides](/papers/clear/clear_cvpr.pdf) for a quick overview!
 - *2021.09*: [The CLEAR Benchmark: Continual LEArning on Real-World Imagery](http://clear-benchmark.github.io) accepted by NeurIPS'21 (Datasets and Benchmarks Track). 
@@ -32,6 +34,45 @@ Hi! I am a third year PhD student at Robotics Institute of Carnegie Mellon Unive
 <!-- - *2020.06*: &nbsp;🎉🎉 Best Paper Nomination at CVPR'20 for [Visual Chirality](https://linzhiqiu.github.io/papers/chirality/)! -->
 
 # 📝 Publications 
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">In submission.</div><img src='papers/vqascore/images/vqascore.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**Evaluating Text-to-Visual Generation with Image-to-Text Generation**
+
+**Zhiqiu Lin**, [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Baiqi Li](https://linzhiqiu.github.io/papers/vqascore/), [Emily Li](https://linzhiqiu.github.io/papers/vqascore/), [Xide Xia](https://xidexia.github.io/), [Graham Neubig](https://phontron.com/), [Pengchuan Zhang\*](https://pzzhang.github.io/pzzhang/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/)
+
+[Website](https://linzhiqiu.github.io/papers/vqascore/) \| [Arxiv](https://arxiv.org/pdf/2404.01291.pdf) \| [![](https://img.shields.io/github/stars/linzhiqiu/t2v_metrics?style=social&label=Code+Stars)](https://github.com/linzhiqiu/t2v_metrics)
+- We propose VQAScore, the state-of-the-art alignment metric for text-to-image/video/3D models.
+- VQAScore based on our new CLIP-FlanT5 model outperforms previous metrics based on GPT-4Vision or costly human feedback.
+
+</div>
+</div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2024</div><img src='papers/leco/images/dalle3_inversion_new.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**Language Models as Black-Box Optimizers for Vision-Language Models**
+
+**Zhiqiu Lin**\*, [Shihong Liu\*](https://llm-can-optimize-vlm.github.io/), [Samuel Yu\*](https://scholar.google.com/citations?user=gxRDkLMAAAAJ&hl=en), [Ryan Lee](https://llm-can-optimize-vlm.github.io/), [Tiffany Ling](https://llm-can-optimize-vlm.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
+
+[Website](https://llm-can-optimize-vlm.github.io/) \| [Arxiv](https://arxiv.org/pdf/2309.05950.pdf)
+- We use ChatGPT to effectively optimize vision-language models without white-box access to model weights or gradients.
+- We show successful applications in visual classification, text-to-image generation and personalization.
+
+</div>
+</div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2024</div><img src='papers/leco/images/tailed_frog_v3.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**The Neglected Tails of Vision-Language Models**
+
+**Zhiqiu Lin**\*, [Shubham Parashar\*](https://shubhamprshr27.github.io/), [Tian Liu\*](https://www.linkedin.com/in/tian1327), [Xiangjue Dong](https://www.linkedin.com/in/xiangjue-dong), [Yanan Li](https://shubhamprshr27.github.io/neglected-tails-of-vlms/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/), [James Caverlee](https://shubhamprshr27.github.io/neglected-tails-of-vlms/), [Shu Kong](https://shubhamprshr27.github.io/neglected-tails-of-vlms/)
+
+[Website](https://shubhamprshr27.github.io/neglected-tails-of-vlms/) \| [Arxiv](https://arxiv.org/pdf/2401.12425.pdf)
+- Popular vision-language models (CLIP, MetaCLIP, OpenCLIP) are all long-tailed learners trained on drastically imbalanced web data, causing biases in downstream applications such as visual chatbots (GPT-4Vision) and T2I generation (Stable Diffusion, DALL-E 3).
+- We fix these biases through our SOTA prompting and retrieval-augmented strategies.
+
+</div>
+</div>
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">In submission.</div><img src='papers/visual_gpt_score/images/teaser_small_new.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
@@ -46,7 +87,6 @@ Hi! I am a third year PhD student at Robotics Institute of Carnegie Mellon Unive
 
 </div>
 </div>
-
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2023</div><img src='papers/cross_modal/images/neuro.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
