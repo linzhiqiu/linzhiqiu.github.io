@@ -22,6 +22,7 @@ Hi! I am a fourth year PhD student at Robotics Institute of Carnegie Mellon Univ
 <!-- My research interest includes neural machine translation and computer vision. I have published more than 100 papers at the top international AI conferences with total <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'>google scholar citations <strong><span id='total_cit'>260000+</span></strong></a> (You can also use google scholar badge <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>). -->
 
 # 🔥 News
+- *2024.05*: [VisualGPTScore](http://arxiv.org/abs/2306.01879) was accepted to ICML'24.
 - *2024.04*: We introduced VQAScore for evaluating the prompt alignment of text-to-image/video/3D models: [Evaluating Text-to-Visual Generation with Image-to-Text Generation](https://arxiv.org/pdf/2404.01291.pdf).
 - *2024.02*: Two papers accepted to CVPR'24: [Language Models as Black-Box Optimizers for Vision-Language Models](https://arxiv.org/abs/2309.05950) and [The Neglected Tails of Vision-Language Models](https://arxiv.org/abs/2401.12425).
 - *2023.12*: Finished my internship at Meta GenAI. Many thanks to my great mentors [Pengchuan Zhang](https://pzzhang.github.io/pzzhang/) and [Xide Xia](https://xidexia.github.io/)!
@@ -44,6 +45,20 @@ Hi! I am a fourth year PhD student at Robotics Institute of Carnegie Mellon Univ
 [Website](https://linzhiqiu.github.io/papers/vqascore/) \| [Arxiv](https://arxiv.org/pdf/2404.01291.pdf) \| [![](https://img.shields.io/github/stars/linzhiqiu/t2v_metrics?style=social&label=Code+Stars)](https://github.com/linzhiqiu/t2v_metrics)
 - We propose VQAScore, the state-of-the-art alignment metric for text-to-image/video/3D models.
 - VQAScore based on our new CLIP-FlanT5 model outperforms previous metrics based on GPT-4Vision or costly human feedback.
+
+</div>
+</div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ICML 2024</div><img src='papers/visual_gpt_score/images/teaser_small_new.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**Revisiting the Role of Language Priors in Vision-Language Models (VisualGPTScore)**
+
+**Zhiqiu Lin**\*, [Xinyue Chen\*](https://www.linkedin.com/in/xinyue-chen-073a4114b/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Pengchuan Zhang](https://pzzhang.github.io/pzzhang/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
+
+[Website](https://linzhiqiu.github.io/papers/visual_gpt_score/) \| [Arxiv](http://arxiv.org/abs/2306.01879) \| [![](https://img.shields.io/github/stars/linzhiqiu/visual_gpt_score?style=social&label=Code+Stars)](https://github.com/linzhiqiu/visual_gpt_score)
+- We use generative VLMs to implement **Visual** **G**enerative **P**re-**T**raining Score (**VisualGPTScore**), i.e., the probablity score of generating a text given an image.
+- Such a generative score achieves top-tier image-text retrieval performance on multiple compositionality benchmarks, surpassing all discriminative approaches by a great margin. 
+- We further investigate the role of language prior P(text) through a probablistic lens, and introduce a debiasing solution that consistently improves the VisualGPTScore under train-test distribution shifts over text.
 
 </div>
 </div>
@@ -73,20 +88,7 @@ Hi! I am a fourth year PhD student at Robotics Institute of Carnegie Mellon Univ
 
 </div>
 </div>
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">In submission.</div><img src='papers/visual_gpt_score/images/teaser_small_new.png' alt="sym" width="100%"></div></div>
-<div class='paper-box-text' markdown="1">
 
-**Revisiting the Role of Language Priors in Vision-Language Models (VisualGPTScore)**
-
-**Zhiqiu Lin**\*, [Xinyue Chen\*](https://www.linkedin.com/in/xinyue-chen-073a4114b/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Pengchuan Zhang](https://pzzhang.github.io/pzzhang/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
-
-[Website](https://linzhiqiu.github.io/papers/visual_gpt_score/) \| [Arxiv](http://arxiv.org/abs/2306.01879) \| [![](https://img.shields.io/github/stars/linzhiqiu/visual_gpt_score?style=social&label=Code+Stars)](https://github.com/linzhiqiu/visual_gpt_score)
-- We use generative VLMs to implement **Visual** **G**enerative **P**re-**T**raining Score (**VisualGPTScore**), i.e., the probablity score of generating a text given an image.
-- Such a generative score achieves top-tier image-text retrieval performance on multiple compositionality benchmarks, surpassing all discriminative approaches by a great margin. 
-- We further investigate the role of language prior P(text) through a probablistic lens, and introduce a debiasing solution that consistently improves the VisualGPTScore under train-test distribution shifts over text.
-
-</div>
-</div>
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2023</div><img src='papers/cross_modal/images/neuro.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 

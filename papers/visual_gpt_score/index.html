@@ -52,6 +52,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title"><span style="color: green;">[ICML 2024]</span></h1>
             <h1 class="title is-1 publication-title">Revisiting the Role of Language Priors in Vision-Language Models
             </h1>
             <div class="is-size-5 publication-authors">
@@ -273,7 +274,7 @@
         <div class="column is-four-fifths">
           <h2 class="title is-3">Limitations and Future Work</h2>
           <div class="content has-text-justified">
-            <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">Our analysis is based on simplified assumptions. For instance, the model might not accurately represent P<sub>train</sub>(text|image), a phenomenon we examine in our paper. Estimating P<sub>train</sub>(text) by sampling gaussian noise images is potentially imprecise, and we encourage future VLMs to directly model P<sub>train</sub>(text) or explore better techniques for debiasing.</p>
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">Our analysis is based on simplified assumptions. For instance, the model might not accurately represent P<sub>train</sub>(text|image), a phenomenon we examine in our paper. Estimating P<sub>train</sub>(text) by sampling gaussian noise images is potentially imprecise, and we encourage future VLMs to directly model P<sub>train</sub>(text) or explore better techniques for debiasing. Lastly, we encourage readers to explore our latest work on <a href="https://linzhiqiu.github.io/papers/vqascore/">VQAScore</a>, which adapts VisualGPTScore to more capable vision-language models trained on visual-question-answering data (rather than solely on captioning data) for state-of-the-art vision-language alignment.</p>
 
           </div>
         </div>
@@ -286,12 +287,13 @@
   <section class="section hero is-light" id="BibTeX">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@article{lin2023revisiting,
+      <pre><code>@article{lin2024revisiting,
         title={Revisiting the Role of Language Priors in Vision-Language Models},
         author={Lin, Zhiqiu and Chen, Xinyue and Pathak, Deepak and Zhang, Pengchuan and Ramanan, Deva},
-        journal={arXiv preprint arXiv:2306.01879},
-        year={2023}
-    }</code></pre>
+        booktitle={International Conference on Machine Learning},
+        year={2024},
+        organization={PMLR}
+      }</code></pre>
     </div>
   </section>
   <!--End BibTex citation -->
