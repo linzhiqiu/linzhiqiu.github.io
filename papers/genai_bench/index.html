@@ -42,6 +42,7 @@
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.31.2/gradio.js"></script>
 </head>
 
 <body>
@@ -147,11 +148,19 @@
               </ol>
             </p>
           </div>
+          <h2 class="title is-3">Try ranking images with VQAScore!</h2>
+          <section class="section"  style="background-color:#efeff081">
+            <div class="container is-max-desktop" id="gradio">
+              <gradio-app src="https://zhiqiulin-vqascore.hf.space"></gradio-app>
+            </div>
+          </section>
         </div>
       </div>
     </div>
   </section>
   <!-- End paper abstract -->
+
+  
 
 
   <!-- Method Overview -->
@@ -291,10 +300,10 @@
   <section class="section hero is-light" id="BibTeX (TO UPDATE)">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
-      <pre><code>@article{li2024evaluating,
+      <pre><code>@InProceedings{li2024evaluating,
         title={Evaluating and Improving Compositional Text-to-Visual Generation},
-        author={Li, Baiqi and Lin, Zhiqiu and Pathak, Deepak and Li, Jiayao and and Fei, Yixin and Wu, Kewen and Xia, Xide and Zhang, Pengchuan and Neubig, Graham and Ramanan, Deva},
-        journal={The First Workshop on the Evaluation of Generative Foundation Models CVPR@2024},
+        author={Li, Baiqi and Lin, Zhiqiu and Pathak, Deepak and Li, Jiayao and Fei, Yixin and Wu, Kewen and Xia, Xide and Zhang, Pengchuan and Neubig, Graham and Ramanan, Deva},
+        booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
         year={2024}
       }</code></pre>
     </div>
