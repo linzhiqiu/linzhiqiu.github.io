@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="">
+  <meta property="og:title" content="NaturalBench: Evaluating Vision-Language Models on Natural Adversarial Samples" />
+  <meta property="og:description" content="" />
+  <meta property="og:url" content="" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+
+  <meta name="twitter:title" content="NaturalBench: Evaluating Vision-Language Models on Natural Adversarial Samples">
+  <meta name="twitter:description" content="">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>NaturalBench: Evaluating Vision-Language Models on Natural Adversarial Samples</title>
+  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"> -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.31.2/gradio.js"></script>
+</head>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">NaturalBench: Evaluating Vision-Language Models on Natural Adversarial Samples
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a target="_blank">Baiqi Li</a><sup>*1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Zhiqiu Lin</a><sup>*1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Wenxuan Peng</a><sup>*1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Jean de Dieu Nyandwi</a><sup>*1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Daniel Jiang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Zixian Ma</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Simran Khanuja</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Deva Ramanan</a><sup>&1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Ranjay Krishna</a><sup>&2</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Graham Neubig</a><sup>&1</sup>,</span>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Carnegie Mellon University<br></span>,
+              <span class="author-block"><sup>2</sup>University of Washington<br></span>,
+              <span class="author-block"><sup>*</sup>Co-first authors<br></span>,
+              <span class="author-block"><sup>*</sup>Co-senior authors<br></span>
+              <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2404.01291.pdf" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/linzhiqiu/todo" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/linzhiqiu/todo" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-database"></i>
+                    </span>
+                    <span>NaturalBench</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- <gradio-app src="https://zhiqiulin-vqascore.hf.space"></gradio-app> -->
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              TODO
+            </p>
+          </div>
+          <!-- <h2 class="title is-3">Try ranking images with VQAScore!</h2> -->
+          <!-- <gradio-app src="https://zhiqiulin-vqascore.hf.space"></gradio-app> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End paper abstract -->
+
+
+  <!-- Method Overview -->
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Natural Adversarial Samples for Vision-Language Models</h2>
+          <div class="content has-text-justified">
+
+            TODO
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Method Overview -->
+
+
+  <!-- Text-Image generation -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Model Evaluation</h2>
+          <div class="content has-text-justified">
+            TODO
+
+              
+            </div>
+
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Prompt Inversion -->
+
+
+  <!-- Prompt Inversion -->
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">TODO</h2>
+          <div class="content has-text-justified">
+            <div class="item">
+              <!-- Your image here -->
+
+              TODO
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Prompt Inversion -->
+
+  <!--BibTex citation -->
+  <section class="section hero is-light" id="BibTeX (TO UPDATE)">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>TODO</code></pre>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
+</body>
+
+</html>
