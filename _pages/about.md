@@ -22,6 +22,7 @@ Hi! I am a fourth year PhD student at Robotics Institute of Carnegie Mellon Univ
 <!-- My research interest includes neural machine translation and computer vision. I have published more than 100 papers at the top international AI conferences with total <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'>google scholar citations <strong><span id='total_cit'>260000+</span></strong></a> (You can also use google scholar badge <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>). -->
 
 # 🔥 News
+- *2024.07*: [VQAScore](http://linzhiqiu.github.io/papers/vqascore) was accepted by ECCV'24!
 - *2024.06*: [GenAI-Bench](http://linzhiqiu.github.io/papers/genai_bench) won Best Short Paper Award at <a href="https://syndata4cv.github.io/">SynData@CVPR2024</a>!
 - *2024.05*: [VisualGPTScore](http://arxiv.org/abs/2306.01879) was accepted to ICML'24.
 - *2024.04*: We introduced VQAScore for evaluating the prompt alignment of text-to-image/video/3D models: [Evaluating Text-to-Visual Generation with Image-to-Text Generation](https://arxiv.org/pdf/2404.01291.pdf).
@@ -49,7 +50,7 @@ Hi! I am a fourth year PhD student at Robotics Institute of Carnegie Mellon Univ
 
 </div>
 </div>
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">In submission.</div><img src='papers/vqascore/images/vqascore.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ECCV 2024</div><img src='papers/vqascore/images/vqascore.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 **Evaluating Text-to-Visual Generation with Image-to-Text Generation**
