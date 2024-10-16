@@ -22,6 +22,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <!-- My research interest includes neural machine translation and computer vision. I have published more than 100 papers at the top international AI conferences with total <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'>google scholar citations <strong><span id='total_cit'>260000+</span></strong></a> (You can also use google scholar badge <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>). -->
 
 # 🔥 News
+- *2024.09*: [NaturalBench](http://linzhiqiu.github.io/papers/naturalbench) was accepted to NeurIPS'24 (Datasets and Benchmarks Track).
 - *2024.08*: [VQAScore](http://linzhiqiu.github.io/papers/vqascore) was accepted to ECCV'24. In addition, VQAScore is highlighted in Google's [Imagen3 Technical Report](https://arxiv.org/abs/2408.07009) as the strongest replacement for CLIPScore, with Imagen3 achieving SOTA on GenAI-Bench for compositional text-to-visual generation.
 - *2024.06*: [GenAI-Bench](http://linzhiqiu.github.io/papers/genai_bench) won Best Short Paper Award at <a href="https://syndata4cv.github.io/">SynData@CVPR2024</a>!
 - *2024.05*: [VisualGPTScore](http://arxiv.org/abs/2306.01879) was accepted to ICML'24.
@@ -37,6 +38,18 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <!-- - *2020.06*: &nbsp;🎉🎉 Best Paper Nomination at CVPR'20 for [Visual Chirality](https://linzhiqiu.github.io/papers/chirality/)! -->
 
 # 📝 Publications 
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">NeurIPS 2024 (Datasets and Benchmarks).</div><img src='papers/naturalbench/images/collection.jpg' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**NaturalBench: Evaluating Vision-Language Models on Natural Adversarial Samples**
+
+**Zhiqiu Lin***, [Baiqi Li\*](https://linzhiqiu.github.io/papers/naturalbench/), [Wenxuan Peng*](https://x.com/peng_wenxuan), [Jean de Nyandwi*](https://x.com/Jeande_d), [Zixian Ma](https://zixianma.github.io/), [Simran Khanuja](https://linzhiqiu.github.io/papers/naturalbench/),  [Ranjay Krishna\*](https://ranjaykrishna.com/index.html), [Graham Neubig\*](https://phontron.com/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/)
+
+[Website](https://linzhiqiu.github.io/papers/naturalbench/)
+- We present NaturalBench, a VQA benchmark with questions about natural images that humans find easy but challenge state-of-the-art models like GPT-4o, Molmo, Llama3.2, LLaVA-OneVision, and Qwen2-VL.
+
+</div>
+</div>
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Best Short Paper at SynData@CVPR 2024.</div><img src='papers/genai_bench/images/process.jpg' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
@@ -44,9 +57,10 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 
 **Zhiqiu Lin***, [Baiqi Li\*](https://linzhiqiu.github.io/papers/vqascore/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Emily Li](https://linzhiqiu.github.io/papers/vqascore/), [Yixin Fei](https://scholar.google.com/citations?user=RFPoHlIAAAAJ&hl=zh-CN), [Kewen Wu](https://www.linkedin.com/in/kewen-rebecca-wu), [Xide Xia\*](https://xidexia.github.io/), [Pengchuan Zhang\*](https://pzzhang.github.io/pzzhang/), [Graham Neubig\*](https://phontron.com/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/)
 
-[Website](https://linzhiqiu.github.io/papers/genai_bench/) \| [PDF](https://linzhiqiu.github.io/papers/genai_bench/pdfs/arxiv.pdf)
-- We propose GenAI-Bench, a comprehensive benchmark for compositional text-to-visual generation.
+[Website](https://linzhiqiu.github.io/papers/genai_bench/) \| [Arxiv](https://arxiv.org/abs/2406.13743)
+- We propose GenAI-Bench, a comprehensive benchmark for compositional text-to-visual generation collected by professional designers.
 - We release over 80,000 human ratings to support future evaluation of automated metrics.
+- We show that VQAScore can be used to improve black-box generative models such as DALL-E 3!
 
 </div>
 </div>

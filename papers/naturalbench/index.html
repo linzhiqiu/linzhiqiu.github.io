@@ -84,7 +84,7 @@
               <span class="author-block"><sup>1</sup>Carnegie Mellon University<br></span>,
               <span class="author-block"><sup>2</sup>University of Washington<br></span>,
               <span class="author-block"><sup>*</sup>Co-first authors<br></span>,
-              <span class="author-block"><sup>*</sup>Co-senior authors<br></span>
+              <span class="author-block"><sup>&</sup>Co-senior authors<br></span>
               <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
             </div>
 
@@ -129,6 +129,8 @@
       </div>
     </div>
   </section>
+
+  
   
   <!-- <gradio-app src="https://zhiqiulin-vqascore.hf.space"></gradio-app> -->
   <!-- Paper abstract -->
@@ -139,11 +141,11 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Are large vision-language models (VLMs) truly effective? In this work, we show that popular VLMs still struggle with natural images and questions that humans can easily answer, which we term <b>natural adversarial samples</b>. Unlike previous VQA benchmarks such as MME that can be addressed by blind QA models, NaturalBench avoids such shortcuts by pairing each question with two images that yield different answers. We use a surprisingly simple procedure to collect adversarial VQA samples from natural image-text corpora using foundation models like CLIP and ChatGPT. We collect a new <b>NaturalBench</b> benchmark for reliably evaluating VLMs with over 10,000 human-verified VQA samples. We note several interesting findings:
+              Are large vision-language models (VLMs) truly effective? In this work, we show that popular VLMs still struggle with questions about natural images that humans can easily answer, which we term <b>natural adversarial samples</b>. Unlike previous VQA benchmarks such as MME that can be addressed by blind QA models, NaturalBench avoids such shortcuts by pairing each question with two images that yield different answers. We use a surprisingly simple procedure to collect challenging VQA samples from natural image-text corpora using foundation models like CLIP and ChatGPT. We collect a new vision-centric VQA benchmark, <b>NaturalBench</b>, for reliably evaluating VLMs with 10,000 human-verified VQA samples. We note several interesting findings:
               <ol type="1">
-                <li><b>NaturalBench is hard</b>. <span style="font-size: 95%;">Popular VLMs like InstructBLIP, LLaVA-NeXT, ShareGPT4V, and XGen-MM (BLIP-3) only achieve 1%-15% above random chance performance. Even the best (closed-source) GPT-4o lags significantly behind human performance (which is above 90%). </span></li>
-                <li><b>NaturalBench is compositional</b>. <span style="font-size: 95%;">NaturalBench requires diverse visio-linguistic skills, including understanding attribute bindings, object relationships, and advanced reasoning like logic and counting. To this end, unlike prior work that uses a single tag per sample, we tag each NaturalBench sample with 1 to 8 skill tags for fine-grained evaluation. </li>
-                <li><b>NaturalBench exposes significant biases in VLMs</b>. <span style="font-size: 95%;">Most VLMs choose the same answer regardless of the input image (or question). We show that debiasing can be crucial for VLM performance.  </span></li>
+                <li><b>NaturalBench is hard</b>. <span style="font-size: 95%;">We evaluate 53 popular VLMs including BLIP-3, mPLUG-Owl2, InternLM-XC2, LLaVA-OneVision, Llama3.2, InternVL2, Cambrain-1, Qwen2-VL, and Molmo. Most of them only achieve 1%-20% above random chance performance. Even the best (closed-source) GPT-4o lags 50% behind human performance (which is above 90%). </span></li>
+                <li><b>NaturalBench is compositional</b>. <span style="font-size: 95%;">NaturalBench requires diverse visio-linguistic skills, including understanding attribute bindings, object relationships, and advanced reasoning like logic and counting. Unlike previous work that uses a single tag per sample, we tag each NaturalBench sample with 1 to 8 skill tags for more fine-grained evaluation. </li>
+                <li><b>NaturalBench exposes significant biases in VLMs</b>. <span style="font-size: 95%;">Most VLMs choose the same answer regardless of the input image (or question). We show that debiasing can be crucial for better performance.  </span></li>
               </ol>
             </p>
           </div>
@@ -154,10 +156,9 @@
     </div>
   </section>
   <!-- End paper abstract -->
-
-
+  
   <!-- Method Overview -->
-  <section class="section hero is-light2">
+  <section class="section hero is-light">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
@@ -171,7 +172,43 @@
             </div>
 
               <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-                <b>NaturalBench examples</b> consist of two questions and two images with alternating answers to prevent ``blind'' models from scoring well (e.g., those that predict the same answer regardless of the image or question, as discussed in the paper). We compare the ground-truth answer for each (image, question) pair with predictions from leading VLMs including GPT-4o, GPT-4v, BLIP3, LLaVA-NeXT, InstructBLIP, mPLUG-Owl2.1, Qwen-VL, and InternVL. Even the best models like GPT-4o lags far behind human performance (which is above 90%). Moreover, these samples are <b>suprisingly easy to collect</b>:
+                <b>NaturalBench</b> adopts a vision consist of two questions and two images with alternating answers to prevent ``blind'' models from scoring well (e.g., those that predict the same answer regardless of the image or question, as discussed in the paper). We compare the ground-truth answer for each (image, question) pair with predictions from leading VLMs including GPT-4o, GPT-4v, BLIP3, LLaVA-NeXT, InstructBLIP, mPLUG-Owl2.1, Qwen-VL, and InternVL. Even the best models like GPT-4o lags far behind human performance (which is above 90%). Moreover, these samples are <b>suprisingly easy to collect</b>:
+              </p>
+              
+              <div style="display: flex; justify-content: center; align-items: center;">
+                <img src="images/collection.jpg" alt="Image illustrating NaturalBench">
+            </div>
+            
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+              We use a semi-automated procedure to collect NaturalBench from natural image-text corpora like Flickr30K and DOCCI. First, we identify confounding pairs of image-text samples that fail discriminative VLMs like CLIP, e.g., they wrongly match an image with another image's caption. Next, we prompt ChatGPT (or GPT4-Vision) to design questions that yield different answers for each image, providing the original captions (or images) in the prompt. We hire human annotators to filter out incorrect or irrelevant VQA samples. This process is much simpler than classic adversarial benchmarks as we do not target any specific VQA models nor perturb the images or questions. 
+            </p>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Method Overview -->
+  
+
+  <!-- Method Overview -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Natural Adversarial Samples for Vision-Language Models</h2>
+          <div class="content has-text-justified">
+
+            <div class="item">
+              <!-- Your image here -->
+              <div style="display: flex; justify-content: center; align-items: center;">
+                <img src="images/natural_teaser.jpg" alt="Image illustrating NaturalBench">
+            </div>
+
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+                <b>NaturalBench</b> adopts a vision consist of two questions and two images with alternating answers to prevent ``blind'' models from scoring well (e.g., those that predict the same answer regardless of the image or question, as discussed in the paper). We compare the ground-truth answer for each (image, question) pair with predictions from leading VLMs including GPT-4o, GPT-4v, BLIP3, LLaVA-NeXT, InstructBLIP, mPLUG-Owl2.1, Qwen-VL, and InternVL. Even the best models like GPT-4o lags far behind human performance (which is above 90%). Moreover, these samples are <b>suprisingly easy to collect</b>:
               </p>
               
               <div style="display: flex; justify-content: center; align-items: center;">
@@ -192,7 +229,7 @@
   <!-- End Method Overview -->
 
 
-  <section class="section hero is-light">
+  <section class="section hero is-light2">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
@@ -221,7 +258,7 @@
     </div>
   </section>
 
-  <section class="section hero is-light2">
+  <section class="section hero is-light">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
@@ -242,7 +279,7 @@
     </div>
   </section>
 
-  <section class="section hero is-light">
+  <section class="section hero is-light2">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
@@ -269,7 +306,7 @@
     </div>
   </section>
 
-  <section class="section hero is-light2">
+  <section class="section hero is-light">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
