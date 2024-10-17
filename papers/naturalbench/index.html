@@ -304,6 +304,33 @@
               Since benchmarks often leak into foundation models' training data, it is crucial to update benchmarks using new data sources. Our benchmark curation method can be easily adapted to new image-text datasets. We expand NaturalBench by incorporating two recently proposed datasets: (1) <a href="https://arxiv.org/abs/2404.19753">DOCCI</a> with fine-grained captions over 100 words, and (2) <a href="https://google.github.io/crossmodal-3600/">XM3600</a> with captions in Chinese and Hindi. We hope our efforts will inspire future work on dynamic evaluation of VLMs.
             </p>
             </div>
+            
+            
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Future Work</h2>
+          <div class="content has-text-justified">
+            
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+              Other than model evaluation, NaturalBench is also useful for model development. For example, we show in the paper that vision finetuning of GPT-4o and LLaVA using half of NaturalBench can significant boost their performance:
+            </p>
+
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <img src="images/todo.png" alt="Image illustrating Performance Boost of Vision Finetuning">
+          </div>
+
+          Given the promising results, we plan to scale up NaturalBench for model post-training in future work.
+            </div>
 
 
             
@@ -314,7 +341,7 @@
   </section>
 
   <!--BibTex citation -->
-  <section class="section hero is-light" id="BibTeX (TO UPDATE)">
+  <section class="section hero is-light2" id="BibTeX (TO UPDATE)">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
       <pre><code>@TODO{li2024natural,
