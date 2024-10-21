@@ -43,7 +43,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 
 **NaturalBench: Evaluating Vision-Language Models on Natural Adversarial Samples**
 
-**Zhiqiu Lin***, [Baiqi Li\*](https://linzhiqiu.github.io/papers/naturalbench/), [Wenxuan Peng*](https://x.com/peng_wenxuan), [Jean de Nyandwi*](https://x.com/Jeande_d), [Zixian Ma](https://zixianma.github.io/), [Simran Khanuja](https://linzhiqiu.github.io/papers/naturalbench/),  [Ranjay Krishna\*](https://ranjaykrishna.com/index.html), [Graham Neubig\*](https://phontron.com/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/)
+**Zhiqiu Lin***, [Baiqi Li\*](https://linzhiqiu.github.io/papers/naturalbench/), [Wenxuan Peng\*](https://x.com/peng_wenxuan), [Jean de Nyandwi\*](https://x.com/Jeande_d), [Zixian Ma](https://zixianma.github.io/), [Simran Khanuja](https://linzhiqiu.github.io/papers/naturalbench/),  [Ranjay Krishna\*](https://ranjaykrishna.com/index.html), [Graham Neubig\*](https://phontron.com/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/)
 
 [Website](https://linzhiqiu.github.io/papers/naturalbench/)
 - We present NaturalBench, a VQA benchmark with questions about natural images that humans find easy but challenge state-of-the-art models like GPT-4o, Molmo, Llama3.2, LLaVA-OneVision, and Qwen2-VL.
