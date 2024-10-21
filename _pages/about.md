@@ -45,8 +45,9 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 
 **Zhiqiu Lin***, [Baiqi Li\*](https://linzhiqiu.github.io/papers/naturalbench/), [Wenxuan Peng\*](https://x.com/peng_wenxuan), [Jean de Nyandwi\*](https://x.com/Jeande_d), [Zixian Ma](https://zixianma.github.io/), [Simran Khanuja](https://linzhiqiu.github.io/papers/naturalbench/),  [Ranjay Krishna\*](https://ranjaykrishna.com/index.html), [Graham Neubig\*](https://phontron.com/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/)
 
-[Website](https://linzhiqiu.github.io/papers/naturalbench/)
-- We present NaturalBench, a VQA benchmark with questions about natural images that humans find easy but challenge state-of-the-art models like GPT-4o, Molmo, Llama3.2, LLaVA-OneVision, and Qwen2-VL.
+[Website](https://linzhiqiu.github.io/papers/naturalbench/) \| [Arxiv](https://arxiv.org/abs/2410.14669) \| [![](https://img.shields.io/github/stars/Baiqi-Li/NaturalBench?style=social&label=Code+Stars)](https://github.com/Baiqi-Li/NaturalBench)
+- We present NaturalBench, a vision-centric VQA benchmark with simple questions about natural images that humans find easy but significantly challenge state-of-the-art models like GPT-4o, Molmo, Llama3.2, LLaVA-OneVision, and Qwen2-VL.
+- We show that debiasing can nearly double model performance, even for GPT-4o!
 
 </div>
 </div>
