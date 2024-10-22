@@ -285,8 +285,11 @@
             </div>
   
             <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-            <b>Biases:</b> NaturalBench exposes VLMs' biases towards certain answers like "Yes" and "B" regardless of the input image and question. We use the answer likelihood (<a href="https://linzhiqiu.github.io/papers/vqascore/"><span style="color: green;">VQAScore</span></a>) to perform a scoring-based evaluation by comparing the likelihood of correct (image, question, answer) triples over the incorrect ones to show that proper debiasing can lead to huge performance gains. This suggests that NaturalBench can be a useful benchmark for evaluating methods that reduce biases (or hallucinations) in VLMs.
+            <b>Biases:</b> NaturalBench exposes VLMs' biases towards certain answers like "Yes" and "B" regardless of the input image and question. We use the answer likelihood (<a href="https://linzhiqiu.github.io/papers/vqascore/"><span style="color: green;">VQAScore</span></a>) to perform a scoring-based evaluation by comparing the likelihood of correct (image, question, answer) triples over the incorrect ones to show that proper debiasing can double or triple the performance, even for GPT-4o. This suggests that NaturalBench can be a useful benchmark for evaluating methods that reduce biases (or hallucinations) in VLMs.
             </p>
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <img src="images/debiasing.png" alt="Image illustrating Tags">
+          </div>
 
           </div>
         </div>
