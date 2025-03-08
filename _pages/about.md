@@ -85,7 +85,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 
 **Zhiqiu Lin**\*, [Xinyue Chen\*](https://www.linkedin.com/in/xinyue-chen-073a4114b/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Pengchuan Zhang](https://pzzhang.github.io/pzzhang/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
 
-[Website](https://linzhiqiu.github.io/papers/visual_gpt_score/) \| [Arxiv](http://arxiv.org/abs/2306.01879) \| [![](https://img.shields.io/github/stars/linzhiqiu/visual_gpt_score?style=social&label=Code+Stars)](https://github.com/linzhiqiu/visual_gpt_score)
+[Website](https://linzhiqiu.github.io/papers/visual_gpt_score/) \| [Arxiv](http://arxiv.org/abs/2306.01879) \| [![](https://img.shields.io/github/stars/linzhiqiu/t2v_metrics?style=social&label=Code+Stars)](https://github.com/linzhiqiu/t2v_metrics)
 - We use generative VLMs to implement **Visual** **G**enerative **P**re-**T**raining Score (**VisualGPTScore**), i.e., the probablity score of generating a text given an image.
 - Such a generative score achieves top-tier image-text retrieval performance on multiple compositionality benchmarks, surpassing all discriminative approaches by a great margin. 
 - We further investigate the role of language prior P(text) through a probablistic lens, and introduce a debiasing solution that consistently improves the VisualGPTScore under train-test distribution shifts over text.
@@ -191,6 +191,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 - *2016.09 - 2020.06*, Undergraduate, Cornell University.
 
 # 💬 Invited Talks
+- *2024.06*, I presented [GenAI-Bench Benchmark](https://linzhiqiu.github.io/papers/genai_bench/) on CVPR'24 Workshop on Synthetic Data. 
 - *2022.06*, I presented [CLEAR Benchmark](https://linzhiqiu.gitbook.io/the-clear-benchmark/) on [CVPR'22 2nd Workshop on Open World Vision](https://www.cs.cmu.edu/~shuk/vplow.html). 
 <!-- - *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/) -->
 
