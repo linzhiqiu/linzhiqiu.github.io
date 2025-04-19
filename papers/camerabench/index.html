@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="">
+  <meta property="og:title" content="CameraBench: Towards Understanding Camera Motions in Any Video" />
+  <meta property="og:description" content="" />
+  <meta property="og:url" content="" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+
+  <meta name="twitter:title" content="CameraBench: Towards Understanding Camera Motions in Any Video">
+  <meta name="twitter:description" content="">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>CameraBench: Towards Understanding Camera Motions in Any Video</title>
+  <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"> -->
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.31.2/gradio.js"></script>
+</head>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- <h1 class="title is-1 publication-title"><span style="color: green;">[In Submission]</span></h1> -->
+            <h1 class="title is-1 publication-title">CameraBench: Towards Understanding Camera Motions in Any Video
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a target="_blank">Zhiqiu Lin</a><sup>1*</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Siyuan Cen</a><sup>2*</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Daniel Jiang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Jay Karhade</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Hewei Wang</a><sup>5</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Chancharik Mitra</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Yu Tong Tiffany Ling</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Yuhan Huang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Sifan Liu</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Mingyu Chen</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Rushikesh Zawar</a><sup>6</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Xue Bai</a><sup>6</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Yilun Du</a><sup>7</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Chuang Gan</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a target="_blank">Deva Ramanan</a><sup>1</sup>,</span>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>CMU<br></span>,
+              <span class="author-block"><sup>2</sup>UMass Amherst<br></span>,
+              <span class="author-block"><sup>3</sup>USC<br></span>,
+              <span class="author-block"><sup>4</sup>Emerson<br></span>,
+              <span class="author-block"><sup>5</sup>Apple<br></span>,
+              <span class="author-block"><sup>6</sup>Adobe<br></span>,
+              <span class="author-block"><sup>7</sup>Harvard<br></span>
+              <!-- <span class="author-block"><sup>*</sup>Co-first authors<br></span> -->
+              <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Arxiv PDF link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper (Soon)</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://github.com/linzhiqiu/t2v_metrics" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Soon)</span>
+                  </a>
+                </span>
+
+                <!-- Github link -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/linzhiqiu/CameraBench/blob/main/README.md" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-database"></i>
+                    </span>
+                    <span>CameraBench (Soon)</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  
+  <!-- <gradio-app src="https://zhiqiulin-vqascore.hf.space"></gradio-app> -->
+  <!-- Paper abstract -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We introduce <b>CameraBench</b>, a large-scale dataset and benchmark designed to assess and improve camera motion understanding. CameraBench consists of ~3,000 diverse internet videos, annotated by experts through a rigorous multi-stage quality control process. One of our contributions is <b>a taxonomy of camera motion primitives</b>, designed in collaboration with cinematographers. We find, for example, that some motions like "follow" (or <i>tracking</i>) require understanding scene content like moving subjects. We conduct a large-scale human study to quantify human annotation performance, revealing that domain expertise and tutorial-based training can significantly enhance accuracy. For example, a novice may confuse <i>zoom-in</i> (a change of intrinsics) with <i>translating forward</i> (a change of extrinsics), but can be trained to differentiate the two. Using CameraBench, we evaluate Structure-from-Motion (<b>SfM</b>) and Video-Language Models (<b>VLMs</b>), finding that SfM models struggle to capture <b>semantic primitives</b> that depend on scene content, while VLMs struggle to capture <b>geometric primitives</b> that require precise estimation of trajectories. We then fine-tune a <b>generative VLM</b> on CameraBench to achieve the best of both worlds and showcase its applications, including motion-augmented captioning, video question answering, and video-text retrieval. We hope our taxonomy, benchmark, and tutorials will drive future efforts towards the ultimate goal of understanding camera motions in any video.
+            </p>
+          </div>
+          <!-- <h2 class="title is-3">Try ranking images with VQAScore!</h2> -->
+          <!-- <gradio-app src="https://zhiqiulin-vqascore.hf.space"></gradio-app> -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End paper abstract -->
+  
+  <!-- Method Overview -->
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Why CameraBench?</h2>
+          <div class="content has-text-justified">
+
+            <div class="content has-text-justified">
+              <blockquote style="border-left: 4px solid #ccc; margin: 1.5em 0; padding: 0.5em 1em; font-style: italic; color: #666;">
+                <p style="margin: 0;">We must perceive in order to move, but we must also move in order to perceive.</p>
+                <footer style="text-align: right; font-size: 0.9em; margin-top: 0.5em;">— J. J. Gibson, <cite><a href="https://library.uniq.edu.iq/storage/books/file/The%20Ecological%20Approach%20to%20Visual%20Perception%20Approach/1667383098The%20Ecological%20Approach%20to%20Visual%20Perception%20Classic%20Edition%20(James%20J.%20Gibson)%20(z-lib.org)%20(1).pdf">The Ecological Approach to Visual Perception</a></cite></footer>
+              </blockquote>
+
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+                Humans perceive the visual world through movement. <a href="https://en.wikipedia.org/wiki/Parallax">Motion parallax</a> enables precise depth perception essential for navigating the physical world. Similarly, camera motion is crucial for modern vision techniques that process videos of dynamic scenes. For example, Structure-from-Motion (<b>SfM</b>) and Simultaneous Localization and Mapping (<b>SLAM</b>) methods must first estimate camera motion (pose trajectory) to reconstruct the scenes in 4D. Likewise, without understanding camera motion, video-language models (<b>VLMs</b>) would not fully perceive, reason about, or generate video dynamics.
+              </p>
+
+              <div class="columns" style="margin-top: 2em;">
+                <div class="column is-7">
+                  <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
+                    Understanding camera motion comes naturally to humans because we intuitively grasp the "invisible subject" -- the camera operator who shapes the video's viewpoint, framing, and narrative. For example, in a video tracking a child's first steps, one can feel a parent's joy and excitement through their handheld, shaky movement. Professional cinematographers and filmmakers use camera motion as a tool to enhance visual storytelling and amplify the emotional impact of their shots. <i>Hitchcock's</i> iconic <b>dolly zoom</b> moves the camera forward while zooming out, maintaining the subject's framing while altering the background to create the impression of vertigo. In <i>Jurassic Park</i> (1993), Spielberg uses a slow <b>upward tilt and rightward pan</b> to evoke a sense of awe as the protagonists (and the audience) first see the dinosaurs. In <i>Inception</i> (2010), Nolan uses a <b>camera roll</b> to mirror shifting gravity, blurring the line of reality. Similarly, game developers use camera movement to enhance player immersion. In <i>Legend of Zelda: Breath of the Wild</i> (2017), a smooth <b>pedestal-up</b> shot transitions from the character's viewpoint to a breathtaking aerial view, hinting at the journey ahead. Even amateur photographers use camera motion as a tool; for example, <b>selfie videos</b> allow one to play the role of both the cinematographer and the subject.
+                  </p>
+                </div>
+                <div class="column is-5">
+                  <div style="display: flex; justify-content: center; align-items: center;">
+                    <img src="images/1.gif" alt="Examples of camera movements" style="max-width: 80%; height: auto;">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Method Overview -->
+  
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">A Taxonomy of Camera Motion Primitives</h2>
+        <div class="content has-text-justified">
+          <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+            Understanding camera motion requires capturing both its <b>geometry</b> (e.g., trajectory) and
+            <b>semantics</b> (e.g., shot intent and filming context). To enable human-like <b>perception of camera motion</b>
+            through data-driven approaches, we collaborate with vision researchers and professional cinematographers to develop a
+            precise <b>taxonomy</b> of camera motion primitives. Our taxonomy introduces three
+            <b>reference frames</b> (object-, ground-, and camera-centric) and defines key motion types, including
+            <b>translation</b> (e.g., upward), <b>rotation</b> (e.g., roll clockwise), <b>intrinsic changes</b> (e.g., zoom-in),
+            <b>circular motion</b> (e.g., arcing), <b>steadiness</b> (e.g., shaky), and <b>tracking shots</b> (e.g., side-tracking).
+          </p>
+          
+          <div class="columns is-centered" style="margin-top: 2em;">
+            <div class="column is-10 has-text-centered">
+              <img src="images/taxonomy.jpg" alt="Taxonomy of camera motion primitives"
+                style="max-width: 100%; height: auto;">
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Scaling High-Quality Human Annotations</h2>
+          <div class="content has-text-justified">
+  
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+              To precisely annotate complex camera motion in real-world videos, we refine our taxonomy iteratively with feedback from film industry experts over months. We also design a hybrid <b>label-then-caption</b> framework. Annotators first determine
+              whether the motion is <b>clear and consistent</b>. For clear motion, they directly classify each motion primitive (e.g.,
+              <code>pan-left</code>, <code>no-tilt</code>). For ambiguous or conflicting motion, they only label confident aspects and
+              leave others as "<i>I am not sure</i>," followed by a <b>natural language description</b> (e.g., "<i>The camera first
+                pans left, then right</i>" or "<i>The background is too dark to perceive any movement</i>"). They are also encouraged to describe <b>why</b> the camera moves—e.g., to follow a subject or enhance immersion. To
+                ensure quality, we conduct a <b>large-scale human study</b> with over 100 participants from diverse backgrounds, finding that professional cinematographers consistently outperform non-experts. This inspires us to implement <b>detailed guidelines</b> and a <b>multistage training program</b> to improve the accuracy of both novice and expert annotators.
+            </p>
+  
+            <div style="display: flex; justify-content: center; align-items: center; margin-top: 2em;">
+              <img src="images/pipeline.jpg" alt="Annotation pipeline" style="max-width: 100%; height: auto;">
+            </div>
+
+  
+        
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">CameraBench</h2>
+          <div class="content has-text-justified">
+            <div class="item">
+              <!-- Your image here -->
+
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 30px; color: #333;">
+                We introduce <b>CameraBench</b>, a large-scale dataset with over 150K binary labels and captions over ~3,000 videos spanning diverse <b>types, genres, POVs, capturing devices, and post-production effects</b> (e.g., nature, films, games, 2D/3D, real/synthetic, GoPro, drone shot, etc.). We showcase example annotations below:
+              </p>
+                </p>
+              <div style="display: flex; justify-content: center; align-items: center;">
+                <img src="images/4.gif" alt="Image illustrating Tags">
+            </div>
+
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 30px; color: #333;">
+              These annotations allow us to evaluate and improve the performance of SfMs and VLMs on a wide range of tasks (video-text retrieval, video captioning, video QA, etc.) that require both geometric and semantic understanding of camera motion. We show example video QA tasks below:
+            </p>
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <img src="images/3.gif" alt="Image illustrating Video QA">
+            </div>
+  
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">SfMs vs. VLMs on CameraBench</h2>
+          <div class="content has-text-justified">
+            
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+              We find that:
+              <ul style="list-style-type: disc; margin-left: 2em;">
+                <li>Recent learning-based SfM/SLAM methods like <a href="https://arxiv.org/abs/2412.04463">MegaSAM</a> and <a href="https://cut3r.github.io/">CuT3R</a> achieve superior performance across most motion primitives, significantly outperforming classic methods like COLMAP. Nontheless, SfMs are still far from solving this task. We show failure cases of SfM methods below:</li>
+                <div style="display: flex; justify-content: center; align-items: center;">
+                  <img src="images/5.gif" alt="Image illustrating Performance of SfMs and VLMs">
+                </div>
+                <div class="content has-text-centered" style="margin-top: 1em; font-size: 0.9em; color: #666;">
+                  <div class="columns">
+                    <div class="column is-6">
+                      <p>
+                        <i>Left:</i> A <code>lead-tracking</code> shot where the camera moves backward as the subject walks forward. Due
+                        to unchanged subject framing and lack of distinct background textures, MegaSAM fails to detect camera
+                        translation and COLMAP crashes.
+                      </p>
+                    </div>
+                    <div class="column is-6">
+                      <p>
+                        <i>Right:</i> A <code>roll-clockwise</code> shot in a low-parallax scene where both MegaSAM and COLMAP fail to
+                        converge and output random trajectories with nonexistent motion.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <li>Although generative VLMs (evaluated using <a href="https://linzhiqiu.github.io/papers/vqascore/">VQAScore</a>) are weaker than SfM/SLAM, they generally outperform discriminative VLMs that use CLIPScore/ITMScore. Furthermore, they are able to capture the <b>semantic primitives</b> that depend on scene content, while SfMs struggle to do so. Motivated by this, we apply supervised
+                fine-tuning (SFT) to a generative VLM (Qwen2.5-VL) on a separately annotated training set of ~1400 videos. We show
+                that simple SFT on small-scale (yet high-quality) data significantly boosts performance by 1-2x, making it match the
+                SOTA MegaSAM in overall AP.</li>
+              </ul>
+            </p>
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <img src="images/?.gif" alt="Image illustrating Performance of SfMs and VLMs">
+            </div>
+          </div>
+          
+          
+
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Motion Augmented Video Captioning</h2>
+          <div class="content has-text-justified">
+            
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+              Lastly, we show that Qwen-2.5-VL finetuned on our high-quality dataset can generate more accurate camera motion captions.
+            </p>
+
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <img src="images/NaturalBench_finetuned_g_acc.jpeg" alt="Image illustrating Performance Boost of Vision Finetuning">
+          </div>
+
+            </div>
+
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--BibTex citation -->
+  <section class="section hero is-light2" id="BibTeX (TO UPDATE)">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{camerabench,
+        title={CameraBench: Towards Understanding Camera Motions in Any Video},
+        author={Lin, Zhiqiu and Cen, Siyuan and Jiang, Daniel and Karhade, Jay and Wang, Hewei and Mitra, Chancharik and Ling, Yu Tong Tiffany and Huang, Yuhan and Liu, Sifan and Chen, Mingyu and Zawar, Rushikesh and Bai, Xue and Du, Yilun and Gan, Chuang and Ramanan, Deva},
+        booktitle={arXiv},
+        year={2024},
+        }</code></pre>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
+</body>
+
+</html>
