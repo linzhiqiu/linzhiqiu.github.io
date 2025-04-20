@@ -214,20 +214,36 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">A Taxonomy of Camera Motion Primitives</h2>
         <div class="content has-text-justified">
-          <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-            Understanding camera motion requires capturing both its <b>geometry</b> (e.g., trajectory) and
-            <b>semantics</b> (e.g., shot intent and filming context). To enable human-like <b>perception of camera motion</b>
-            through data-driven approaches, we collaborate with vision researchers and professional cinematographers to develop a
-            precise <b>taxonomy</b> of camera motion primitives. Our taxonomy introduces three
+          <div class="columns" style="margin-top: 2em;">
+            <div class="column is-4">
+              <div style="display: flex; justify-content: center; align-items: center;">
+                <img src="images/taxonomy_design.jpg" alt="Taxonomy of camera motion primitives"
+                style="width: 100%; height: auto;">
+              </div>
+            </div>
+            <div class="column is-8">
+              <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+                Understanding camera motion requires capturing both its <b>geometry</b> (e.g., trajectory) and
+                <b>semantics</b> (e.g., shot intent and filming context). To enable human-like <b>perception of camera motion</b>
+                through data-driven approaches, we collaborate with vision researchers and professional cinematographers to develop a
+                precise <b>taxonomy</b> of camera motion primitives in an iterative process – sourcing diverse internet videos, annotating them, and refining the taxonomy to address
+                missing labels and improve consensus.
+              </p>
+            </div>
+          </div>
+          
+          <p style="text-align: justify; font-size: 16px; line-height: 1.5; color: #333;">
+            Our final taxonomy includes three
             <b>reference frames</b> (object-, ground-, and camera-centric) and defines key motion types, including
             <b>translation</b> (e.g., upward), <b>rotation</b> (e.g., roll clockwise), <b>intrinsic changes</b> (e.g., zoom-in),
-            <b>circular motion</b> (e.g., arcing), <b>steadiness</b> (e.g., shaky), and <b>tracking shots</b> (e.g., side-tracking).
+            <b>circular motion</b> (e.g., arcing), <b>steadiness</b> (e.g., shaky), and <b>tracking shots</b> (e.g.,
+            side-tracking):
           </p>
           
           <div class="columns is-centered" style="margin-top: 2em;">
-            <div class="column is-10 has-text-centered">
-              <img src="images/taxonomy.jpg" alt="Taxonomy of camera motion primitives"
-                style="max-width: 100%; height: auto;">
+            <div class="column">
+              <img src="images/3.gif" alt="Taxonomy of camera motion primitives"
+                style="width: 100%; height: auto; display: block; margin: 0 auto;">
             </div>
           </div>
 
@@ -253,10 +269,19 @@
                 pans left, then right</i>" or "<i>The background is too dark to perceive any movement</i>"). They are also encouraged to describe <b>why</b> the camera moves—e.g., to follow a subject or enhance immersion. To
                 ensure quality, we conduct a <b>large-scale human study</b> with over 100 participants from diverse backgrounds, finding that professional cinematographers consistently outperform non-experts. This inspires us to implement <b>detailed guidelines</b> and a <b>multistage training program</b> to improve the accuracy of both novice and expert annotators.
             </p>
-  
-            <div style="display: flex; justify-content: center; align-items: center; margin-top: 2em;">
-              <img src="images/pipeline.jpg" alt="Annotation pipeline" style="max-width: 100%; height: auto;">
+            
+            <div style="display: flex; justify-content: center; align-items: center; gap: 2em; margin-top: 2em;">
+              <img src="images/training.jpg" alt="Annotation pipeline" style="max-width: 40%; height: auto;">
+            
+              <figure style="max-width: 59%; text-align: center; margin: 0;">
+                <img src="images/human_training.png" alt="Training results" style="width: 100%; height: auto;">
+                <figcaption style="font-size: 14px; margin-top: 0.5em; color: #444;">
+                  Our training program improves the accuracy of both expert and non-expert annotators by 10–15%.
+                </figcaption>
+              </figure>
             </div>
+
+
 
   
         
@@ -288,7 +313,13 @@
               These annotations allow us to evaluate and improve the performance of SfMs and VLMs on a wide range of tasks (video-text retrieval, video captioning, video QA, etc.) that require both geometric and semantic understanding of camera motion. We show example video QA tasks below:
             </p>
             <div style="display: flex; justify-content: center; align-items: center;">
-              <img src="images/3.gif" alt="Image illustrating Video QA">
+              <img src="images/6.1.gif" alt="Image illustrating Video QA 1">
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <img src="images/6.2.gif" alt="Image illustrating Video QA 2">
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <img src="images/6.3.long.gif" alt="Image illustrating Video QA 3">
             </div>
   
 
@@ -306,7 +337,7 @@
           <div class="content has-text-justified">
             
             <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-              We find that:
+              We highlight the following key findings:
               <ul style="list-style-type: disc; margin-left: 2em;">
                 <li>Recent learning-based SfM/SLAM methods like <a href="https://arxiv.org/abs/2412.04463">MegaSAM</a> and <a href="https://cut3r.github.io/">CuT3R</a> achieve superior performance across most motion primitives, significantly outperforming classic methods like COLMAP. Nontheless, SfMs are still far from solving this task. We show failure cases of SfM methods below:</li>
                 <div style="display: flex; justify-content: center; align-items: center;">
@@ -333,11 +364,12 @@
                 fine-tuning (SFT) to a generative VLM (Qwen2.5-VL) on a separately annotated training set of ~1400 videos. We show
                 that simple SFT on small-scale (yet high-quality) data significantly boosts performance by 1-2x, making it match the
                 SOTA MegaSAM in overall AP.</li>
+                <div style="display: flex; justify-content: center; align-items: center;">
+                  <img src="images/sfm_vs_vlm.jpg" alt="Image illustrating Performance of SfMs and VLMs">
+                </div>
               </ul>
             </p>
-            <div style="display: flex; justify-content: center; align-items: center;">
-              <img src="images/?.gif" alt="Image illustrating Performance of SfMs and VLMs">
-            </div>
+            
           </div>
           
           
@@ -356,17 +388,36 @@
           <div class="content has-text-justified">
             
             <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-              Lastly, we show that Qwen-2.5-VL finetuned on our high-quality dataset can generate more accurate camera motion captions.
+              Lastly, we show that Qwen-2.5-VL finetuned on our high-quality dataset can generate more accurate camera motion captions than the state-of-the-art generative VLMs such as GPT-4o and Gemini-2.5-Pro.
             </p>
 
-            <div style="display: flex; justify-content: center; align-items: center;">
-              <img src="images/NaturalBench_finetuned_g_acc.jpeg" alt="Image illustrating Performance Boost of Vision Finetuning">
-          </div>
-
+            <div class="columns" style="margin-top: 2em;">
+              <div class="column is-6">
+                <img src="images/caption.1.gif" alt="Video caption example 1" style="width: 100%; height: auto;">
+              </div>
+              <div class="column is-6">
+                <img src="images/caption.1.png" alt="Video caption result 1" style="width: 100%; height: auto;">
+              </div>
             </div>
 
+            <div class="columns" style="margin-top: 1em;">
+              <div class="column is-6">
+                <img src="images/caption.2.gif" alt="Video caption example 2" style="width: 100%; height: auto;">
+              </div>
+              <div class="column is-6">
+                <img src="images/caption.2.png" alt="Video caption result 2" style="width: 100%; height: auto;">
+              </div>
+            </div>
 
-            
+            <div class="columns" style="margin-top: 1em;">
+              <div class="column is-6">
+                <img src="images/caption.3.gif" alt="Video caption example 3" style="width: 100%; height: auto;">
+              </div>
+              <div class="column is-6">
+                <img src="images/caption.3.png" alt="Video caption result 3" style="width: 100%; height: auto;">
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -381,7 +432,7 @@
         title={CameraBench: Towards Understanding Camera Motions in Any Video},
         author={Lin, Zhiqiu and Cen, Siyuan and Jiang, Daniel and Karhade, Jay and Wang, Hewei and Mitra, Chancharik and Ling, Yu Tong Tiffany and Huang, Yuhan and Liu, Sifan and Chen, Mingyu and Zawar, Rushikesh and Bai, Xue and Du, Yilun and Gan, Chuang and Ramanan, Deva},
         booktitle={arXiv},
-        year={2024},
+        year={2025},
         }</code></pre>
     </div>
   </section>
