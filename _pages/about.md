@@ -38,6 +38,21 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <!-- - *2020.06*: &nbsp;🎉🎉 Best Paper Nomination at CVPR'20 for [Visual Chirality](https://linzhiqiu.github.io/papers/chirality/)! -->
 
 # 📝 Publications 
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">NeurIPS 2024 (Datasets and Benchmarks).</div><img src='papers/camerabench/images/taxonomy_design.jpg' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**CameraBench: Towards Understanding Camera Motions in Any Video**
+
+**Zhiqiu Lin***, [Siyuan Cen\*](https://linzhiqiu.github.io/papers/camerabench/), [Daniel Jiang](https://linzhiqiu.github.io/papers/camerabench/), [Jay Karhade](https://linzhiqiu.github.io/papers/camerabench/), [Hewei Wang](https://linzhiqiu.github.io/papers/camerabench/), [Chancharik Mitra](https://linzhiqiu.github.io/papers/camerabench/), [Yu Tong Tiffany Ling](https://linzhiqiu.github.io/papers/camerabench/), [Yuhan Huang](https://linzhiqiu.github.io/papers/camerabench/), [Sifan Liu](https://linzhiqiu.github.io/papers/camerabench/), [Mingyu Chen](https://linzhiqiu.github.io/papers/camerabench/), [Rushikesh Zawar](https://linzhiqiu.github.io/papers/camerabench/), [Xue Bai](https://linzhiqiu.github.io/papers/camerabench/), [Yilun Du](https://linzhiqiu.github.io/papers/camerabench/), [Chuang Gan](https://scholar.google.com/citations?user=PTeSCbIAAAAJ&hl=en), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
+
+[Website](https://linzhiqiu.github.io/papers/camerabench/) \| [Arxiv](https://arxiv.org/abs/)
+- We introduce CameraBench, a large-scale dataset and benchmark designed to assess and improve camera motion understanding.
+- We develop a precise taxonomy of camera motion primitives in collaboration with cinematographers.
+- We evaluate SfM and VLM methods, finding that SfMs struggle with semantic primitives while VLMs struggle with geometric primitives.
+
+</div>
+</div>
+
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">NeurIPS 2024 (Datasets and Benchmarks).</div><img src='papers/naturalbench/images/collection.jpg' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
@@ -196,7 +211,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <!-- - *2021.03*, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  \| [\[video\]](https://github.com/) -->
 
 # 💻 Services
-- Organizer: CVPR’22 VPLOW Workshop (Challenge Track)
+- Organizer: CVPR'22 VPLOW Workshop (Challenge Track)
 - Reviewer: ECCV, CVPR (Outstanding reviewer), ICCV, NeurIPS, ICML.
 - Teaching (CMU): [Learning-based Image Synthesis](https://learning-image-synthesis.github.io/sp22/) and Advanced Computer Vision
 - Teaching (Cornell): Advanced Machine Learning, Cornell Tech Pre-Master Program, Functional Programming, Algorithm Analysis, Data Structures, Computer Vision
