@@ -54,7 +54,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">NeurIPS 2024 (Datasets and Benchmarks).</div><img src='papers/naturalbench/images/collection.jpg' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**NaturalBench: Evaluating Vision-Language Models on Natural Adversarial Samples**
+**NaturalBench: Evaluating Vision-Language Models on Natural Adversarial Samples (NeurIPS'24)**
 
 **Zhiqiu Lin***, [Baiqi Li\*](https://linzhiqiu.github.io/papers/naturalbench/), [Wenxuan Peng\*](https://x.com/peng_wenxuan), [Jean de Nyandwi\*](https://x.com/Jeande_d), [Zixian Ma](https://zixianma.github.io/), [Simran Khanuja](https://linzhiqiu.github.io/papers/naturalbench/),  [Ranjay Krishna\*](https://ranjaykrishna.com/index.html), [Graham Neubig\*](https://phontron.com/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/)
 
@@ -67,7 +67,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Best Short Paper at SynData@CVPR 2024.</div><img src='papers/genai_bench/images/process.jpg' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**GenAI-Bench: Evaluating and Improving Compositional Text-to-Visual Generation**
+**GenAI-Bench: Evaluating and Improving Compositional Text-to-Visual Generation (CVPR'24 Best Short Paper at SynData Workshop)**
 
 **Zhiqiu Lin***, [Baiqi Li\*](https://linzhiqiu.github.io/papers/vqascore/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Emily Li](https://linzhiqiu.github.io/papers/vqascore/), [Yixin Fei](https://scholar.google.com/citations?user=RFPoHlIAAAAJ&hl=zh-CN), [Kewen Wu](https://www.linkedin.com/in/kewen-rebecca-wu), [Xide Xia\*](https://xidexia.github.io/), [Pengchuan Zhang\*](https://pzzhang.github.io/pzzhang/), [Graham Neubig\*](https://phontron.com/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/)
 
@@ -81,7 +81,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ECCV 2024</div><img src='papers/vqascore/images/vqascore.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**Evaluating Text-to-Visual Generation with Image-to-Text Generation**
+**Evaluating Text-to-Visual Generation with Image-to-Text Generation (ECCV 2024)**
 
 **Zhiqiu Lin**, [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Baiqi Li](https://linzhiqiu.github.io/papers/vqascore/), [Emily Li](https://linzhiqiu.github.io/papers/vqascore/), [Xide Xia](https://xidexia.github.io/), [Graham Neubig](https://phontron.com/), [Pengchuan Zhang\*](https://pzzhang.github.io/pzzhang/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/)
 
@@ -94,7 +94,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ICML 2024</div><img src='papers/visual_gpt_score/images/teaser_small_new.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**Revisiting the Role of Language Priors in Vision-Language Models (VisualGPTScore)**
+**Revisiting the Role of Language Priors in Vision-Language Models (ICML'24)**
 
 **Zhiqiu Lin**\*, [Xinyue Chen\*](https://www.linkedin.com/in/xinyue-chen-073a4114b/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Pengchuan Zhang](https://pzzhang.github.io/pzzhang/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
 
@@ -108,7 +108,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2024</div><img src='papers/leco/images/dalle3_inversion_new.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**Language Models as Black-Box Optimizers for Vision-Language Models**
+**Language Models as Black-Box Optimizers for Vision-Language Models (CVPR'24)**
 
 **Zhiqiu Lin**\*, [Shihong Liu\*](https://llm-can-optimize-vlm.github.io/), [Samuel Yu\*](https://scholar.google.com/citations?user=gxRDkLMAAAAJ&hl=en), [Ryan Lee](https://llm-can-optimize-vlm.github.io/), [Tiffany Ling](https://llm-can-optimize-vlm.github.io/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
 
@@ -121,7 +121,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2024</div><img src='papers/leco/images/tailed_frog_v3.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**The Neglected Tails of Vision-Language Models**
+**The Neglected Tails of Vision-Language Models (CVPR'24)**
 
 **Zhiqiu Lin**\*, [Shubham Parashar\*](https://shubhamprshr27.github.io/), [Tian Liu\*](https://www.linkedin.com/in/tian1327), [Xiangjue Dong](https://www.linkedin.com/in/xiangjue-dong), [Yanan Li](https://shubhamprshr27.github.io/neglected-tails-of-vlms/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/), [James Caverlee](https://shubhamprshr27.github.io/neglected-tails-of-vlms/), [Shu Kong](https://shubhamprshr27.github.io/neglected-tails-of-vlms/)
 
@@ -135,7 +135,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2023</div><img src='papers/cross_modal/images/neuro.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**Multimodality Helps Unimodality: Cross-Modal Few-Shot Learning with Multimodal Models**
+**Multimodality Helps Unimodality: Cross-Modal Few-Shot Learning with Multimodal Models (CVPR'23)**
 
 **Zhiqiu Lin**\*, [Samuel Yu\*](https://scholar.google.com/citations?user=gxRDkLMAAAAJ&hl=en), [Zhiyi Kuang](https://www.linkedin.com/in/zhiyikuang/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
 
@@ -149,7 +149,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">NeurIPS 2022</div><img src='papers/leco/images/teaser.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**LECO: Continual Learning with Evolving Class Ontologies**
+**LECO: Continual Learning with Evolving Class Ontologies (NeurIPS'22)**
 
 **Zhiqiu Lin**, [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Yu-Xiong Wang](https://yxw.web.illinois.edu/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/), [Shu Kong\*](https://aimerykong.github.io/)
 
@@ -162,7 +162,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">NeurIPS 2021 (Datasets and Benchmarks)</div><img src='images/clear/icon_text.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**The CLEAR Benchmark: Continual LEArning on Real-World Imagery**
+**The CLEAR Benchmark: Continual LEArning on Real-World Imagery (NeurIPS'21)**
 
 **Zhiqiu Lin**, [Jia Shi](https://www.linkedin.com/in/elvishelvisshi/), [Deepak Pathak\*](https://www.cs.cmu.edu/~dpathak/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/)
 
@@ -177,7 +177,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2020 (Best Paper Nomination)</div><img src='images/chirality/mirror.jpg' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**Visual Chirality**
+**Visual Chirality (CVPR'24, Best Paper Nomination)**
 
 **Zhiqiu Lin**, [Jin Sun](http://www.cs.cornell.edu/~jinsun/), [Abe Davis](http://abedavis.com), [Noah Snavely](http://www.cs.cornell.edu/~snavely/)
 
