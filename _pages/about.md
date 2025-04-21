@@ -67,7 +67,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Best Short Paper at SynData@CVPR 2024.</div><img src='papers/genai_bench/images/process.jpg' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**GenAI-Bench: Evaluating and Improving Compositional Text-to-Visual Generation (CVPR'24 Best Short Paper at SynData Workshop)**
+**GenAI-Bench: Evaluating and Improving Compositional Text-to-Visual Generation (CVPR'24, Best Short Paper at SynData Workshop)**
 
 **Zhiqiu Lin***, [Baiqi Li\*](https://linzhiqiu.github.io/papers/vqascore/), [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Emily Li](https://linzhiqiu.github.io/papers/vqascore/), [Yixin Fei](https://scholar.google.com/citations?user=RFPoHlIAAAAJ&hl=zh-CN), [Kewen Wu](https://www.linkedin.com/in/kewen-rebecca-wu), [Xide Xia\*](https://xidexia.github.io/), [Pengchuan Zhang\*](https://pzzhang.github.io/pzzhang/), [Graham Neubig\*](https://phontron.com/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/)
 
@@ -81,7 +81,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ECCV 2024</div><img src='papers/vqascore/images/vqascore.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**Evaluating Text-to-Visual Generation with Image-to-Text Generation (ECCV 2024)**
+**Evaluating Text-to-Visual Generation with Image-to-Text Generation (ECCV'2024)**
 
 **Zhiqiu Lin**, [Deepak Pathak](https://www.cs.cmu.edu/~dpathak/), [Baiqi Li](https://linzhiqiu.github.io/papers/vqascore/), [Emily Li](https://linzhiqiu.github.io/papers/vqascore/), [Xide Xia](https://xidexia.github.io/), [Graham Neubig](https://phontron.com/), [Pengchuan Zhang\*](https://pzzhang.github.io/pzzhang/), [Deva Ramanan\*](https://www.cs.cmu.edu/~deva/)
 
