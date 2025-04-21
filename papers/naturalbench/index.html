@@ -144,7 +144,7 @@
             <p>
               Are large vision-language models (VLMs) truly effective? In this work, we show that popular VLMs still struggle with questions about natural images that humans can easily answer, which we term <b>natural adversarial samples</b>. Unlike previous VQA benchmarks such as MME that can be addressed by blind QA models, NaturalBench avoids such shortcuts by pairing each question with two images that yield different answers. We use a simple procedure to collect challenging VQA samples from natural image-text corpora (e.g., Flickr and DOCCI) using foundation models like CLIP and ChatGPT. We collect a new vision-centric VQA benchmark, <b>NaturalBench</b>, for reliably evaluating VLMs with 10,000 human-verified VQA samples. We note several interesting findings:
               <ol type="1">
-                <li><b>NaturalBench is hard</b>. <span style="font-size: 95%;">We evaluate 53 popular VLMs including BLIP-3, mPLUG-Owl2, InternLM-XC2, LLaVA-OneVision, Llama3.2, InternVL2, Cambrain-1, Qwen2-VL, and Molmo. Most of them only achieve 1%-20% above random chance performance. Even the best (closed-source) GPT-4o lags 50% behind human performance (which is above 90%). </span></li>
+                <li><b>NaturalBench is hard</b>. <span style="font-size: 95%;">We evaluate 55 popular VLMs including BLIP-3, mPLUG-Owl2, InternLM-XC2, LLaVA-OneVision, Llama3.2, InternVL2, Cambrain-1, Qwen2-VL, and Molmo. Most of them only achieve 1%-20% above random chance performance. Even the best (closed-source) GPT-o3 and GPT-4o lags 40%-50% behind human performance (which is above 90%). </span></li>
                 <li><b>NaturalBench is compositional</b>. <span style="font-size: 95%;">NaturalBench requires diverse visio-linguistic skills, including understanding attribute bindings, object relationships, and advanced reasoning like logic and counting. Unlike previous work that uses a single tag per sample, we tag each NaturalBench sample with 1 to 8 skill tags for more fine-grained evaluation. </li>
                 <li><b>NaturalBench exposes significant biases in VLMs</b>. <span style="font-size: 95%;">Most VLMs choose the same answer regardless of the input image (or question). We show that debiasing can be crucial for better performance.  </span></li>
               </ol>
@@ -246,7 +246,7 @@
           <div class="content has-text-justified">
 
           <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-            We now show that NaturalBench poses a significant challenge to 53 state-of-the-art VLMs. To better understand model performance, beyond binary VQA accuracy (<b>Acc</b>), we introduce three metrics based on NaturalBench's paired image-question format.
+            We now show that NaturalBench poses a significant challenge to 55 state-of-the-art VLMs. To better understand model performance, beyond binary VQA accuracy (<b>Acc</b>), we introduce three metrics based on NaturalBench's paired image-question format.
 
             <ul> <li><b>Question Accuracy (Q-Acc):</b> Awards a point only if a model correctly answers a question for both images.</li> <li><b>Image Accuracy (I-Acc):</b> Awards a point when a model correctly answers both questions for an image.</li> <li><b>Group Accuracy (G-Acc):</b> Awards a point only when a model correctly answers all four (image, question) pairs in a test sample.</li> </ul>
             Below, we present the performance of VLMs across these metrics. We also highlight the performance gap (in terms of G-Acc) compared to humans in <span style="color: red;">red</span>:
@@ -366,7 +366,7 @@
             </div>
 
             <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-              However, visual reasoning is not solved yet. We show that GPT-o3 can still make simple mistakes: For example, after a full minute of analysis, o3 still mistakes a building’s 3rd floor for the 2nd.
+              However, visual reasoning is not solved yet. We show that GPT-o3 can still make simple mistakes even after a full minute of reasoning--hallucinating something being moved while nothing is happening.
             </p>
             <div style="display: flex; justify-content: center; align-items: center;">
               <img src="images/gpt_o3_failure.png" alt="Image illustrating GPT-o3 Failures">
