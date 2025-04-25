@@ -378,43 +378,34 @@
     </div>
   </section>
 
-  <section class="section hero is-light">
+
+    <section class="section hero is-light">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Motion Augmented Video Captioning</h2>
+          <h2 class="title is-3">CameraBench Leaderboard</h2>
           <div class="content has-text-justified">
             
             <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
-              Lastly, we show that Qwen-2.5-VL finetuned on our high-quality dataset can generate more accurate camera motion captions than the state-of-the-art generative VLMs such as GPT-4o and Gemini-2.5-Pro.
+              Below is the leaderboard for the binary classification of motion primitives.
             </p>
 
-            <div class="columns" style="margin-top: 2em;">
-              <div class="column is-7">
-                <img src="images/caption.1.gif" alt="Video caption example 1" style="height: 280px; width: auto;">
-              </div>
-              <div class="column is-5">
-                <img src="images/caption.1.png" alt="Video caption result 1" style="height: 280px; width: auto;">
-              </div>
+            <!-- <h2>📊 Binary Classification of Motion Primitives</h1> -->
+            <div class="iframe-container">
+              <iframe src="https://sy77777en.github.io/CameraBench/leaderboard/table.html" width="100%" height="920"
+                frameborder="0"></iframe>
             </div>
-
-            <div class="columns" style="margin-top: 1em;">
-              <div class="column is-7">
-                <img src="images/caption.2.gif" alt="Video caption example 2" style="height: 280px; width: auto;">
-              </div>
-              <div class="column is-5">
-                <img src="images/caption.2.png" alt="Video caption result 2" style="height: 280px; width: auto;">
-              </div>
+            <!-- <h1>📊 CameraBench Leaderboard (Video QA)</h1> -->
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+              Below is the leaderboard for the video QA tasks.
+            </p>
+            <div class="iframe-container">
+              <iframe src="https://sy77777en.github.io/CameraBench/leaderboard/VQA-Q-Acc.html" width="100%" height="920"
+                frameborder="0"></iframe>
             </div>
-
-            <div class="columns" style="margin-top: 1em;">
-              <div class="column is-7">
-                <img src="images/caption.3.gif" alt="Video caption example 3" style="height: 280px; width: auto;">
-              </div>
-              <div class="column is-5">
-                <img src="images/caption.3.png" alt="Video caption result 3" style="height: 280px; width: auto;">
-              </div>
-            </div>
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+              Please reach out if you wish to add your method to the leaderboard.
+            </p>
 
           </div>
         </div>
@@ -422,8 +413,65 @@
     </div>
   </section>
 
+
+  <section class="section hero is-light2">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Motion Augmented Video Captioning</h2>
+          <div class="content has-text-justified">
+  
+            <p style="text-align: justify; font-size: 16px; line-height: 1.5; margin-top: 10px; color: #333;">
+              Lastly, we show that Qwen-2.5-VL finetuned on our high-quality dataset can generate more accurate camera
+              motion captions than the state-of-the-art generative VLMs such as GPT-4o and Gemini-2.5-Pro.
+            </p>
+
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <img src="images/caption1.gif" alt="Image illustrating Motion Augmented Video Captioning">
+            </div>
+
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <img src="images/caption2.gif" alt="Image illustrating Motion Augmented Video Captioning">
+            </div>
+            
+            <div style="display: flex; justify-content: center; align-items: center;">
+              <img src="images/caption3.gif" alt="Image illustrating Motion Augmented Video Captioning">
+            </div>
+            <!-- <div class="columns" style="margin-top: 2em;">
+              <div class="column is-7">
+                <img src="images/caption.1.gif" alt="Video caption example 1" style="height: 280px; width: auto;">
+              </div>
+              <div class="column is-5">
+                <img src="images/caption.1.png" alt="Video caption result 1" style="height: 280px; width: auto;">
+              </div>
+            </div> -->
+  
+            <!-- <div class="columns" style="margin-top: 1em;">
+              <div class="column is-7">
+                <img src="images/caption.2.gif" alt="Video caption example 2" style="height: 280px; width: auto;">
+              </div>
+              <div class="column is-5">
+                <img src="images/caption.2.png" alt="Video caption result 2" style="height: 280px; width: auto;">
+              </div>
+            </div>
+  
+            <div class="columns" style="margin-top: 1em;">
+              <div class="column is-7">
+                <img src="images/caption.3.gif" alt="Video caption example 3" style="height: 280px; width: auto;">
+              </div>
+              <div class="column is-5">
+                <img src="images/caption.3.png" alt="Video caption result 3" style="height: 280px; width: auto;">
+              </div>
+            </div> -->
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!--BibTex citation -->
-  <section class="section hero is-light2" id="BibTeX (TO UPDATE)">
+  <section class="section hero is-light" id="BibTeX (TO UPDATE)">
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
       <pre><code>@inproceedings{camerabench,
