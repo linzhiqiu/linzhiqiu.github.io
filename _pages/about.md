@@ -45,7 +45,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 
 **Zhiqiu Lin***, [Siyuan Cen\*](https://linzhiqiu.github.io/papers/camerabench/), [Daniel Jiang](https://linzhiqiu.github.io/papers/camerabench/), [Jay Karhade](https://linzhiqiu.github.io/papers/camerabench/), [Hewei Wang](https://linzhiqiu.github.io/papers/camerabench/), [Chancharik Mitra](https://linzhiqiu.github.io/papers/camerabench/), [Yu Tong Tiffany Ling](https://linzhiqiu.github.io/papers/camerabench/), [Yuhan Huang](https://linzhiqiu.github.io/papers/camerabench/), [Sifan Liu](https://linzhiqiu.github.io/papers/camerabench/), [Mingyu Chen](https://linzhiqiu.github.io/papers/camerabench/), [Rushikesh Zawar](https://linzhiqiu.github.io/papers/camerabench/), [Xue Bai](https://linzhiqiu.github.io/papers/camerabench/), [Yilun Du](https://linzhiqiu.github.io/papers/camerabench/), [Chuang Gan](https://scholar.google.com/citations?user=PTeSCbIAAAAJ&hl=en), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
 
-[Website](https://linzhiqiu.github.io/papers/camerabench/) \| [Arxiv (Soon)](https://arxiv.org/abs/)
+[Website](https://linzhiqiu.github.io/papers/camerabench/) \| [Arxiv](https://arxiv.org/abs/2504.15376) \| [![](https://img.shields.io/github/stars/sy77777en/CameraBench?style=social&label=Code+Stars)](https://github.com/sy77777en/CameraBench)
 - We introduce CameraBench, a large-scale dataset and benchmark designed to assess and improve camera motion understanding for SfM/SLAM and VLMs.
 
 </div>
