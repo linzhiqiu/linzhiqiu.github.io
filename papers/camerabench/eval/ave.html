@@ -1,0 +1,1866 @@
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>AVE Evaluation Results</title>
+        <style>
+            body { 
+                font-family: Arial, sans-serif; 
+                margin: 20px;
+                background-color: #f5f5f5;
+            }
+            .container { 
+                max-width: 1200px; 
+                margin: 0 auto;
+                background-color: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .header { 
+                text-align: center; 
+                margin-bottom: 30px;
+                padding: 20px;
+                background-color: #f8f9fa;
+                border-radius: 8px;
+            }
+            .stats { 
+                background-color: #f0f0f0; 
+                padding: 15px; 
+                border-radius: 5px; 
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            .video-container { 
+                margin-bottom: 30px; 
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                background-color: white;
+            }
+            .video-info { margin-bottom: 15px; }
+            .video-player {
+                width: 100%;
+                max-width: 800px;
+                margin: 20px 0;
+                border-radius: 4px;
+            }
+            .metadata {
+                background-color: #f8f9fa;
+                padding: 15px;
+                border-radius: 4px;
+                margin-top: 15px;
+            }
+            .metadata-item {
+                margin: 5px 0;
+            }
+            .motion-badge {
+                display: inline-block;
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 14px;
+                margin-left: 10px;
+            }
+            .evaluation-result {
+                margin-top: 15px;
+                padding: 10px;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+            .correct { 
+                background-color: #e8f5e9; 
+                color: #2e7d32;
+                border: 1px solid #a5d6a7;
+            }
+            .incorrect { 
+                background-color: #ffebee; 
+                color: #c62828;
+                border: 1px solid #ef9a9a;
+            }
+            .not-evaluated { 
+                background-color: #f5f5f5; 
+                color: #616161;
+                border: 1px solid #e0e0e0;
+            }
+            .comment {
+                margin-top: 10px;
+                padding: 10px;
+                background-color: #f8f9fa;
+                border-radius: 4px;
+                font-style: italic;
+            }
+            .filter-controls {
+                margin: 20px 0;
+                padding: 15px;
+                background-color: #f8f9fa;
+                border-radius: 8px;
+            }
+            .filter-button {
+                padding: 8px 16px;
+                margin: 0 5px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: bold;
+                background-color: #2196F3;
+                color: white;
+            }
+            .filter-button.active {
+                background-color: #1976D2;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>AVE Evaluation Results</h1>
+                <p>View and Filter Evaluation Results</p>
+            </div>
+            <div class="stats">
+                <h2>Evaluation Statistics</h2>
+                <p>Correct: <span id="correct-count">0</span> | Incorrect: <span id="incorrect-count">0</span></p>
+                <p>Accuracy: <span id="accuracy">0</span>%</p>
+            </div>
+            <div class="filter-controls">
+                <button class="filter-button active" onclick="filterResults('all')">All</button>
+                <button class="filter-button" onclick="filterResults('correct')">Correct</button>
+                <button class="filter-button" onclick="filterResults('incorrect')">Incorrect</button>
+                <button class="filter-button" onclick="filterResults('not_evaluated')">Not Evaluated</button>
+            </div>
+    
+            <div class="video-container" id="video-0" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 1: Td8eEM9KDig</h3>
+                    <p>Shot ID: b8db6a09-c8a7-453f-8239-a3ee2e353b52</p>
+                    <p>Time: 27.94s - 28.95s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/Td8eEM9KDig_b8db6a09-c8a7-453f-8239-a3ee2e353b52.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> insert
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> wide
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> low-angle
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Handheld (H) shot taken with the camera being supported only by the operator’s hands and shoulder.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-1" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 2: lXS7GWgCBWM</h3>
+                    <p>Shot ID: 15245050-c62e-4ba6-8d06-8c9d111bdcc2</p>
+                    <p>Time: 28.74s - 30.20s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/lXS7GWgCBWM_15245050-c62e-4ba6-8d06-8c9d111bdcc2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> close-up
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Handheld (H) shot taken with the camera being supported only by the operator’s hands and shoulder.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-2" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 3: tXNMNMLQzwg</h3>
+                    <p>Shot ID: fc9313e8-ecb6-45ee-9e25-755ea8213a02</p>
+                    <p>Time: 112.86s - 114.36s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/tXNMNMLQzwg_fc9313e8-ecb6-45ee-9e25-755ea8213a02.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> ots
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-3" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 4: Rt3u4bU6EMU</h3>
+                    <p>Shot ID: 66c59a41-b75f-4a5d-9a42-214e87871df8</p>
+                    <p>Time: 90.92s - 91.63s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/Rt3u4bU6EMU_66c59a41-b75f-4a5d-9a42-214e87871df8.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> two-shot
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-4" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 5: 2uRRExAY-8g</h3>
+                    <p>Shot ID: 0742e4e3-caff-4059-aa6a-b0a80d843c97</p>
+                    <p>Time: 87.71s - 88.42s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/2uRRExAY-8g_0742e4e3-caff-4059-aa6a-b0a80d843c97.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> insert
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-5" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 6: 3KdgZgQRDU0</h3>
+                    <p>Shot ID: 63a27590-ce08-4d9b-9dd0-d4d1027e12b1</p>
+                    <p>Time: 112.86s - 115.53s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/3KdgZgQRDU0_63a27590-ce08-4d9b-9dd0-d4d1027e12b1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Locked (L) shot taken without shifting the position of the camera because it is shaking.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-6" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 7: 1g82D68N-ys</h3>
+                    <p>Shot ID: 28a94814-726e-438e-a98d-f6b619af2995</p>
+                    <p>Time: 23.06s - 26.03s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/1g82D68N-ys_28a94814-726e-438e-a98d-f6b619af2995.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> group-shot, group
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">Missing "Pan"</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-7" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 8: PlkvQ0NbjUs</h3>
+                    <p>Shot ID: 534b79ee-a330-41aa-b308-8e445b90d85e</p>
+                    <p>Time: 137.80s - 139.68s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/PlkvQ0NbjUs_534b79ee-a330-41aa-b308-8e445b90d85e.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> low-angle
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-8" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 9: EUvgqItrt1c</h3>
+                    <p>Shot ID: 6ff6f9a8-9f59-435d-9f84-33ae67a9dc39</p>
+                    <p>Time: 1.42s - 3.92s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/EUvgqItrt1c_6ff6f9a8-9f59-435d-9f84-33ae67a9dc39.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-9" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 10: fSOh-vTjWk4</h3>
+                    <p>Shot ID: c0d15b46-c2a3-4f89-8d49-7fa5a5e35fd3</p>
+                    <p>Time: 150.53s - 166.62s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/fSOh-vTjWk4_c0d15b46-c2a3-4f89-8d49-7fa5a5e35fd3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">Missing Dolly/Zoom; also contains shot transition.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-10" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 11: cE2bc0vU9pg</h3>
+                    <p>Shot ID: df2e1d89-3ec6-455c-b6e5-876b5717c7ae</p>
+                    <p>Time: 95.26s - 97.39s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/cE2bc0vU9pg_df2e1d89-3ec6-455c-b6e5-876b5717c7ae.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> ots, group-shot
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">Missing Dolly/Zoom</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-11" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 12: LK4c5TIKY0w</h3>
+                    <p>Shot ID: ff4698e5-639b-455b-8ea3-6d5b7c7b95a8</p>
+                    <p>Time: 153.86s - 156.70s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/LK4c5TIKY0w_ff4698e5-639b-455b-8ea3-6d5b7c7b95a8.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> low-angle
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int, ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-12" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 13: _Mr6MQB8vRg</h3>
+                    <p>Shot ID: c5ce560a-c089-49f3-8aea-6d20df723a9a</p>
+                    <p>Time: 144.39s - 146.02s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/_Mr6MQB8vRg_c5ce560a-c089-49f3-8aea-6d20df723a9a.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Handheld (H) shot taken with the camera being supported only by the operator’s hands and shoulder.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-13" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 14: 387KRtYq2mE</h3>
+                    <p>Shot ID: 82cff6a6-9a7b-4b2f-8d8d-1ca1ebd6475e</p>
+                    <p>Time: 87.30s - 90.97s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/387KRtYq2mE_82cff6a6-9a7b-4b2f-8d8d-1ca1ebd6475e.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> close-up
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Handheld (H) shot taken with the camera being supported only by the operator’s hands and shoulder.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-14" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 15: MdwuW8n3JYA</h3>
+                    <p>Shot ID: 15479f45-c620-40ad-9123-d19fd5eb8e75</p>
+                    <p>Time: 46.55s - 58.98s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/MdwuW8n3JYA_15479f45-c620-40ad-9123-d19fd5eb8e75.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> wide
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-15" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 16: ZFXOR2yoWCg</h3>
+                    <p>Shot ID: 88b61b3d-0e8f-4eb6-b94c-b7008294569a</p>
+                    <p>Time: 180.64s - 181.43s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/ZFXOR2yoWCg_88b61b3d-0e8f-4eb6-b94c-b7008294569a.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> group-shot
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Locked (L) shot taken without shifting the position of the camera because it is shaking.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-16" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 17: SLkR7mzysAs</h3>
+                    <p>Shot ID: 136bc96e-8937-4c1b-b1cb-415286051fa7</p>
+                    <p>Time: 106.06s - 115.57s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/SLkR7mzysAs_136bc96e-8937-4c1b-b1cb-415286051fa7.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">other</span><span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> other, single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> other, medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> other, eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> other, int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Locked (L) shot taken without shifting the position of the camera because it contains shot transition.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-17" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 18: AoKtg7t1Y0M</h3>
+                    <p>Shot ID: 8ac3f69c-f1b3-4846-bea7-ab5f68a8068e</p>
+                    <p>Time: 48.34s - 50.80s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/AoKtg7t1Y0M_8ac3f69c-f1b3-4846-bea7-ab5f68a8068e.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> ots
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> close-up
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Handheld (H) shot taken with the camera being supported only by the operator’s hands and shoulder.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-18" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 19: pizMaFdtY-s</h3>
+                    <p>Shot ID: 191e8777-02d3-4a43-9d0d-b93c1112d280</p>
+                    <p>Time: 9.18s - 11.76s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/pizMaFdtY-s_191e8777-02d3-4a43-9d0d-b93c1112d280.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> two-shot
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level, high-angle
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">Missing Dolly/Zoom</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-19" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 20: BDiB3XcDsT0</h3>
+                    <p>Shot ID: 166be1a4-3af6-4a6d-9474-4370a4e28aa2</p>
+                    <p>Time: 111.40s - 117.16s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/BDiB3XcDsT0_166be1a4-3af6-4a6d-9474-4370a4e28aa2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span><span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">It makes no sense to label handheld and locked together.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-20" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 21: _XST7hft6k8</h3>
+                    <p>Shot ID: bd701599-2d8c-42f2-8417-0269b9e2c844</p>
+                    <p>Time: 66.27s - 67.28s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/_XST7hft6k8_bd701599-2d8c-42f2-8417-0269b9e2c844.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span><span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">It makes no sense to label handheld and locked together.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-21" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 22: q7vtWB4owdE</h3>
+                    <p>Shot ID: 29667106-6bc3-46e1-9c37-9bbf9b876b60</p>
+                    <p>Time: 158.53s - 161.08s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/q7vtWB4owdE_29667106-6bc3-46e1-9c37-9bbf9b876b60.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Handheld (H) shot taken with the camera being supported only by the operator’s hands and shoulder.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-22" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 23: GyhrH5E6B6g</h3>
+                    <p>Shot ID: 07a4beaa-f098-45de-a207-6027b6db28b3</p>
+                    <p>Time: 88.13s - 89.59s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/GyhrH5E6B6g_07a4beaa-f098-45de-a207-6027b6db28b3.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> ots
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level, low-angle
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Locked (L) shot taken without shifting the position of the camera because it is shaking.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-23" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 24: XMt98-MEWmw</h3>
+                    <p>Shot ID: fb9608e0-3115-45f6-9c6b-b09f3b135170</p>
+                    <p>Time: 42.04s - 45.88s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/XMt98-MEWmw_fb9608e0-3115-45f6-9c6b-b09f3b135170.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> group-shot
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-24" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 25: 5ttoICpH0Vc</h3>
+                    <p>Shot ID: ea35e7e6-f043-4793-b3ed-a3167563da77</p>
+                    <p>Time: 60.64s - 61.77s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/5ttoICpH0Vc_ea35e7e6-f043-4793-b3ed-a3167563da77.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">pan</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">There is no obvious panning motion.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-25" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 26: cWYIlga8sas</h3>
+                    <p>Shot ID: 0771f26a-f38a-4077-865d-e94b70f88f9d</p>
+                    <p>Time: 143.81s - 144.19s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/cWYIlga8sas_0771f26a-f38a-4077-865d-e94b70f88f9d.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> insert
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> wide, medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> low-angle
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Handheld (H) shot taken with the camera being supported only by the operator’s hands and shoulder.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-26" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 27: Ia8LqyDsdbo</h3>
+                    <p>Shot ID: ab0515ca-2e30-42b7-9bf9-df7e87bb4cc9</p>
+                    <p>Time: 117.28s - 124.83s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/Ia8LqyDsdbo_ab0515ca-2e30-42b7-9bf9-df7e87bb4cc9.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-27" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 28: WRlIDIu2qpg</h3>
+                    <p>Shot ID: 204554b4-e5cb-4c47-9809-ead9a80546a6</p>
+                    <p>Time: 110.03s - 117.28s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/WRlIDIu2qpg_204554b4-e5cb-4c47-9809-ead9a80546a6.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">zoom</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-28" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 29: UZqpweWv5_0</h3>
+                    <p>Shot ID: deaa8484-a584-44ba-a81d-804f9a017397</p>
+                    <p>Time: 83.54s - 86.17s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/UZqpweWv5_0_deaa8484-a584-44ba-a81d-804f9a017397.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> ots
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> 
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-29" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 30: y-qCvfXMTlg</h3>
+                    <p>Shot ID: ae50139b-2db7-4e67-beef-0a87be073f93</p>
+                    <p>Time: 93.43s - 95.09s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/y-qCvfXMTlg_ae50139b-2db7-4e67-beef-0a87be073f93.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> low-angle
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-30" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 31: BuwF3dRJiS8</h3>
+                    <p>Shot ID: 3be0f6b7-c87b-4d59-a57c-70e6b4b42743</p>
+                    <p>Time: 8.76s - 15.56s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/BuwF3dRJiS8_3be0f6b7-c87b-4d59-a57c-70e6b4b42743.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> wide
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-31" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 32: 5x1FeyWYp9s</h3>
+                    <p>Shot ID: 459920bf-3116-40b0-9870-ad07cf6e3acb</p>
+                    <p>Time: 104.31s - 104.81s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/5x1FeyWYp9s_459920bf-3116-40b0-9870-ad07cf6e3acb.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> group-shot
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> wide
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Handheld (H) shot taken with the camera being supported only by the operator’s hands and shoulder.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-32" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 33: a6--cEjo3bY</h3>
+                    <p>Shot ID: ed29eac8-783d-4b3e-9584-d1fbf3128ca2</p>
+                    <p>Time: 146.27s - 146.81s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/a6--cEjo3bY_ed29eac8-783d-4b3e-9584-d1fbf3128ca2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> two-shot
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-33" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 34: 5ijEAMP_zW4</h3>
+                    <p>Shot ID: 34ecb931-fbf9-4f8e-a573-6ce81bd9ea08</p>
+                    <p>Time: 71.74s - 73.49s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/5ijEAMP_zW4_34ecb931-fbf9-4f8e-a573-6ce81bd9ea08.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> ots
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-34" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 35: R6nZpcweYXw</h3>
+                    <p>Shot ID: 771d9148-4279-41e0-a2f3-f7f4c9b0bae2</p>
+                    <p>Time: 6.55s - 8.38s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/R6nZpcweYXw_771d9148-4279-41e0-a2f3-f7f4c9b0bae2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> close-up
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-35" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 36: Ax1Vgvp5Cls</h3>
+                    <p>Shot ID: c40ada72-1725-4785-9553-e3c6a14390a5</p>
+                    <p>Time: 0.00s - 17.64s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/Ax1Vgvp5Cls_c40ada72-1725-4785-9553-e3c6a14390a5.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">tilt</span><span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> two-shot
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">Missing Dolly/Zoom</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-36" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 37: ASVUj89hyg0</h3>
+                    <p>Shot ID: 0aab288f-2b77-47ab-990a-ff99c219052a</p>
+                    <p>Time: 70.36s - 74.37s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/ASVUj89hyg0_0aab288f-2b77-47ab-990a-ff99c219052a.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> ots
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">Missing pan</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-37" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 38: SMaYCguBHAA</h3>
+                    <p>Shot ID: bafdce19-a6f0-4c1f-8a5b-0c54156cf734</p>
+                    <p>Time: 51.72s - 62.81s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/SMaYCguBHAA_bafdce19-a6f0-4c1f-8a5b-0c54156cf734.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> group-shot
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-38" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 39: Se2zCvUqqWw</h3>
+                    <p>Shot ID: 04cc8b3d-db2a-4055-8e72-bf8372f87000</p>
+                    <p>Time: 134.47s - 135.76s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/Se2zCvUqqWw_04cc8b3d-db2a-4055-8e72-bf8372f87000.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> insert
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">Missing pan</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-39" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 40: sCr9YZRDsJA</h3>
+                    <p>Shot ID: d0e0fb3e-d89d-4751-adf9-b2b2bdde4871</p>
+                    <p>Time: 142.31s - 145.65s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/sCr9YZRDsJA_d0e0fb3e-d89d-4751-adf9-b2b2bdde4871.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> group-shot
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> wide
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> low-angle
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">Missing tilt</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-40" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 41: wTfbHs4HlPo</h3>
+                    <p>Shot ID: 8434a4c4-e27f-4bc9-84e2-90f279de9a72</p>
+                    <p>Time: 77.70s - 80.83s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/wTfbHs4HlPo_8434a4c4-e27f-4bc9-84e2-90f279de9a72.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span><span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> ots, single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">It makes no sense to label handheld and locked together.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-41" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 42: p2fHtpp_umI</h3>
+                    <p>Shot ID: c52b8ef2-2758-4b7e-b048-dc00b64527fc</p>
+                    <p>Time: 60.69s - 63.19s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/p2fHtpp_umI_c52b8ef2-2758-4b7e-b048-dc00b64527fc.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> group-shot, group
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-42" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 43: ZRJgexzNOMo</h3>
+                    <p>Shot ID: 3bd43223-6b78-4937-8093-9b9de1953d0a</p>
+                    <p>Time: 39.79s - 41.08s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/ZRJgexzNOMo_3bd43223-6b78-4937-8093-9b9de1953d0a.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> ots
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> close-up
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Handheld (H) shot taken with the camera being supported only by the operator’s hands and shoulder.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-43" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 44: 2EQCpQbUrzI</h3>
+                    <p>Shot ID: a98f5b50-79c3-454a-a183-8be80ebd5b77</p>
+                    <p>Time: 203.70s - 204.37s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/2EQCpQbUrzI_a98f5b50-79c3-454a-a183-8be80ebd5b77.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-44" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 45: 12KcnPMV3OM</h3>
+                    <p>Shot ID: df76b16d-f4ce-4ef8-aefc-e9b80a3072e8</p>
+                    <p>Time: 78.75s - 88.00s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/12KcnPMV3OM_df76b16d-f4ce-4ef8-aefc-e9b80a3072e8.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> two-shot
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Locked (L) shot taken without shifting the position of the camera because there is obvious motion.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-45" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 46: VBYiVoNwzQo</h3>
+                    <p>Shot ID: 0d0a670a-4f05-42ab-9122-3104cd23e767</p>
+                    <p>Time: 95.51s - 97.51s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/VBYiVoNwzQo_0d0a670a-4f05-42ab-9122-3104cd23e767.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> three-shot
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> close-up
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">This is not a Handheld (H) shot taken with the camera being supported only by the operator’s hands and shoulder.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-46" data-evaluation="incorrect">
+                <div class="video-info">
+                    <h3>Video 47: edaHyeIxzcI</h3>
+                    <p>Shot ID: b7cde9b2-5697-49ee-9696-6e8672aec996</p>
+                    <p>Time: 0.54s - 1.13s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/edaHyeIxzcI_b7cde9b2-5697-49ee-9696-6e8672aec996.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">handheld</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> insert
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result incorrect">
+                        Evaluation: Incorrect
+                    </div>
+                    <div class="comment">Missing Dolly/Zoom.</div>
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-47" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 48: rnnt0KYtwFc</h3>
+                    <p>Shot ID: bf021fdb-9856-4681-b253-b9a25b1e9c0b</p>
+                    <p>Time: 70.99s - 73.82s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/rnnt0KYtwFc_bf021fdb-9856-4681-b253-b9a25b1e9c0b.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-48" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 49: PCXI31d3vlE</h3>
+                    <p>Shot ID: d9d0eb39-f424-4e7c-bd31-081fd9b0d5f9</p>
+                    <p>Time: 26.03s - 28.82s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/PCXI31d3vlE_d9d0eb39-f424-4e7c-bd31-081fd9b0d5f9.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> single
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> medium
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> ext
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="video-container" id="video-49" data-evaluation="correct">
+                <div class="video-info">
+                    <h3>Video 50: YtktNetGOKU</h3>
+                    <p>Shot ID: 67230ac6-be55-4e22-ab51-c5edc233efab</p>
+                    <p>Time: 95.43s - 98.77s</p>
+                    <video class="video-player" controls>
+                        <source src="https://huggingface.co/datasets/zhiqiulin/camerabench_error_analysis/resolve/main/YtktNetGOKU_67230ac6-be55-4e22-ab51-c5edc233efab.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="metadata">
+                        <div class="metadata-item">
+                            <strong>Motions:</strong>
+                            <span class="motion-badge">locked</span>
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Type:</strong> insert
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Size:</strong> close-up
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Shot Angle:</strong> eye-level
+                        </div>
+                        <div class="metadata-item">
+                            <strong>Location:</strong> int
+                        </div>
+                    </div>
+                    <div class="evaluation-result correct">
+                        Evaluation: Correct
+                    </div>
+                    
+                </div>
+            </div>
+        
+        </div>
+        <script>
+            function updateStats() {
+                const correct = document.querySelectorAll('.video-container[data-evaluation="correct"]').length;
+                const incorrect = document.querySelectorAll('.video-container[data-evaluation="incorrect"]').length;
+                const total = correct + incorrect;
+                const accuracy = total > 0 ? Math.round((correct / total) * 100) : 0;
+                
+                document.getElementById('correct-count').textContent = correct;
+                document.getElementById('incorrect-count').textContent = incorrect;
+                document.getElementById('accuracy').textContent = accuracy;
+            }
+            
+            function filterResults(filter) {
+                // Update button states
+                document.querySelectorAll('.filter-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.target.classList.add('active');
+                
+                // Show/hide videos based on filter
+                document.querySelectorAll('.video-container').forEach(container => {
+                    if (filter === 'all' || container.dataset.evaluation === filter) {
+                        container.style.display = 'block';
+                    } else {
+                        container.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Initialize stats
+            updateStats();
+        </script>
+    </body>
+    </html>
+    
