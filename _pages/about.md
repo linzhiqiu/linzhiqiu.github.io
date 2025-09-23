@@ -39,7 +39,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <!-- - *2020.06*: &nbsp;🎉🎉 Best Paper Nomination at CVPR'20 for [Visual Chirality](https://linzhiqiu.github.io/papers/chirality/)! -->
 
 # 📝 Publications 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Arxiv.</div><img src='papers/camerabench/images/3.gif' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">NeurIPS 2025 (Spotlight).</div><img src='papers/camerabench/images/3.gif' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 **CameraBench: Towards Understanding Camera Motions in Any Video (NeurIPS'25 Spotlight)**
