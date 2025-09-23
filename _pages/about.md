@@ -22,7 +22,8 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <!-- My research interest includes neural machine translation and computer vision. I have published more than 100 papers at the top international AI conferences with total <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'>google scholar citations <strong><span id='total_cit'>260000+</span></strong></a> (You can also use google scholar badge <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>). -->
 
 # 🔥 News
-- *2024.09*: [NaturalBench](http://linzhiqiu.github.io/papers/naturalbench) was accepted to NeurIPS'24 (Datasets and Benchmarks Track).
+- *2025.09*: [CameraBench](http://linzhiqiu.github.io/papers/camerabench) was accepted to NeurIPS'25 (Spotlight).
+- *2024.09*: [NaturalBench](http://linzhiqiu.github.io/papers/naturalbench) was accepted to NeurIPS'24.
 - *2024.08*: [VQAScore](http://linzhiqiu.github.io/papers/vqascore) was accepted to ECCV'24. In addition, VQAScore is highlighted in Google's [Imagen3 Technical Report](https://arxiv.org/abs/2408.07009) as the strongest replacement for CLIPScore, with Imagen3 achieving SOTA on GenAI-Bench for compositional text-to-visual generation.
 - *2024.06*: [GenAI-Bench](http://linzhiqiu.github.io/papers/genai_bench) won Best Short Paper Award at <a href="https://syndata4cv.github.io/">SynData@CVPR2024</a>!
 - *2024.05*: [VisualGPTScore](http://arxiv.org/abs/2306.01879) was accepted to ICML'24.
@@ -33,7 +34,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 - *2023.02*: [Multimodality Helps Unimodality: Cross-Modal Few-Shot Learning with Multimodal Models](https://linzhiqiu.github.io/papers/cross_modal/) was accepted by CVPR'23.
 - *2022.09*: [LECO: Continual Learning with Evolving Class Ontologies](https://linzhiqiu.github.io/papers/leco/) was accepted by NeurIPS'22. Check out the [website](https://linzhiqiu.github.io/papers/leco/) and [slides](/papers/leco/LECO.pdf) for a quick overview!
 - *2022.06*: [The 1st CLEAR Challenge](http://clear-benchmark.github.io) was hosted on CVPR'22 [2nd Workshop on Open World Vision](https://www.cs.cmu.edu/~shuk/vplow.html). Check out the [slides](/papers/clear/clear_cvpr.pdf) for a quick overview!
-- *2021.09*: [The CLEAR Benchmark: Continual LEArning on Real-World Imagery](http://clear-benchmark.github.io) accepted by NeurIPS'21 (Datasets and Benchmarks Track). 
+- *2021.09*: [The CLEAR Benchmark: Continual LEArning on Real-World Imagery](http://clear-benchmark.github.io) accepted by NeurIPS'21. 
 - *2020.06*: Best Paper Nomination at CVPR'20 for [Visual Chirality](https://linzhiqiu.github.io/papers/chirality/)!
 <!-- - *2020.06*: &nbsp;🎉🎉 Best Paper Nomination at CVPR'20 for [Visual Chirality](https://linzhiqiu.github.io/papers/chirality/)! -->
 
@@ -41,12 +42,13 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Arxiv.</div><img src='papers/camerabench/images/3.gif' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**CameraBench: Towards Understanding Camera Motions in Any Video**
+**CameraBench: Towards Understanding Camera Motions in Any Video (NeurIPS'25 Spotlight)**
 
 **Zhiqiu Lin***, [Siyuan Cen\*](https://linzhiqiu.github.io/papers/camerabench/), [Daniel Jiang](https://linzhiqiu.github.io/papers/camerabench/), [Jay Karhade](https://linzhiqiu.github.io/papers/camerabench/), [Hewei Wang](https://linzhiqiu.github.io/papers/camerabench/), [Chancharik Mitra](https://linzhiqiu.github.io/papers/camerabench/), [Yu Tong Tiffany Ling](https://linzhiqiu.github.io/papers/camerabench/), [Yuhan Huang](https://linzhiqiu.github.io/papers/camerabench/), [Sifan Liu](https://linzhiqiu.github.io/papers/camerabench/), [Mingyu Chen](https://linzhiqiu.github.io/papers/camerabench/), [Rushikesh Zawar](https://linzhiqiu.github.io/papers/camerabench/), [Xue Bai](https://linzhiqiu.github.io/papers/camerabench/), [Yilun Du](https://linzhiqiu.github.io/papers/camerabench/), [Chuang Gan](https://scholar.google.com/citations?user=PTeSCbIAAAAJ&hl=en), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
 
 [Website](https://linzhiqiu.github.io/papers/camerabench/) \| [Arxiv](https://arxiv.org/abs/2504.15376) \| [![](https://img.shields.io/github/stars/sy77777en/CameraBench?style=social&label=Code+Stars)](https://github.com/sy77777en/CameraBench)
-- We introduce CameraBench, a large-scale dataset and benchmark designed to assess and improve camera motion understanding for SfM/SLAM and VLMs.
+- We introduce CameraBench, a large-scale effort that pushes video-language models to reason about the language of camera motion just like professional cinematographers.
+- Our open-source dataset and models are gaining strong interest and adoption from frontier video understanding and generation labs such as Deepmind and Kling.
 
 </div>
 </div>
