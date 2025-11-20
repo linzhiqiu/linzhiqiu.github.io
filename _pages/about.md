@@ -179,7 +179,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2020 (Best Paper Nomination)</div><img src='images/chirality/mirror.jpg' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**Visual Chirality (CVPR'24, Best Paper Nomination)**
+**Visual Chirality (CVPR'20, Best Paper Nomination)**
 
 **Zhiqiu Lin**, [Jin Sun](http://www.cs.cornell.edu/~jinsun/), [Abe Davis](http://abedavis.com), [Noah Snavely](http://www.cs.cornell.edu/~snavely/)
 
