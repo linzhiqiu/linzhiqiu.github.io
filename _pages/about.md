@@ -48,7 +48,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 
 [Website](https://linzhiqiu.github.io/papers/camerabench/) \| [Arxiv](https://arxiv.org/abs/2504.15376) \| [![](https://img.shields.io/github/stars/sy77777en/CameraBench?style=social&label=Code+Stars)](https://github.com/sy77777en/CameraBench)
 - We introduce CameraBench, a large-scale effort that pushes video-language models to reason about the language of camera motion just like professional cinematographers.
-- Our open-source dataset and models are gaining strong interest and adoption from frontier video understanding and generation labs such as Deepmind and Kling.
+- Our open-source dataset and models are gaining strong interest and adoption from frontier video understanding and generation labs such as Deepmind, xAI, and Kling.
 
 </div>
 </div>
