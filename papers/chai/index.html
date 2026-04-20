@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CHAI: Building a Precise Video Language with Human–AI Oversight</title>
+<meta name="description" content="CHAI: Critique-based Human–AI Oversight for precise video captioning. CVPR 2026 Highlight (Top 3%).">
+
+<meta property="og:title" content="CHAI: Building a Precise Video Language with Human–AI Oversight">
+<meta property="og:description" content="A year with 100+ content creators teaching AI to describe video like a filmmaker. CVPR 2026 Highlight (Top 3%).">
+<meta property="og:image" content="images/teaser_draft.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ── Reset & Variables ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #f7f7f9;
+  --bg-alt: #EDF0F4;
+  --bg-dark: #1a1a1a;
+  --text: #1a1a1a;
+  --text-muted: #6b6560;
+  --accent: #004194;
+  --accent-light: #EFF6FF;
+  --border: #d9d5cf;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'Roboto Mono', 'JetBrains Mono', monospace;
+  --max-w: 1100px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: #006AF3; text-decoration: none; font-weight: 700; }
+a:hover { text-decoration: underline; }
+
+img, video { max-width: 100%; display: block; }
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+
+section {
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+section:last-of-type { border-bottom: none; }
+
+/* ── Hero ── */
+.hero {
+  padding: 4.5rem 0 4rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero__badges {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  margin-bottom: 2.4rem;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+}
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6em 1.2em;
+}
+.hero__badge--award { color: #8A6700; background: #FFEFBE; }
+.hero__badge--top { color: #fff; background: #C9961A; letter-spacing: 0.08em; }
+
+.hero__tagline {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  font-style: italic;
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 0 auto 0.6rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.hero h1 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.15;
+  max-width: 900px;
+  margin: 0.8rem auto 1.6rem;
+}
+.hero__subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 680px;
+  margin: 0 auto 2.4rem;
+  line-height: 1.6;
+}
+.hero__subtitle b { color: var(--text); font-weight: 600; }
+.hero__authors a { font-weight: 400; }
+.hero__authors {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 800px;
+  margin: 0 auto 0.5rem;
+  line-height: 1.8;
+}
+.hero__affiliations { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 2rem; }
+.hero__links {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: var(--mono);
+  font-size: 1rem;
+  padding: 0.6em 1.3em;
+  border-radius: 6px;
+  background: var(--bg-dark);
+  color: #fff;
+  transition: background 0.2s, opacity 0.2s;
+}
+.hero__links-break { flex-basis: 100%; height: 0; }
+.hero__links a:hover { opacity: 0.85; text-decoration: none; }
+.hero__links a:not(.outline):hover { background: #004493; opacity: 1; }
+.hero__links a.outline {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+.hero__links a.outline:hover { border-color: var(--text); }
+
+/* Small pill appended inside buttons */
+.btn-pill {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.25em 0.55em;
+  border-radius: 3px;
+  margin-left: 0.2em;
+  line-height: 1.1;
+}
+.btn-pill--soon { color: #9B6100; background: #FCEFCC; }
+.btn-pill--award { color: #0E6B34; background: #DCF2E4; }
+
+/* ── Section Headers ── */
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #006AF3;
+  margin-bottom: 0.6rem;
+}
+.section-title {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.section-lead {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.section-lead b { color: var(--text); }
+
+.sub-heading {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin: 3rem 0 0.6rem;
+  color: var(--text);
+}
+.sub-heading__label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #006AF3;
+  margin-bottom: 0.3rem;
+}
+
+/* ── Key Points ── */
+.key-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.key-point {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+.key-point__illustration {
+  width: 100%;
+  height: 110px;
+  background: #EFF6FF;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+.key-point__num {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 2rem;
+  color: #006AF3;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.key-point h3 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.key-point p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+.key-point p b { color: var(--text); }
+
+/* ── Figure blocks ── */
+.fig-block { margin: 2.5rem 0; }
+.fig-block img {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.fig-block__caption {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  line-height: 1.84;
+}
+.fig-block__caption b { color: var(--text); }
+
+/* ── Image slot with placeholder fallback ── */
+.img-slot {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #fff;
+  min-height: 220px;
+}
+.img-slot img { width: 100%; display: block; }
+.img-slot.missing {
+  background: repeating-linear-gradient(45deg, #faf5ea, #faf5ea 14px, #f0e8d5 14px, #f0e8d5 28px);
+  border: 2px dashed #c9bfab;
+  aspect-ratio: 16 / 9;
+}
+.img-slot.missing img { display: none; }
+.img-slot.missing::before {
+  content: "📌 " attr(data-filename) " — add figure/GIF here";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: #7a5c00;
+  background: rgba(255, 248, 225, 0.92);
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  white-space: nowrap;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Two-col ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+@media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+/* ── Carousel ── */
+.carousel-wrapper { position: relative; margin: 2rem 0; }
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.carousel::-webkit-scrollbar { height: 6px; }
+.carousel::-webkit-scrollbar-track { background: transparent; }
+.carousel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.carousel__item {
+  flex: 0 0 min(840px, 92vw);
+  scroll-snap-align: start;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: #fff;
+}
+.carousel__item img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  background: #ffffff;
+  display: block;
+}
+.carousel__item__label {
+  padding: 0 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+.carousel__item__label b { color: var(--text); font-weight: 600; margin-right: 0.4em; }
+.carousel-hint {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Highlight box ── */
+.highlight-box {
+  background: #fff;
+  border-left: 3px solid #006AF3;
+  border-radius: 0 8px 8px 0;
+  padding: 1.5rem 1.8rem;
+  margin: 2rem 0;
+}
+.highlight-box h3 {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.02em;
+}
+.highlight-box ul { padding-left: 1.2rem; font-size: 0.92rem; color: var(--text-muted); }
+.highlight-box li { margin-bottom: 0.4rem; }
+.highlight-box li b { color: var(--text); }
+
+/* ── Stat cards ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.stat-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.4rem 1.2rem;
+  text-align: center;
+}
+.stat-card__num {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: #006AF3;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-card__label { font-size: 0.82rem; color: var(--text); font-weight: 600; margin-bottom: 0.2rem; }
+.stat-card__sub { font-size: 0.78rem; color: var(--text-muted); }
+
+/* ── Table ── */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  background: #fff;
+}
+.table-wrap th, .table-wrap td {
+  padding: 0.55rem 0.7rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.table-wrap th {
+  background: var(--bg-alt);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.table-wrap tr:last-child td { border-bottom: none; }
+.table-wrap .best { font-weight: 700; color: #006AF3; }
+.table-wrap .row-ours { background: #EFF6FF; }
+.table-wrap .row-ours td { color: #006AF3; }
+.table-wrap .row-ours td:first-child { color: var(--text); }
+.table-wrap .check { color: #16833b; font-weight: 700; }
+.table-wrap .cross { color: #c0392b; font-weight: 700; }
+
+/* ── Related work pointer ── */
+.related-pointer {
+  background: var(--bg-alt);
+  border-radius: 10px;
+  padding: 1.5rem 1.8rem;
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  margin: 2rem 0;
+}
+.related-pointer__icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 6px;
+  background: var(--accent-light);
+  color: #006AF3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.related-pointer h4 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.pill {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0E6B34;
+  background: #DCF2E4;
+  padding: 0.25em 0.6em;
+  border-radius: 4px;
+  vertical-align: 2px;
+  margin-left: 0.4em;
+}
+.related-pointer p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ── Collaboration card ── */
+.collab-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem 2.2rem;
+  margin-top: 1.8rem;
+}
+.collab-card p {
+  font-size: 0.96rem;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.collab-card p:last-child { margin-bottom: 0; }
+.collab-card .emphasis {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.2rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ── BibTeX ── */
+.bibtex-block {
+  background: var(--bg-dark);
+  color: #e0ddd8;
+  border-radius: 8px;
+  padding: 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  overflow-x: auto;
+  position: relative;
+}
+.bibtex-block pre { white-space: pre; color: #e0ddd8; }
+.bibtex-block .copy-btn {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  background: rgba(255,255,255,0.1);
+  color: #ccc;
+  border: none;
+  padding: 0.3em 0.7em;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+.bibtex-block .copy-btn:hover { background: rgba(255,255,255,0.2); }
+
+/* ── Footer ── */
+footer {
+  padding: 2.5rem 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+
+/* ── Placeholder note ── */
+.placeholder-note {
+  background: #FFF8E1;
+  border-left: 3px solid #E3A800;
+  color: #7a5c00;
+  border-radius: 0 6px 6px 0;
+  padding: 0.6em 0.9em;
+  font-size: 0.82rem;
+  font-family: var(--mono);
+  margin: 0.8rem 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  section { padding: 3rem 0; }
+  .container { padding: 0 1.2rem; }
+  .hero__badges { flex-wrap: wrap; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<header class="hero">
+<div class="container fade-up">
+  <div class="hero__badges">
+    <div class="hero__badge hero__badge--award">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.536.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
+      CVPR 2026 Highlight
+    </div>
+    <div class="hero__badge hero__badge--top">Top 3%</div>
+  </div>
+
+  <p class="hero__tagline">Before AI can generate professional videos, it needs to see like a professional.</p>
+
+  <h1>Building a Precise Video Language<br>with Human–AI Oversight</h1>
+
+  <p class="hero__subtitle">
+    A year with <b>100+ content creators</b> teaching AI to describe video like a filmmaker — with a structured
+    specification, scalable human–AI oversight, and post-training that lets an <b>8B model surpass GPT-5 and
+    Gemini-3.1</b>.
+  </p>
+
+  <p class="hero__authors">
+    <a href="https://linzhiqiu.github.io/">Zhiqiu Lin</a><sup>1</sup>,
+    Chancharik Mitra<sup>1</sup>,
+    Siyuan Cen<sup>1</sup>,
+    Isaac Li<sup>1</sup>,
+    Yuhan Huang<sup>1</sup>,
+    Yu Tong Tiffany Ling<sup>1</sup>,
+    Hewei Wang<sup>3</sup>,
+    Irene Pi<sup>1</sup>,
+    Shihang Zhu<sup>1</sup>,
+    Ryan Rao<sup>1</sup>,
+    George Liu<sup>1</sup>,
+    Jiaxi Li<sup>1</sup>,
+    Ruojin Li<sup>1</sup>,
+    Yili Han<sup>1</sup>,
+    <a href="#">Yilun Du</a><sup>2</sup>,
+    <a href="#">Deva Ramanan</a><sup>1</sup>
+  </p>
+  <p class="hero__affiliations">
+    <sup>1</sup>Carnegie Mellon University &nbsp;&nbsp;
+    <sup>2</sup>Harvard University &nbsp;&nbsp;
+    <sup>3</sup>Apple
+  </p>
+
+  <div class="hero__links">
+    <a href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+      Paper
+    </a>
+    <a href="https://github.com/chancharikmitra/CHAI">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      Code
+    </a>
+    <a href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" /></svg>
+      Dataset
+    </a>
+    <a href="#"><span style="font-size:1.2em;">🤗</span> HuggingFace</a>
+    <div class="hero__links-break"></div>
+    <a href="https://linzhiqiu.github.io/papers/moodio/" class="outline">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
+      Moodio Platform
+      <span class="btn-pill btn-pill--soon">Releasing May 2026</span>
+    </a>
+    <a href="https://linzhiqiu.github.io/papers/camerabench/" class="outline">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" /></svg>
+      CameraBench
+      <span class="btn-pill btn-pill--award">NeurIPS'25 Spotlight · Top 3%</span>
+    </a>
+  </div>
+</div>
+</header>
+
+<!-- ════════════════════ OVERVIEW ════════════════════ -->
+<section>
+<div class="container">
+  <div class="section-label">Overview</div>
+  <div class="section-title">A recipe for precise video language</div>
+  <p class="section-lead">
+    VLMs already write fluent captions — but they hallucinate what they see, miss how the camera moves, and confuse
+    left from right. Humans, on the other hand, make typos, describe events out of order, and lack the vocabulary for
+    cinematography. <b>CHAI combines their strengths</b>: models write, humans critique.
+  </p>
+
+  <div class="key-points">
+    <div class="key-point">
+      <div class="key-point__illustration">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#006AF3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25Z" /></svg>
+      </div>
+      <div class="key-point__num">1</div>
+      <h3>Precise Specification</h3>
+      <p>A structured video language spanning <b>subjects, scenes, motion, spatial framing, and camera dynamics</b> — grounded by <b>200+ visual primitives</b> co-designed with professional cinematographers.</p>
+    </div>
+
+    <div class="key-point">
+      <div class="key-point__illustration">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#006AF3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
+      </div>
+      <div class="key-point__num">2</div>
+      <h3>Scalable Oversight</h3>
+      <p>LLMs write more fluently than most humans, but hallucinate what they see. CHAI lets <b>AI draft captions</b> and <b>humans critique</b> — shifting effort from generation to verification.</p>
+    </div>
+
+    <div class="key-point">
+      <div class="key-point__illustration">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#006AF3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" /></svg>
+      </div>
+      <div class="key-point__num">3</div>
+      <h3>Post-Training</h3>
+      <p>Our <b>Qwen3-VL-8B surpasses Gemini-3.1 and GPT-5</b>. Human critiques turn AI drafts into accurate captions, yielding signals for SFT, DPO, reward modeling, and inference-time scaling.</p>
+    </div>
+
+    <div class="key-point">
+      <div class="key-point__illustration">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#006AF3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
+      </div>
+      <div class="key-point__num">4</div>
+      <h3>Better Generation</h3>
+      <p>We fine-tune Wan to follow our detailed cinematic prompts of up to <b>400 words</b> — precise control over dolly zoom, rack focus, speed ramps, Dutch angles, POVs, and more.</p>
+    </div>
+  </div>
+
+  <div class="fig-block" style="margin-top:3rem;">
+    <img src="images/teaser_draft.png" alt="CHAI Recipe Overview">
+    <p class="fig-block__caption"><b>Figure 1.</b> Our recipe for precise video language. <span style="color:#c04000;">Red (top)</span>: prior work lacks specification and oversight, leading to imprecise terminology, hallucinations, and poor writing. <span style="color:#004194;">Blue (bottom)</span>: CHAI combines structured specification, critique-based oversight, and post-training — which in turn unlock professional-quality video generation.</p>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ SPECIFICATION ════════════════════ -->
+<section>
+<div class="container">
+  <div class="section-label">① Specification</div>
+  <div class="section-title">Teaching AI the shared language of cinema</div>
+  <p class="section-lead">
+    Without clear specification, video captions use imprecise terms (confusing <em>dolly-in</em> with <em>zoom-in</em>),
+    miss key details (camera shake, focus shifts), and inject subjective language ("inspiring atmosphere") instead of
+    describing what's visible. <b>Filmmakers don't have this problem.</b> They use precise terms like
+    <em>rack focus</em>, <em>Dutch angle</em>, and <em>medium full shot</em> to coordinate on set. We formalized this
+    shared vocabulary.
+  </p>
+
+  <div class="fig-block" style="margin-top:2rem;">
+    <img src="images/specification.png" alt="Specification comparison">
+    <p class="fig-block__caption"><b>Figure 2.</b> Prior datasets (red) suffer from imprecise terminology, missing information, and subjective descriptions. Our specification (blue) is co-designed with 100+ professional creators over a year-long collaboration.</p>
+  </div>
+
+  <p style="font-size:0.98rem; color:var(--text-muted); margin-top:2.5rem; text-align:center; line-height:1.9;">
+    A structured specification covering <b style="color:var(--text);">5 aspects</b>:<br>
+    🧑 <b style="color:var(--text);">Subject</b> &middot; 🏞️ <b style="color:var(--text);">Scene</b> &middot; 🏃 <b style="color:var(--text);">Motion</b> &middot; 📐 <b style="color:var(--text);">Spatial</b> &middot; 🎥 <b style="color:var(--text);">Camera</b>
+  </p>
+
+  <!-- Taxonomy figure -->
+  <div class="fig-block" style="margin-top:1.2rem;">
+    <img src="images/overall.png" alt="CHAI taxonomy">
+    <p class="fig-block__caption"><b>Figure 3.</b> The full taxonomy — each of the 5 aspects is decomposed into sub-aspects, grounded by 200+ visual and motion primitives.</p>
+  </div>
+
+  <div class="related-pointer">
+    <div class="related-pointer__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="30" height="30"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 1 1.242 7.244" /></svg>
+    </div>
+    <div>
+      <h4>CameraBench-Pro (via Moodio)</h4>
+      <p>The 200+ primitives powering CHAI's specification come from <b>CameraBench-Pro</b> — a large-scale cinematic dataset with 1.5M+ professional annotations across 225 primitives and 17 skill categories, released as part of the upcoming <a href="https://linzhiqiu.github.io/papers/moodio/">Moodio</a> project.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ OVERSIGHT ════════════════════ -->
+<section>
+<div class="container">
+  <div class="section-label">② Oversight</div>
+  <div class="section-title">AI writes. Humans critique.</div>
+  <p class="section-lead">
+    Specification tells you <em>what</em> to describe. But who does the writing? Humans write captions with typos,
+    grammar errors, and events out of order. Models write fluently but hallucinate objects and motion that don't exist.
+    Both confuse left vs. right. <b>CHAI's insight:</b> LLMs are already better writers than most humans, but humans
+    are better at spotting visual errors — so let each do what they're best at.
+  </p>
+
+  <div class="fig-block" style="margin-top:2rem;">
+    <img src="images/oversight.png" alt="CHAI Oversight Framework">
+    <p class="fig-block__caption"><b>Figure 4.</b> The CHAI framework. 🤖 AI writes comprehensive pre-captions. 👤 Human experts critique what's wrong and how to fix it, guiding AI to produce accurate post-captions. ✅ Peer-review bonuses reward annotators for precision and reviewers for catching errors.</p>
+  </div>
+  <div class="placeholder-note">
+    📌 <b>TODO (Zhiqiu):</b> replace <code>images/oversight.png</code> with the updated figure when ready.
+  </div>
+
+  <!-- Triplet examples carousel -->
+  <div class="carousel-wrapper" style="margin-top:2.5rem;">
+    <div class="carousel-hint">↔ SWIPE THROUGH (PRE-CAPTION · CRITIQUE · POST-CAPTION) EXAMPLES</div>
+    <div class="carousel">
+      <div class="carousel__item">
+        <img src="images/subject_caption.png" alt="Subject caption triplet">
+        <div class="carousel__item__label"><b>Subject</b> — type, appearance, pose, relationships</div>
+      </div>
+      <div class="carousel__item">
+        <img src="images/scene_caption.png" alt="Scene caption triplet">
+        <div class="carousel__item__label"><b>Scene</b> — POV, setting, overlays, time of day</div>
+      </div>
+      <div class="carousel__item">
+        <img src="images/subject_motion.png" alt="Motion caption triplet">
+        <div class="carousel__item__label"><b>Motion</b> — actions, interactions, group dynamics</div>
+      </div>
+      <div class="carousel__item">
+        <img src="images/spatial_caption.png" alt="Spatial caption triplet">
+        <div class="carousel__item__label"><b>Spatial</b> — shot size, frame position, depth, movement</div>
+      </div>
+      <div class="carousel__item">
+        <img src="images/camera_caption.png" alt="Camera caption triplet">
+        <div class="carousel__item__label"><b>Camera</b> — angle, height, lens, focus, steadiness, movement</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ POST-TRAINING + CRITIQUE QUALITY ════════════════════ -->
+<section>
+<div class="container">
+  <div class="section-label">③ Post-Training</div>
+  <div class="section-title">An 8B model beats GPT-5 and Gemini-3.1</div>
+  <p class="section-lead">
+    CHAI produces <b>(pre-caption, critique, post-caption)</b> triplets — unlocking three capabilities at once:
+    captioning, reward modeling, and critique generation. The catch? <b>Critique quality is the bottleneck.</b>
+  </p>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-card__num">17.8</div>
+      <div class="stat-card__label">Caption BLEU-4</div>
+      <div class="stat-card__sub">vs. Gemini-3.1 (5.1), GPT-5 (5.5)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card__num">86.8</div>
+      <div class="stat-card__label">Reward Accuracy</div>
+      <div class="stat-card__sub">vs. Gemini-2.5 (62.0), GPT-5 (59.5)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card__num">27.5</div>
+      <div class="stat-card__label">Critique BLEU-4</div>
+      <div class="stat-card__sub">vs. Gemini-3.1 (3.3), GPT-5 (2.8)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card__num">8B</div>
+      <div class="stat-card__label">Qwen3-VL parameters</div>
+      <div class="stat-card__sub">SFT + DPO on CHAI data</div>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:3rem;">
+    <div class="fig-block" style="margin:0;">
+      <img src="images/critique_quality.png" alt="Critique quality matters">
+      <p class="fig-block__caption"><b>Figure 5.</b> A good critique is <b>accurate</b>, <b>complete</b>, and <b>constructive</b>. CHAI enforces all three properties by requiring critiques to directly guide model revision.</p>
+    </div>
+    <div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="text-align:left;">Critique Type</th>
+              <th>Prec.</th>
+              <th>Rec.</th>
+              <th>Constr.</th>
+              <th>Caption</th>
+              <th>Reward</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="text-align:left;">Blind Gemini-2.5</td><td>—</td><td>—</td><td>—</td><td>10.2</td><td>43.0</td></tr>
+            <tr><td style="text-align:left;">Gemini-2.5 (w/ video)</td><td>—</td><td>—</td><td>—</td><td>11.9</td><td>59.9</td></tr>
+            <tr><td style="text-align:left;">Inaccurate</td><td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td><td>11.3</td><td>45.5</td></tr>
+            <tr><td style="text-align:left;">Incomplete</td><td class="check">✓</td><td class="cross">✗</td><td class="check">✓</td><td>11.7</td><td>54.7</td></tr>
+            <tr><td style="text-align:left;">Non-constructive</td><td class="check">✓</td><td class="check">✓</td><td class="cross">✗</td><td>12.5</td><td>65.0</td></tr>
+            <tr><td style="text-align:left;">Ours (w/o QC)</td><td>—</td><td>—</td><td>—</td><td>13.8</td><td>70.7</td></tr>
+            <tr class="row-ours"><td style="text-align:left;"><b>Ours (w/ QC)</b></td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="best">17.0</td><td class="best">86.8</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.6rem;">
+        Weakening any single quality dimension degrades post-training. Prior work (OpenAI GDC, MM-RLHF) collects
+        <b style="color:var(--text);">50%+ non-constructive critiques</b> — just "this is wrong" without explaining
+        the fix.
+      </p>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:2.5rem;">
+    <h3>Key Findings</h3>
+    <ul>
+      <li>Current VLMs handle <b>subject &amp; scene</b> well but struggle with <b>motion &amp; camera</b> aspects</li>
+      <li>Explicit preference + critique supervision improves SFT and RL — <b>Qwen3-VL-8B outperforms Gemini-3.1-Pro</b></li>
+      <li>Critique quality (precision, recall, constructiveness) is <b>the</b> bottleneck for post-training success</li>
+      <li>Inference-time scaling via best-of-<em>N</em> with reward models yields further gains — no extra human labels</li>
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ VIDEO GENERATION ════════════════════ -->
+<section>
+<div class="container">
+  <div class="section-label">④ Application</div>
+  <div class="section-title">Better understanding → better generation</div>
+  <p class="section-lead">
+    We re-caption <b>large-scale professional videos</b> (films, commercials, music videos, games) with our post-trained
+    model and fine-tune Wan2.2 to follow detailed prompts of up to <b>400 words</b> — achieving precise control over
+    techniques current generators struggle with.
+  </p>
+
+  <!-- Two-column teaser image slots -->
+  <div class="two-col" style="margin-top:2rem;">
+    <div class="img-slot" data-filename="videogeneration_1.png">
+      <img src="images/videogeneration_1.png" alt="Video generation example 1"
+           onerror="this.parentElement.classList.add('missing');">
+    </div>
+    <div class="img-slot" data-filename="videogeneration_2.png">
+      <img src="images/videogeneration_2.png" alt="Video generation example 2"
+           onerror="this.parentElement.classList.add('missing');">
+    </div>
+  </div>
+  <p class="fig-block__caption"><b>Figure 6.</b> After fine-tuning on re-captioned data, Wan2.2 follows detailed prompts more faithfully, with finer control over camera motion, cinematography, and visual composition.</p>
+
+  <!-- Generation examples carousel -->
+  <div class="carousel-wrapper" style="margin-top:2.5rem;">
+    <div class="carousel-hint">↔ SWIPE THROUGH 11 CINEMATIC CONTROL EXAMPLES</div>
+    <div class="carousel">
+      <div class="carousel__item"><img src="images/dolly_zoom.png" alt="Dolly zoom"><div class="carousel__item__label"><b>Dolly zoom out</b> — Hitchcock's vertigo effect</div></div>
+      <div class="carousel__item"><img src="images/isometric.png" alt="Isometric"><div class="carousel__item__label"><b>Isometric (2.5D)</b> — game perspective</div></div>
+      <div class="carousel__item"><img src="images/rolling_cw.png" alt="Roll"><div class="carousel__item__label"><b>Clockwise camera roll</b></div></div>
+      <div class="carousel__item"><img src="images/dutch_angle.png" alt="Dutch angle"><div class="carousel__item__label"><b>Dutch angle</b> — tilted horizon</div></div>
+      <div class="carousel__item"><img src="images/rack_focus.png" alt="Rack focus"><div class="carousel__item__label"><b>Rack focus</b> — shifting between subjects</div></div>
+      <div class="carousel__item"><img src="images/speed_ramp.png" alt="Speed ramp"><div class="carousel__item__label"><b>Speed ramp</b> — mixing fast and slow</div></div>
+      <div class="carousel__item"><img src="images/side_view.png" alt="Side view"><div class="carousel__item__label"><b>Side-view</b> game perspective</div></div>
+      <div class="carousel__item"><img src="images/watermark.png" alt="Watermark"><div class="carousel__item__label"><b>Watermark overlay</b></div></div>
+      <div class="carousel__item"><img src="images/waterlevels.png" alt="Water"><div class="carousel__item__label"><b>Underwater → above water</b> transition</div></div>
+      <div class="carousel__item"><img src="images/shotsize_change.png" alt="Shot size"><div class="carousel__item__label"><b>Medium shot → close-up</b></div></div>
+      <div class="carousel__item"><img src="images/reveal.png" alt="Reveal"><div class="carousel__item__label"><b>Revealing shot</b></div></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ ECOSYSTEM / RELATED ════════════════════ -->
+<section>
+<div class="container">
+  <div class="section-label">Ecosystem</div>
+  <div class="section-title">Part of a broader effort</div>
+  <p class="section-lead">
+    CHAI is one pillar of our research program on precise video language for professional video understanding and
+    generation.
+  </p>
+
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.2rem; margin-top:1.8rem;">
+    <div class="related-pointer" style="margin:0;">
+      <div class="related-pointer__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="30" height="30"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
+      </div>
+      <div>
+        <h4>Moodio &amp; CameraBench-Pro</h4>
+        <p>A co-pilot for video production built on 225 cinematic primitives and 1.5M+ professional annotations. CHAI's specification and annotation platform build on this foundation. <a href="https://linzhiqiu.github.io/papers/moodio/">Website →</a></p>
+      </div>
+    </div>
+    <div class="related-pointer" style="margin:0;">
+      <div class="related-pointer__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="30" height="30"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" /></svg>
+      </div>
+      <div>
+        <h4>CameraBench <span class="pill">NeurIPS'25 Spotlight · Top 3%</span></h4>
+        <p>Our predecessor benchmark on camera motion understanding: ~3,000 expert-annotated videos, a taxonomy of motion primitives, and evaluations of SfM and VLM methods. <a href="https://linzhiqiu.github.io/papers/camerabench/">Website →</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Collaboration card -->
+  <div class="collab-card">
+    <p class="emphasis">🚀 We are actively advancing CHAI with larger-scale datasets and stronger video understanding models.</p>
+    <p>
+      We welcome collaborations and funding opportunities with researchers and practitioners in <b>video understanding,
+      captioning, and multimodal agents for professional-level video content</b>.
+    </p>
+    <p>
+      If you're interested in accessing improved data or models, please reach out at
+      <a href="mailto:zhiqiulin98@gmail.com">zhiqiulin98@gmail.com</a> or
+      <a href="mailto:cmitra@andrew.cmu.edu">cmitra@andrew.cmu.edu</a>, or open a
+      <a href="https://github.com/chancharikmitra/CHAI/issues">GitHub Issue</a>.
+    </p>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ PRIOR WORK FALLS SHORT (end) ════════════════════ -->
+<section style="background: var(--bg-alt);">
+<div class="container">
+  <div class="section-label">Motivation</div>
+  <div class="section-title">Where prior captioning falls short</div>
+  <p class="section-lead">
+    Before training professionals, we tried crowdsourced workers with film knowledge — they still lack the vocabulary
+    for basic cinematography. We also evaluated <b>8 video–text datasets (2016–2025)</b> and found recurring issues
+    from lack of specification and oversight.
+  </p>
+
+  <!-- First half: crowdsourced -->
+  <h3 class="sub-heading">
+    <span class="sub-heading__label">Crowdsourced Annotators</span>
+    Seeing ≠ knowing how to describe
+  </h3>
+  <p style="color: var(--text-muted); line-height: 1.7;">
+    Crowdworkers still confuse <em>dolly-in</em> with <em>zoom-in</em>, call full shots "close-ups," and describe
+    fisheye distortion as "circular buildings." These errors motivated our collaboration with professional creators.
+  </p>
+
+  <div class="fig-block" style="margin-top:1.5rem;">
+    <img src="images/crowdsourced.png" alt="Crowdsourced captioning errors">
+    <p class="fig-block__caption"><b>Figure 7.</b> Crowdsourced annotators lack the visual vocabulary for common cinematic and motion effects.</p>
+  </div>
+
+  <!-- Second half: prior datasets -->
+  <h3 class="sub-heading">
+    <span class="sub-heading__label">Prior Datasets (2016–2025)</span>
+    Recurring issues from missing specification &amp; oversight
+  </h3>
+  <p style="color: var(--text-muted); line-height: 1.7;">
+    Even recent benchmarks suffer from imprecise terminology, missing information, subjective descriptions (lack of
+    specification), as well as poor writing, visual hallucinations, and inaccurate details (lack of oversight).
+  </p>
+
+  <div class="fig-block" style="margin-top:1.5rem;">
+    <div class="img-slot" data-filename="errors_specification.png">
+      <img src="images/errors_specification.png" alt="Errors from lack of specification"
+           onerror="this.parentElement.classList.add('missing');">
+    </div>
+    <p class="fig-block__caption"><b>Figure 8.</b> Errors caused by lack of <b>specification</b>: imprecise terminology, missing information, subjective descriptions.</p>
+  </div>
+
+  <div class="fig-block" style="margin-top:1.5rem;">
+    <div class="img-slot" data-filename="errors_oversight.png">
+      <img src="images/errors_oversight.png" alt="Errors from lack of oversight"
+           onerror="this.parentElement.classList.add('missing');">
+    </div>
+    <p class="fig-block__caption"><b>Figure 9.</b> Errors caused by lack of <b>oversight</b>: poor writing, visual hallucinations, inaccurate details.</p>
+  </div>
+
+  <div class="placeholder-note">
+    📌 <b>TODO (Zhiqiu):</b> add <code>images/errors_specification.png</code> and <code>images/errors_oversight.png</code>
+    from the paper's appendix (Figures S2 &amp; S3). Placeholders above will auto-swap once images are dropped into
+    <code>images/</code>.
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ BIBTEX ════════════════════ -->
+<section>
+<div class="container">
+  <div class="section-label">Citation</div>
+  <div class="section-title">BibTeX</div>
+  <div class="bibtex-block">
+    <button class="copy-btn" onclick="const t=document.getElementById('bibtex-text').textContent;navigator.clipboard.writeText(t);this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500);">Copy</button>
+<pre id="bibtex-text">@inproceedings{lin2026chai,
+  title={Building a Precise Video Language with Human-AI Oversight},
+  author={Zhiqiu Lin and Chancharik Mitra and Siyuan Cen and Isaac Li
+          and Yuhan Huang and Yu Tong Tiffany Ling and Hewei Wang
+          and Irene Pi and Shihang Zhu and Ryan Rao and George Liu
+          and Jiaxi Li and Ruojin Li and Yili Han and Yilun Du
+          and Deva Ramanan},
+  booktitle={IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2026}
+}</pre>
+  </div>
+</div>
+</section>
+
+<footer>
+  <div class="container">
+    We release our full recipe — specification, training materials, annotation platform, quality control pipeline, data, code, and models.
+  </div>
+</footer>
+
+</body>
+</html>
