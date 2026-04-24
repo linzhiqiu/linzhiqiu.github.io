@@ -46,8 +46,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-a { color: #006AF3; text-decoration: none; font-weight: 700; }
-a:hover { text-decoration: underline; }
+a { color: #006AF3; text-decoration: none; font-weight: 700; transition: color 0.15s; }
+a:hover { text-decoration: underline; color: var(--accent); }
 
 img, video { max-width: 100%; display: block; }
 
@@ -96,6 +96,7 @@ section:last-of-type { border-bottom: none; }
   text-transform: uppercase;
   color: #8A6700;
   background: #FFEFBE;
+  border: 0.5px solid #8A6700;
   padding: 0.18em 0.5em;
   border-radius: 3px;
   margin-left: 0.4em;
@@ -108,13 +109,24 @@ section:last-of-type { border-bottom: none; }
   flex-wrap: nowrap;
 }
 .topnav__links a {
-  font-family: var(--mono);
-  font-size: 0.78rem;
+  font-family: var(--sans);
+  font-size: 0.82rem;
   font-weight: 500;
   color: var(--text-muted);
   padding: 0.45em 0.75em;
   border-radius: 5px;
   transition: color 0.15s, background 0.15s;
+  position: relative;
+}
+.topnav__links a:not(.nav-cta) + a:not(.nav-cta)::before {
+  content: "";
+  position: absolute;
+  left: -0.15rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1em;
+  width: 1px;
+  background: var(--border);
 }
 .topnav__links a:hover {
   color: var(--text);
@@ -165,7 +177,7 @@ section:last-of-type { border-bottom: none; }
 
 /* ── Hero ── */
 .hero {
-  padding: 4.5rem 0 4rem;
+  padding: 3rem 0 4rem;
   text-align: center;
   border-bottom: 1px solid var(--border);
 }
@@ -193,14 +205,15 @@ section:last-of-type { border-bottom: none; }
 .hero__badge--top { color: #fff; background: #C9961A; letter-spacing: 0.08em; }
 
 .hero__tagline {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
-  font-style: italic;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+  font-style: normal;
   color: var(--text-muted);
   max-width: 720px;
   margin: 0 auto 0.6rem;
   line-height: 1.3;
   letter-spacing: -0.01em;
+  text-align: center;
 }
 .hero h1 {
   font-family: 'EB Garamond', Georgia, serif;
@@ -251,9 +264,11 @@ section:last-of-type { border-bottom: none; }
 .hero__links a.outline {
   background: transparent;
   color: var(--text);
-  border: 1.5px solid var(--border);
+  border: 1px solid #999999;
 }
-.hero__links a.outline:hover { border-color: var(--text); }
+.hero__links a.outline:hover { border-color: #006AF3; color: var(--accent); background: #ffffff; }
+.hero__links a.outline > svg { opacity: 0.5; }
+.hero__links a.outline:hover > svg { opacity: 1; }
 
 /* Small pill appended inside buttons */
 .btn-pill {
@@ -356,6 +371,8 @@ section:last-of-type { border-bottom: none; }
 .fig-block { margin: 2.5rem 0; }
 .fig-block img {
   border-radius: 8px;
+}
+.fig-block.has-border img {
   border: 1px solid var(--border);
 }
 .fig-block__caption {
@@ -372,7 +389,6 @@ section:last-of-type { border-bottom: none; }
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid var(--border);
   background: #fff;
   min-height: 220px;
 }
@@ -432,13 +448,95 @@ section:last-of-type { border-bottom: none; }
   overflow: hidden;
   background: #fff;
 }
-.carousel__item img {
+.carousel__item img,
+.carousel__item video {
   width: 100%;
   height: 400px;
   object-fit: contain;
   background: #ffffff;
   display: block;
 }
+/* Natural-fit variant: items size to media's intrinsic aspect ratio */
+.carousel-wrapper--natural .carousel__item {
+  flex: 0 0 auto;
+  max-width: 92vw;
+}
+.carousel-wrapper--natural .carousel__item img,
+.carousel-wrapper--natural .carousel__item video {
+  width: auto;
+  height: auto;
+  max-height: 70vh;
+  max-width: calc(92vw - 48px);
+  object-fit: initial;
+  margin: 24px;
+  display: block;
+}
+/* Caption triplets (natural fit but NOT the rounded cinematic one) get bigger sizing */
+.carousel-wrapper--natural:not(.carousel-wrapper--rounded) .carousel__item img,
+.carousel-wrapper--natural:not(.carousel-wrapper--rounded) .carousel__item video {
+  max-height: 90vh;
+  max-width: calc(95vw - 48px);
+}
+.carousel-wrapper--natural .carousel__item video { cursor: zoom-in; }
+
+/* Rounded-video variant — adds 12px border-radius on the videos */
+.carousel-wrapper--rounded .carousel__item img,
+.carousel-wrapper--rounded .carousel__item video {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ── Lightbox ── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  display: none;
+  z-index: 9999;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2rem 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+.lightbox.is-open { display: block; }
+.lightbox__media {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  background: #000;
+  border-radius: 6px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+.lightbox__close {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.4rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgba(217, 213, 207, 0.6);
+  color: #333333;
+  font-size: 1.6rem;
+  line-height: 1;
+  font-family: var(--sans);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border-color 0.15s;
+  z-index: 10000;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+.lightbox__close:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(217, 213, 207, 0.9);
+}
+body.lightbox-open { overflow: hidden; }
 .carousel__item__label {
   padding: 0 1rem;
   font-size: 0.85rem;
@@ -550,7 +648,7 @@ section:last-of-type { border-bottom: none; }
   width: 56px;
   height: 56px;
   border-radius: 6px;
-  background: var(--accent-light);
+  background: #ffffff;
   color: #006AF3;
   display: flex;
   align-items: center;
@@ -595,9 +693,13 @@ section:last-of-type { border-bottom: none; }
 .collab-card p:last-child { margin-bottom: 0; }
 .collab-card .emphasis {
   font-family: 'EB Garamond', Georgia, serif;
-  font-size: 1.2rem;
-  color: var(--text);
+  font-size: 1.5rem;
+  font-style: normal;
+  color: #333333;
   font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.2rem;
 }
 
 /* ── BibTeX ── */
@@ -724,7 +826,7 @@ footer {
   <div class="topnav__inner">
     <div class="topnav__brand">
       <a href="#top">CHAI</a>
-      <span class="topnav__brand-tag">CVPR '26</span>
+      <span class="topnav__brand-tag"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="9" height="9" style="vertical-align:-0.5px; margin-right:0.25em;"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.536.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>CVPR '26</span>
     </div>
     <button class="topnav__toggle" aria-label="Toggle menu" aria-expanded="false" onclick="
       const l=document.getElementById('topnav-links');
@@ -760,7 +862,7 @@ footer {
     <div class="hero__badge hero__badge--top">Top 3%</div>
   </div>
 
-  <p class="hero__tagline">Before AI can generate professional videos, it needs to see like a professional.</p>
+  <p class="hero__tagline">Before AI can generate professional videos,<br>it needs to see like a professional.</p>
 
   <h1>Building a Precise Video Language<br>with Human–AI Oversight</h1>
 
@@ -828,7 +930,7 @@ footer {
 <div class="container">
   <div class="hook__lead">
     <p>
-      Try prompting a video generator for a <b>dolly zoom</b>, <b>rack focus</b>, or <b>speed ramp</b>. Most will give
+      Try prompting a video generator for a <b style="color:#006AF3;">dolly zoom</b>, <b style="color:#006AF3;">dutch angle</b>, <b style="color:#006AF3;">shot size change</b>, or <b style="color:#006AF3;">speed ramp</b>. Most will give
       you a generic push-in or a slow-mo. Why? These techniques require a <em>language of cinema</em> that current
       models rarely speak. <b>We built that language.</b>
     </p>
@@ -841,10 +943,6 @@ footer {
     </video>
   </div>
 
-  <div class="placeholder-note" style="margin-top:1.5rem;">
-    📌 <b>TODO (Zhiqiu):</b> drop the comparison video at <code>images/hero/comparison.mp4</code> — single MP4
-    containing all 4 effect comparisons (dolly zoom, rack focus, TBD, TBD) vs. baseline generators.
-  </div>
 </div>
 </section>
 
@@ -931,7 +1029,7 @@ footer {
 <!-- ════════════════════ SPECIFICATION ════════════════════ -->
 <section id="specification">
 <div class="container">
-  <div class="section-label">① Specification</div>
+  <div class="section-label">1 Specification</div>
   <div class="section-title">Teaching AI the shared language of cinema</div>
   <p class="section-lead">
     Without clear specification, video captions use imprecise terms (confusing <em>dolly-in</em> with <em>zoom-in</em>),
@@ -952,7 +1050,7 @@ footer {
   </p>
 
   <!-- Taxonomy figure -->
-  <div class="fig-block" style="margin-top:1.2rem;">
+  <div class="fig-block has-border" style="margin-top:1.2rem;">
     <img src="images/overall.png" alt="CHAI taxonomy">
     <p class="fig-block__caption"><b>Figure 3.</b> The full taxonomy — each of the 5 aspects is decomposed into sub-aspects, grounded by 200+ visual and motion primitives.</p>
   </div>
@@ -972,7 +1070,7 @@ footer {
 <!-- ════════════════════ OVERSIGHT ════════════════════ -->
 <section id="oversight">
 <div class="container">
-  <div class="section-label">② Oversight</div>
+  <div class="section-label">2 Oversight</div>
   <div class="section-title">AI writes. Humans critique.</div>
   <p class="section-lead">
     Specification tells you <em>what</em> to describe. But who does the writing? Humans write captions with typos,
@@ -982,35 +1080,32 @@ footer {
   </p>
 
   <div class="fig-block" style="margin-top:2rem;">
-    <img src="images/oversight.png" alt="CHAI Oversight Framework">
+    <img src="images/oversight.webp" alt="CHAI Oversight Framework">
     <p class="fig-block__caption"><b>Figure 4.</b> The CHAI framework. 🤖 AI writes comprehensive pre-captions. 👤 Human experts critique what's wrong and how to fix it, guiding AI to produce accurate post-captions. ✅ Peer-review bonuses reward annotators for precision and reviewers for catching errors.</p>
-  </div>
-  <div class="placeholder-note">
-    📌 <b>TODO (Zhiqiu):</b> replace <code>images/oversight.png</code> with the updated figure when ready.
   </div>
 
   <!-- Triplet examples carousel -->
-  <div class="carousel-wrapper" style="margin-top:2.5rem;">
+  <div class="carousel-wrapper carousel-wrapper--natural" style="margin-top:2.5rem;">
     <div class="carousel-hint">↔ SWIPE THROUGH (PRE-CAPTION · CRITIQUE · POST-CAPTION) EXAMPLES</div>
     <div class="carousel">
       <div class="carousel__item">
-        <img src="images/subject_caption.png" alt="Subject caption triplet">
+        <video src="images/caption_examples/subject.mp4" autoplay loop muted playsinline></video>
         <div class="carousel__item__label"><b>Subject</b> — type, appearance, pose, relationships</div>
       </div>
       <div class="carousel__item">
-        <img src="images/scene_caption.png" alt="Scene caption triplet">
+        <video src="images/caption_examples/scene.mp4" autoplay loop muted playsinline></video>
         <div class="carousel__item__label"><b>Scene</b> — POV, setting, overlays, time of day</div>
       </div>
       <div class="carousel__item">
-        <img src="images/subject_motion.png" alt="Motion caption triplet">
+        <video src="images/caption_examples/motion.mp4" autoplay loop muted playsinline></video>
         <div class="carousel__item__label"><b>Motion</b> — actions, interactions, group dynamics</div>
       </div>
       <div class="carousel__item">
-        <img src="images/spatial_caption.png" alt="Spatial caption triplet">
+        <video src="images/caption_examples/spacial.mp4" autoplay loop muted playsinline></video>
         <div class="carousel__item__label"><b>Spatial</b> — shot size, frame position, depth, movement</div>
       </div>
       <div class="carousel__item">
-        <img src="images/camera_caption.png" alt="Camera caption triplet">
+        <video src="images/caption_examples/camera.mp4" autoplay loop muted playsinline></video>
         <div class="carousel__item__label"><b>Camera</b> — angle, height, lens, focus, steadiness, movement</div>
       </div>
     </div>
@@ -1021,52 +1116,81 @@ footer {
 <!-- ════════════════════ POST-TRAINING + CRITIQUE QUALITY ════════════════════ -->
 <section id="post-training">
 <div class="container">
-  <div class="section-label">③ Post-Training</div>
+  <div class="section-label">3 Post-Training</div>
   <div class="section-title">An 8B model beats GPT-5 and Gemini-3.1</div>
   <p class="section-lead">
     CHAI produces <b>(pre-caption, critique, post-caption)</b> triplets — unlocking three capabilities at once:
     captioning, reward modeling, and critique generation. The catch? <b>Critique quality is the bottleneck.</b>
   </p>
 
-  <div class="stats-row">
-    <div class="stat-card">
-      <div class="stat-card__num">17.8</div>
-      <div class="stat-card__label">Caption BLEU-4</div>
-      <div class="stat-card__sub">vs. Gemini-3.1 (5.1), GPT-5 (5.5)</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card__num">86.8</div>
-      <div class="stat-card__label">Reward Accuracy</div>
-      <div class="stat-card__sub">vs. Gemini-2.5 (62.0), GPT-5 (59.5)</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card__num">27.5</div>
-      <div class="stat-card__label">Critique BLEU-4</div>
-      <div class="stat-card__sub">vs. Gemini-3.1 (3.3), GPT-5 (2.8)</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card__num">8B</div>
-      <div class="stat-card__label">Qwen3-VL parameters</div>
-      <div class="stat-card__sub">SFT + DPO on CHAI data</div>
-    </div>
+  <div class="fig-block" style="margin-top:3rem;">
+    <img src="images/critique_quality.png" alt="Critique quality matters">
+    <p class="fig-block__caption"><b>Figure 5.</b> A good critique is <b>accurate</b>, <b>complete</b>, and <b>constructive</b>. CHAI enforces all three properties by requiring critiques to directly guide model revision.</p>
   </div>
 
-  <div class="two-col" style="margin-top:3rem;">
-    <div class="fig-block" style="margin:0;">
-      <img src="images/critique_quality.png" alt="Critique quality matters">
-      <p class="fig-block__caption"><b>Figure 5.</b> A good critique is <b>accurate</b>, <b>complete</b>, and <b>constructive</b>. CHAI enforces all three properties by requiring critiques to directly guide model revision.</p>
-    </div>
-    <div>
-      <div class="img-slot" data-filename="critique_quality_table.png" style="aspect-ratio: 4 / 3;">
-        <img src="images/critique_quality_table.png" alt="Critique quality vs. post-training performance"
-             onerror="this.parentElement.classList.add('missing');">
+  <div style="margin-top:2.5rem;">
+    <div class="table-wrap" style="margin: 0;">
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2" style="text-align:left;">Critique Type</th>
+              <th colspan="3">Quality Metrics</th>
+              <th colspan="3">Task Performance</th>
+            </tr>
+            <tr>
+              <th>Prec.</th>
+              <th>Rec.</th>
+              <th>Constr.</th>
+              <th>Caption</th>
+              <th>Reward</th>
+              <th>Critique</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="text-align:left;">Blind Gemini-2.5</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td>10.9</td><td>44.5</td><td>21.1</td>
+            </tr>
+            <tr>
+              <td style="text-align:left;">Gemini-2.5</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td>12.7</td><td>62.0</td><td>26.2</td>
+            </tr>
+            <tr>
+              <td style="text-align:left;">Inaccurate critique</td>
+              <td class="cross">✗</td><td class="check">✓</td><td class="check">✓</td>
+              <td>12.1</td><td>47.1</td><td>21.9</td>
+            </tr>
+            <tr>
+              <td style="text-align:left;">Incomplete critique</td>
+              <td class="check">✓</td><td class="cross">✗</td><td class="check">✓</td>
+              <td>12.5</td><td>56.6</td><td>28.7</td>
+            </tr>
+            <tr>
+              <td style="text-align:left;">Unhelpful critique</td>
+              <td class="check">✓</td><td class="check">✓</td><td class="cross">✗</td>
+              <td>13.4</td><td>67.2</td><td>32.9</td>
+            </tr>
+            <tr>
+              <td style="text-align:left;">Ours (w/o quality check)</td>
+              <td>—</td><td>—</td><td>—</td>
+              <td>14.8</td><td>73.1</td><td>35.7</td>
+            </tr>
+            <tr class="row-ours">
+              <td style="text-align:left;"><b>Ours (w/ quality check)</b></td>
+              <td class="check">✓</td><td class="check">✓</td><td class="check">✓</td>
+              <td><b>18.2</b></td><td><b>89.8</b></td><td><b>41.7</b></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.6rem;">
-        Weakening any single quality dimension degrades post-training. Prior work (OpenAI GDC, MM-RLHF) collects
-        <b style="color:var(--text);">50%+ non-constructive critiques</b> — just "this is wrong" without explaining
-        the fix.
+      <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.8rem;">
+        <b style="color:var(--text);">Critique quality determines post-training success.</b>
+        Weakening any single quality dimension (precision, recall, constructiveness) degrades post-training.
+        Prior work (OpenAI GDC, MM-RLHF) collects <b style="color:var(--text);">50%+ non-constructive critiques</b>
+        — just "this is wrong" without explaining the fix.
       </p>
-    </div>
   </div>
 
   <div class="highlight-box" style="margin-top:2.5rem;">
@@ -1083,7 +1207,7 @@ footer {
 <!-- ════════════════════ VIDEO GENERATION ════════════════════ -->
 <section id="generation">
 <div class="container">
-  <div class="section-label">④ Application</div>
+  <div class="section-label">4 Application</div>
   <div class="section-title">Better understanding → better generation</div>
   <p class="section-lead">
     We re-caption <b>large-scale professional videos</b> (films, commercials, music videos, games) with our post-trained
@@ -1093,32 +1217,32 @@ footer {
 
   <!-- Two-column teaser image slots -->
   <div class="two-col" style="margin-top:2rem;">
-    <div class="img-slot" data-filename="videogeneration_1.png">
-      <img src="images/videogeneration_1.png" alt="Video generation example 1"
+    <div class="img-slot" data-filename="videogeneration_1.webp">
+      <img src="images/videogeneration_1.webp" alt="Video generation example 1"
            onerror="this.parentElement.classList.add('missing');">
     </div>
-    <div class="img-slot" data-filename="videogeneration_2.png">
-      <img src="images/videogeneration_2.png" alt="Video generation example 2"
+    <div class="img-slot" data-filename="videogeneration_2.webp">
+      <img src="images/videogeneration_2.webp" alt="Video generation example 2"
            onerror="this.parentElement.classList.add('missing');">
     </div>
   </div>
   <p class="fig-block__caption"><b>Figure 6.</b> After fine-tuning on re-captioned data, Wan2.2 follows detailed prompts more faithfully, with finer control over camera motion, cinematography, and visual composition.</p>
 
   <!-- Generation examples carousel -->
-  <div class="carousel-wrapper" style="margin-top:2.5rem;">
+  <div class="carousel-wrapper carousel-wrapper--natural carousel-wrapper--rounded" style="margin-top:2.5rem;">
     <div class="carousel-hint">↔ SWIPE THROUGH 11 CINEMATIC CONTROL EXAMPLES</div>
     <div class="carousel">
-      <div class="carousel__item"><img src="images/dolly_zoom.png" alt="Dolly zoom"><div class="carousel__item__label"><b>Dolly zoom out</b> — Hitchcock's vertigo effect</div></div>
-      <div class="carousel__item"><img src="images/isometric.png" alt="Isometric"><div class="carousel__item__label"><b>Isometric (2.5D)</b> — game perspective</div></div>
-      <div class="carousel__item"><img src="images/rolling_cw.png" alt="Roll"><div class="carousel__item__label"><b>Clockwise camera roll</b></div></div>
-      <div class="carousel__item"><img src="images/dutch_angle.png" alt="Dutch angle"><div class="carousel__item__label"><b>Dutch angle</b> — tilted horizon</div></div>
-      <div class="carousel__item"><img src="images/rack_focus.png" alt="Rack focus"><div class="carousel__item__label"><b>Rack focus</b> — shifting between subjects</div></div>
-      <div class="carousel__item"><img src="images/speed_ramp.png" alt="Speed ramp"><div class="carousel__item__label"><b>Speed ramp</b> — mixing fast and slow</div></div>
-      <div class="carousel__item"><img src="images/side_view.png" alt="Side view"><div class="carousel__item__label"><b>Side-view</b> game perspective</div></div>
-      <div class="carousel__item"><img src="images/watermark.png" alt="Watermark"><div class="carousel__item__label"><b>Watermark overlay</b></div></div>
-      <div class="carousel__item"><img src="images/waterlevels.png" alt="Water"><div class="carousel__item__label"><b>Underwater → above water</b> transition</div></div>
-      <div class="carousel__item"><img src="images/shotsize_change.png" alt="Shot size"><div class="carousel__item__label"><b>Medium shot → close-up</b></div></div>
-      <div class="carousel__item"><img src="images/reveal.png" alt="Reveal"><div class="carousel__item__label"><b>Revealing shot</b></div></div>
+      <div class="carousel__item"><video src="images/dolly_zoom.mp4" autoplay loop muted playsinline></video><div class="carousel__item__label"><b>Dolly zoom out</b> — Hitchcock's vertigo effect</div></div>
+      <div class="carousel__item"><video src="images/isometric.mp4" autoplay loop muted playsinline></video><div class="carousel__item__label"><b>Isometric (2.5D)</b> — game perspective</div></div>
+      <div class="carousel__item"><video src="images/rolling_cw.mp4" autoplay loop muted playsinline></video><div class="carousel__item__label"><b>Clockwise camera roll</b></div></div>
+      <div class="carousel__item"><video src="images/dutch_angle.mp4" autoplay loop muted playsinline></video><div class="carousel__item__label"><b>Dutch angle</b> — tilted horizon</div></div>
+      <div class="carousel__item"><video src="images/rack_focus.mp4" autoplay loop muted playsinline></video><div class="carousel__item__label"><b>Rack focus</b> — shifting between subjects</div></div>
+      <div class="carousel__item"><video src="images/speed_ramp.mp4" autoplay loop muted playsinline></video><div class="carousel__item__label"><b>Speed ramp</b> — mixing fast and slow</div></div>
+      <div class="carousel__item"><video src="images/side_view.mp4" autoplay loop muted playsinline></video><div class="carousel__item__label"><b>Side-view</b> game perspective</div></div>
+      <div class="carousel__item"><video src="images/watermark.mp4" autoplay loop muted playsinline></video><div class="carousel__item__label"><b>Watermark overlay</b></div></div>
+      <div class="carousel__item"><video src="images/waterlevels.mp4" autoplay loop muted playsinline></video><div class="carousel__item__label"><b>Underwater → above water</b> transition</div></div>
+      <div class="carousel__item"><video src="images/shotsize_change.mp4" autoplay loop muted playsinline></video><div class="carousel__item__label"><b>Medium shot → close-up</b></div></div>
+      <div class="carousel__item"><video src="images/reveal.mp4" autoplay loop muted playsinline></video><div class="carousel__item__label"><b>Revealing shot</b></div></div>
     </div>
   </div>
 </div>
@@ -1135,29 +1259,35 @@ footer {
   </p>
 
   <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.2rem; margin-top:1.8rem;">
-    <div class="related-pointer" style="margin:0;">
-      <div class="related-pointer__icon">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="30" height="30"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
+    <div class="related-pointer" style="margin:0; align-items:flex-start;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.6rem; flex-shrink:0;">
+        <div class="related-pointer__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="30" height="30"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
+        </div>
+        <a href="https://linzhiqiu.github.io/papers/moodio/" style="font-size:0.72rem; white-space:nowrap;">Website →</a>
       </div>
       <div>
         <h4>Moodio &amp; CameraBench-Pro</h4>
-        <p>A co-pilot for video production built on 225 cinematic primitives and 1.5M+ professional annotations. CHAI's specification and annotation platform build on this foundation. <a href="https://linzhiqiu.github.io/papers/moodio/">Website →</a></p>
+        <p>A co-pilot for video production built on 225 cinematic primitives and 1.5M+ professional annotations. CHAI's specification and annotation platform build on this foundation.</p>
       </div>
     </div>
-    <div class="related-pointer" style="margin:0;">
-      <div class="related-pointer__icon">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="30" height="30"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" /></svg>
+    <div class="related-pointer" style="margin:0; align-items:flex-start;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.6rem; flex-shrink:0;">
+        <div class="related-pointer__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="30" height="30"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" /></svg>
+        </div>
+        <a href="https://linzhiqiu.github.io/papers/camerabench/" style="font-size:0.72rem; white-space:nowrap;">Website →</a>
       </div>
       <div>
         <h4>CameraBench <span class="pill">NeurIPS'25 Spotlight · Top 3%</span></h4>
-        <p>Our predecessor benchmark on camera motion understanding: ~3,000 expert-annotated videos, a taxonomy of motion primitives, and evaluations of SfM and VLM methods. <a href="https://linzhiqiu.github.io/papers/camerabench/">Website →</a></p>
+        <p>Our predecessor benchmark on camera motion understanding: ~3,000 expert-annotated videos, a taxonomy of motion primitives, and evaluations of SfM and VLM methods.</p>
       </div>
     </div>
   </div>
 
   <!-- Collaboration card -->
   <div class="collab-card">
-    <p class="emphasis">🚀 We are actively advancing CHAI with larger-scale datasets and stronger video understanding models.</p>
+    <p class="emphasis">🚀<br>We are actively advancing CHAI with larger-scale datasets and stronger video understanding models.</p>
     <p>
       We welcome collaborations and funding opportunities with researchers and practitioners in <b>video understanding,
       captioning, and multimodal agents for professional-level video content</b>.
@@ -1194,7 +1324,7 @@ footer {
   </p>
 
   <div class="fig-block" style="margin-top:1.5rem;">
-    <img src="images/crowdsourced.png" alt="Crowdsourced captioning errors">
+    <video src="images/crowdsourced.mp4" autoplay loop muted playsinline></video>
     <p class="fig-block__caption"><b>Figure 7.</b> Crowdsourced annotators lack the visual vocabulary for common cinematic and motion effects.</p>
   </div>
 
@@ -1209,26 +1339,21 @@ footer {
   </p>
 
   <div class="fig-block" style="margin-top:1.5rem;">
-    <div class="img-slot" data-filename="errors_specification.png">
-      <img src="images/errors_specification.png" alt="Errors from lack of specification"
-           onerror="this.parentElement.classList.add('missing');">
+    <div class="img-slot" data-filename="errors_specification.mp4">
+      <video src="images/errors_specification.mp4" autoplay loop muted playsinline
+           onerror="this.parentElement.classList.add('missing');"></video>
     </div>
     <p class="fig-block__caption"><b>Figure 8.</b> Errors caused by lack of <b>specification</b>: imprecise terminology, missing information, subjective descriptions.</p>
   </div>
 
   <div class="fig-block" style="margin-top:1.5rem;">
-    <div class="img-slot" data-filename="errors_oversight.png">
-      <img src="images/errors_oversight.png" alt="Errors from lack of oversight"
-           onerror="this.parentElement.classList.add('missing');">
+    <div class="img-slot" data-filename="errors_oversight.mp4">
+      <video src="images/errors_oversight.mp4" autoplay loop muted playsinline
+           onerror="this.parentElement.classList.add('missing');"></video>
     </div>
     <p class="fig-block__caption"><b>Figure 9.</b> Errors caused by lack of <b>oversight</b>: poor writing, visual hallucinations, inaccurate details.</p>
   </div>
 
-  <div class="placeholder-note">
-    📌 <b>TODO (Zhiqiu):</b> add <code>images/errors_specification.png</code> and <code>images/errors_oversight.png</code>
-    from the paper's appendix (Figures S2 &amp; S3). Placeholders above will auto-swap once images are dropped into
-    <code>images/</code>.
-  </div>
 </div>
 </section>
 
@@ -1258,6 +1383,60 @@ footer {
     <span style="color: var(--text-muted); font-size: 0.8rem;">© 2026 &nbsp;·&nbsp; <a href="https://linzhiqiu.github.io/">Zhiqiu Lin</a></span>
   </div>
 </footer>
+
+<!-- Lightbox overlay (hidden by default) -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="lightbox__close" id="lightbox-close" aria-label="Close">×</button>
+  <div id="lightbox-content"></div>
+</div>
+
+<script>
+  // Double-click on caption-triplet videos to open in lightbox
+  (function() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxContent = document.getElementById('lightbox-content');
+    const closeBtn = document.getElementById('lightbox-close');
+    if (!lightbox || !lightboxContent || !closeBtn) return;
+
+    function openLightbox(srcVideo) {
+      lightboxContent.innerHTML = '';
+      const v = document.createElement('video');
+      v.src = srcVideo.currentSrc || srcVideo.src;
+      v.autoplay = true;
+      v.loop = true;
+      v.muted = true;
+      v.playsInline = true;
+      v.controls = false;
+      v.className = 'lightbox__media';
+      lightboxContent.appendChild(v);
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('lightbox-open');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxContent.innerHTML = '';
+      document.body.classList.remove('lightbox-open');
+    }
+
+    document.querySelectorAll('.carousel-wrapper--natural .carousel__item video').forEach(v => {
+      v.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        openLightbox(v);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('is-open')) closeLightbox();
+    });
+  })();
+</script>
 
 </body>
 </html>
