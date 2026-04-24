@@ -22,6 +22,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 <!-- My research interest includes neural machine translation and computer vision. I have published more than 100 papers at the top international AI conferences with total <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'>google scholar citations <strong><span id='total_cit'>260000+</span></strong></a> (You can also use google scholar badge <a href='https://scholar.google.com/citations?user=DhtAFkwAAAAJ'><img src="https://img.shields.io/endpoint?url={{ url | url_encode }}&logo=Google%20Scholar&labelColor=f6f6f6&color=9cf&style=flat&label=citations"></a>). -->
 
 # 🔥 News
+- *2026.04*: [CHAI](http://linzhiqiu.github.io/papers/chai) was accepted to CVPR'26 as a **Highlight (Top 3%)**! An 8B model beating GPT-5 and Gemini-3.1-Pro on professional video captioning.
 - *2025.09*: [CameraBench](http://linzhiqiu.github.io/papers/camerabench) was accepted to NeurIPS'25 (Spotlight).
 - *2024.09*: [NaturalBench](http://linzhiqiu.github.io/papers/naturalbench) was accepted to NeurIPS'24.
 - *2024.08*: [VQAScore](http://linzhiqiu.github.io/papers/vqascore) was accepted to ECCV'24. In addition, VQAScore is highlighted in Google's [Imagen3 Technical Report](https://arxiv.org/abs/2408.07009) as the strongest replacement for CLIPScore, with Imagen3 achieving SOTA on GenAI-Bench for compositional text-to-visual generation.
@@ -41,6 +42,24 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 # 📝 Publications 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">NeurIPS 2025 (Spotlight).</div><img src='papers/camerabench/images/3.gif' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2026 Highlight (Top 3%)</div><img src='papers/chai/images/teaser.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**CHAI: Building a Precise Video Language with Human-AI Oversight (CVPR'26 Highlight, Top 3%)**
+
+**Zhiqiu Lin**, [Chancharik Mitra](https://scholar.google.com/citations?user=k85XvocAAAAJ&hl=en), [Siyuan Cen](https://linzhiqiu.github.io/papers/chai/), [Isaac Li](https://linzhiqiu.github.io/papers/chai/), [Yuhan Huang](https://linzhiqiu.github.io/papers/chai/), [Yu Tong Tiffany Ling](https://linzhiqiu.github.io/papers/chai/), [Hewei Wang](https://linzhiqiu.github.io/papers/chai/), [Irene Pi](https://linzhiqiu.github.io/papers/chai/), [Shihang Zhu](https://linzhiqiu.github.io/papers/chai/), [Ryan Rao](https://linzhiqiu.github.io/papers/chai/), [George Liu](https://linzhiqiu.github.io/papers/chai/), [Jiaxi Li](https://linzhiqiu.github.io/papers/chai/), [Ruojin Li](https://linzhiqiu.github.io/papers/chai/), [Yili Han](https://linzhiqiu.github.io/papers/chai/), [Yilun Du](https://yilundu.github.io/), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
+
+[Website](https://linzhiqiu.github.io/papers/chai/) \| [Arxiv](https://arxiv.org/abs/2604.21718)
+<!-- \| [![](https://img.shields.io/github/stars/chancharikmitra/CHAI?style=social&label=Code+Stars)](https://github.com/chancharikmitra/CHAI) -->
+- Before AI can *generate* professional videos, it needs to *see* like a professional. We spent a year with **100+ content creators** building the shared language of cinema for AI.
+- A structured video specification grounded by **200+ visual primitives** across subjects, scenes, motion, spatial framing, and camera dynamics.
+- **Critique-based Human-AI oversight (CHAI)**: AI drafts fluent captions, humans critique visual errors — each doing what they're best at.
+- Post-training on CHAI triplets lets our **8B Qwen3-VL surpass GPT-5 and Gemini-3.1-Pro** on captioning, reward modeling, and critique generation.
+- Unlocks **professional-grade video generation** — fine-tuned Wan follows 400-word cinematic prompts for dolly zooms, rack focus, speed ramps, Dutch angles, and more.
+
+</div>
+</div>
 
 **CameraBench: Towards Understanding Camera Motions in Any Video (NeurIPS'25 Spotlight)**
 
@@ -197,7 +216,10 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
  [Zikai Alex Wen](https://www.cs.cornell.edu/~zkwen/), **Zhiqiu Lin**, Rowena Chen, [Erik Andersen](http://www.cs.cornell.edu/~eland/), **CHI 2019**
 
 # 🎖 Honors and Awards
-- *2020.06* Best Paper Nomination at CVPR'20 for [Visual Chirality](https://linzhiqiu.github.io/papers/chirality/)!
+- *2026.03* CVPR 2026 **Highlight (Top 3%)** for [CHAI](https://linzhiqiu.github.io/papers/chai)!
+- *2025.09* NeurIPS 2025 **Spotlight** for [CameraBench](http://linzhiqiu.github.io/papers/camerabench)!
+- *2024.06* **Best Short Paper Award** at SynData@CVPR'24 for [GenAI-Bench](http://linzhiqiu.github.io/papers/genai_bench)!
+- *2020.06* **Best Paper Nomination** at CVPR'20 for [Visual Chirality](https://linzhiqiu.github.io/papers/chirality/)!
 - *2020.05* Graduated Summa Cum Laude in Computer Science and Mathematics from Cornell University, and served as college symbol bearer (top 5 of the college).
 <!-- - *2021.09* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ornare aliquet ipsum, ac tempus justo dapibus sit amet.  -->
 
