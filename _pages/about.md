@@ -58,10 +58,10 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">NeurIPS 2025 (Spotlight)</div><img src='papers/camerabench/images/3.gif' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">NeurIPS 2025 Spotlight (Top 3%)</div><img src='papers/camerabench/images/3.gif' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
-**CameraBench: Towards Understanding Camera Motions in Any Video (NeurIPS'25 Spotlight)**
+**CameraBench: Towards Understanding Camera Motions in Any Video (NeurIPS'25 Spotlight, Top 3%)**
 
 **Zhiqiu Lin***, [Siyuan Cen\*](https://linzhiqiu.github.io/papers/camerabench/), [Daniel Jiang](https://linzhiqiu.github.io/papers/camerabench/), [Jay Karhade](https://linzhiqiu.github.io/papers/camerabench/), [Hewei Wang](https://linzhiqiu.github.io/papers/camerabench/), [Chancharik Mitra](https://linzhiqiu.github.io/papers/camerabench/), [Yu Tong Tiffany Ling](https://linzhiqiu.github.io/papers/camerabench/), [Yuhan Huang](https://linzhiqiu.github.io/papers/camerabench/), [Sifan Liu](https://linzhiqiu.github.io/papers/camerabench/), [Mingyu Chen](https://linzhiqiu.github.io/papers/camerabench/), [Rushikesh Zawar](https://linzhiqiu.github.io/papers/camerabench/), [Xue Bai](https://linzhiqiu.github.io/papers/camerabench/), [Yilun Du](https://linzhiqiu.github.io/papers/camerabench/), [Chuang Gan](https://scholar.google.com/citations?user=PTeSCbIAAAAJ&hl=en), [Deva Ramanan](https://www.cs.cmu.edu/~deva/)
 
