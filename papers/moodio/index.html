@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moodio: An AI-Powered Film Studio for Learning by Watching</title>
+<meta name="description" content="Moodio reframes video creation from prompt engineering to learning by watching — a three-stage reference-first workflow (Inspire · Learn · Generate) built on CameraBench-Pro.">
+
+<meta property="og:title" content="Moodio: An AI-Powered Film Studio for Learning by Watching">
+<meta property="og:description" content="A reference-first workflow for cinematic video creation — discover, learn, generate. Built on CameraBench-Pro: 225 cinematic primitives, 1.5M+ annotations, 100+ filmmakers.">
+<meta property="og:image" content="images/teaser.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ── Reset & Variables ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #F2F0F4;
+  --bg-alt: #ECE9EF;
+  --bg-dark: #1a1a1a;
+  --text: #1a1a1a;
+  --text-muted: #6b6560;
+  --accent: #9353D3;
+  --accent-light: #F2EAFA; /* light purple */
+  --border: #d9d5cf;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+  --mono: 'Roboto Mono', 'JetBrains Mono', monospace;
+  --max-w: 1100px;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+body {
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.65;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: #9353D3; text-decoration: none; font-weight: 700; }
+a:hover { text-decoration: underline; }
+
+img, video { max-width: 100%; display: block; }
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+
+section {
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+section:last-of-type { border-bottom: none; }
+
+/* ── Top navigation ── */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(242, 240, 244, 0.88);
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.topnav__inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0.7rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.topnav__brand {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+.topnav__brand a { color: inherit; font-weight: inherit; text-decoration: none; }
+.topnav__brand-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8A6700;
+  background: #FFEFBE;
+  border: 1px solid #8A6700;
+  padding: 0.18em 0.5em;
+  border-radius: 3px;
+  margin-left: 0.4em;
+  vertical-align: 2px;
+}
+.topnav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: nowrap;
+}
+.topnav__links a {
+  position: relative;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 0.45em 0.75em;
+  border-radius: 5px;
+  transition: color 0.15s, background 0.15s;
+}
+.topnav__links a + a:not(.nav-cta)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 1px;
+  height: 14px;
+  background: #d9d5cf;
+}
+.topnav__links a:hover {
+  color: var(--accent);
+  background: var(--bg-alt);
+  text-decoration: none;
+}
+.topnav__links a.nav-cta:hover { color: #fff; }
+.topnav__links a.nav-cta {
+  color: #fff;
+  background: var(--bg-dark);
+  margin-left: 0.4rem;
+  padding: 0.45em 0.9em;
+}
+.topnav__links a.nav-cta:hover { background: var(--accent); color: #fff; }
+.topnav__toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.4rem;
+  cursor: pointer;
+  color: var(--text);
+}
+@media (max-width: 820px) {
+  .topnav__inner { padding: 0.7rem 1.2rem; }
+  .topnav__toggle { display: block; }
+  .topnav__links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 0.5rem 1.2rem 1rem;
+    box-shadow: 0 8px 14px rgba(0,0,0,0.04);
+    display: none;
+  }
+  .topnav__links.open { display: flex; }
+  .topnav__links a {
+    padding: 0.7em 0.4em;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+  .topnav__links a:last-child { border-bottom: none; }
+  .topnav__links a.nav-cta { margin: 0.6rem 0 0; text-align: center; }
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 4.5rem 0 4rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.hero__badges {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  margin-bottom: 2.4rem;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+}
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6em 1.2em;
+}
+.hero__badge--award { color: #8A6700; background: #FFEFBE; }
+.hero__badge--top { color: #fff; background: #C9961A; letter-spacing: 0.08em; }
+
+.hero__tagline {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  font-style: italic;
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 0 auto 0.6rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.hero h1 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.15;
+  max-width: 900px;
+  margin: 0.8rem auto 1.6rem;
+}
+.hero__subtitle {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.35rem;
+  color: var(--text-muted);
+  max-width: 680px;
+  margin: 0 auto 2.4rem;
+  line-height: 1.5;
+}
+.hero__subtitle b { color: var(--text); font-weight: 600; }
+.hero__authors a { font-weight: 400; }
+.hero__authors {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 800px;
+  margin: 0 auto 0.5rem;
+  line-height: 1.8;
+}
+.hero__affiliations { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 2rem; }
+.hero__links {
+  display: flex;
+  column-gap: 16px;
+  row-gap: 0;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hero__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  font-family: var(--mono);
+  font-size: 1rem;
+  padding: 0.6em 1.3em;
+  border-radius: 6px;
+  background: var(--bg-dark);
+  color: #fff;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
+}
+.hero__links-break { flex-basis: 100%; height: 16px; }
+.hero__links a:hover { text-decoration: none; }
+.hero__links a:not(.outline):not(.try-live):hover {
+  background: var(--accent);
+  opacity: 1;
+}
+.hero__links a.try-live {
+  background: var(--accent);
+}
+.hero__links a.try-live:hover {
+  background: var(--bg-dark);
+  opacity: 1;
+}
+.hero__links a.outline {
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--border);
+}
+.hero__links a.outline:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Small pill appended inside buttons */
+.btn-pill {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.25em 0.55em;
+  border-radius: 3px;
+  margin-left: 0.2em;
+  line-height: 1.1;
+}
+.btn-pill--soon { color: #9B6100; background: #FCEFCC; }
+.btn-pill--award { color: #0E6B34; background: #DCF2E4; }
+
+/* ── Section Headers ── */
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9353D3;
+  margin-bottom: 0.6rem;
+}
+.section-title {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.section-lead {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.section-lead b { color: var(--text); }
+
+.sub-heading {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin: 3rem 0 0.6rem;
+  color: var(--text);
+}
+.sub-heading__label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9353D3;
+  margin-bottom: 0.3rem;
+}
+
+/* ── Key Points ── */
+.key-points {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin-top: 2.5rem;
+}
+.key-point {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: clamp(88px, 14%, 132px) 1fr;
+  column-gap: 24px;
+  align-items: start;
+}
+.key-point__illustration {
+  grid-row: 1 / span 2;
+  align-self: stretch;
+  width: 100%;
+  background: var(--accent-light);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.key-point__illustration svg {
+  width: 50%;
+  height: auto;
+  max-width: 60px;
+}
+.key-point__header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin-bottom: 0.4rem;
+}
+.key-point__num {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.6rem;
+  color: #9353D3;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.key-point h3 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.key-point p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+.key-point p b { color: var(--text); }
+
+/* ── Figure blocks ── */
+.fig-block { margin: 2.5rem 0; }
+.fig-block img,
+.fig-block video {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  width: 100%;
+  display: block;
+}
+.fig-block__caption {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.8rem;
+  line-height: 1.84;
+}
+.fig-block__caption b { color: var(--text); }
+
+/* ── Image slot with placeholder fallback ── */
+.img-slot {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #fff;
+  min-height: 220px;
+}
+.img-slot img { width: 100%; display: block; }
+.img-slot.missing {
+  background: repeating-linear-gradient(45deg, #faf5ea, #faf5ea 14px, #f0e8d5 14px, #f0e8d5 28px);
+  border: 2px dashed #c9bfab;
+  aspect-ratio: 16 / 9;
+}
+.img-slot.missing img { display: none; }
+.img-slot.missing::before {
+  content: "📌 " attr(data-filename) " — add figure/GIF here";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: #7a5c00;
+  background: rgba(255, 248, 225, 0.92);
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  white-space: nowrap;
+  max-width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Two-col ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+@media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+/* ── Aspect-balanced two-column figure (Figure 5) ── */
+.two-col--balanced {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: stretch;
+}
+.two-col--balanced > div {
+  flex-basis: 0;
+  flex-shrink: 1;
+  min-width: 0;
+}
+.two-col--balanced > div img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+@media (max-width: 768px) {
+  .two-col--balanced { flex-direction: column; }
+  .two-col--balanced > div { flex-grow: 1 !important; }
+}
+
+/* ── Zoomable image (clickable) ── */
+.zoomable {
+  cursor: zoom-in;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.zoomable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* ── Lightbox overlay ── */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 2.5rem;
+  background: rgba(20, 16, 28, 0.55);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+.lightbox.open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.25s ease, visibility 0s linear 0s;
+}
+.lightbox__stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  max-width: 100%;
+  max-height: calc(100vh - 5rem);
+  min-width: 0;
+}
+.lightbox__img {
+  max-width: 100%;
+  max-height: calc(100vh - 8rem);
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  background: #fff;
+  transform: scale(0.96);
+  transition: transform 0.25s ease;
+}
+.lightbox.open .lightbox__img {
+  transform: scale(1);
+}
+.lightbox__caption {
+  color: rgba(255,255,255,0.9);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.35);
+}
+.lightbox__nav {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: var(--sans);
+  line-height: 1;
+  transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+}
+.lightbox__nav:hover { background: rgba(255,255,255,0.32); transform: scale(1.05); }
+.lightbox__nav:active { transform: scale(0.96); }
+.lightbox__nav[hidden] { display: none; }
+.lightbox__close {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  line-height: 1;
+  transition: background 0.2s ease, transform 0.15s ease;
+  z-index: 1;
+}
+.lightbox__close:hover { background: rgba(255,255,255,0.32); transform: scale(1.05); }
+.lightbox__close:active { transform: scale(0.96); }
+body.lightbox-open { overflow: hidden; }
+@media (max-width: 600px) {
+  .lightbox { gap: 0.5rem; padding: 1.25rem; }
+  .lightbox__close { top: 0.75rem; right: 0.75rem; }
+}
+
+/* ── Carousel ── */
+.carousel-wrapper { position: relative; margin: 2rem 0; }
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.carousel::-webkit-scrollbar { height: 6px; }
+.carousel::-webkit-scrollbar-track { background: transparent; }
+.carousel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.carousel__item {
+  flex: 0 0 min(840px, 92vw);
+  scroll-snap-align: start;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: #fff;
+}
+.carousel__item img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  background: #ffffff;
+  display: block;
+}
+.carousel__item__label {
+  padding: 0 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+.carousel__item__label b { color: var(--text); font-weight: 600; margin-right: 0.4em; }
+.carousel-hint {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Highlight box ── */
+.highlight-box {
+  background: #fff;
+  border-left: 3px solid #9353D3;
+  border-radius: 0 8px 8px 0;
+  padding: 1.5rem 1.8rem;
+  margin: 2rem 0;
+}
+.highlight-box h3 {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.02em;
+}
+.highlight-box ul { padding-left: 1.2rem; font-size: 0.92rem; color: var(--text-muted); }
+.highlight-box li { margin-bottom: 0.4rem; }
+.highlight-box li b { color: var(--text); }
+
+/* ── Stat cards ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.stat-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.4rem 1.2rem;
+  text-align: center;
+}
+.stat-card__num {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: #9353D3;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-card__label { font-size: 0.82rem; color: var(--text); font-weight: 600; margin-bottom: 0.2rem; }
+.stat-card__sub { font-size: 0.78rem; color: var(--text-muted); }
+
+/* ── Table ── */
+.table-wrap {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  background: #fff;
+}
+.table-wrap th, .table-wrap td {
+  padding: 0.55rem 0.7rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.table-wrap th {
+  background: var(--bg-alt);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.table-wrap tr:last-child td { border-bottom: none; }
+.table-wrap .best { font-weight: 700; color: #9353D3; }
+.table-wrap .row-ours { background: #F2EAFA; }
+.table-wrap .row-ours td { color: #9353D3; }
+.table-wrap .row-ours td:first-child { color: var(--text); }
+.table-wrap .check { color: #16833b; font-weight: 700; }
+.table-wrap .cross { color: #c0392b; font-weight: 700; }
+
+/* ── Related work pointer ── */
+.related-pointer {
+  background: var(--bg-alt);
+  border-radius: 10px;
+  padding: 1.5rem 1.8rem;
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  margin: 2rem 0;
+}
+.related-pointer__icon {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid var(--border);
+  color: #9353D3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.related-pointer h4 {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.pill {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0E6B34;
+  background: #DCF2E4;
+  padding: 0.25em 0.6em;
+  border-radius: 4px;
+  vertical-align: 2px;
+  margin-left: 0.4em;
+}
+.related-pointer p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ── Collaboration card ── */
+.collab-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem 2.2rem;
+  margin-top: 1.8rem;
+}
+.collab-card p {
+  font-size: 0.96rem;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.collab-card p:last-child { margin-bottom: 0; }
+.collab-card .emphasis {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.2rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* ── BibTeX ── */
+.bibtex-block {
+  background: var(--bg-dark);
+  color: #e0ddd8;
+  border-radius: 8px;
+  padding: 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  overflow-x: auto;
+  position: relative;
+}
+.bibtex-block pre { white-space: pre; color: #e0ddd8; }
+.bibtex-block .copy-btn {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  background: rgba(255,255,255,0.1);
+  color: #ccc;
+  border: none;
+  padding: 0.3em 0.7em;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+.bibtex-block .copy-btn:hover { background: rgba(255,255,255,0.2); }
+
+/* ── Footer ── */
+footer {
+  padding: 2.5rem 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { opacity: 0; animation: fadeUp 0.7s ease forwards; }
+
+/* ── Placeholder note ── */
+.placeholder-note {
+  background: #FFF8E1;
+  border-left: 3px solid #E3A800;
+  color: #7a5c00;
+  border-radius: 0 6px 6px 0;
+  padding: 0.6em 0.9em;
+  font-size: 0.82rem;
+  font-family: var(--mono);
+  margin: 0.8rem 0;
+}
+
+/* ── Hook section (headline results) ── */
+.hook {
+  padding: 3.5rem 0 4rem;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+.hook__lead {
+  max-width: 880px;
+  margin: 0 auto 2.2rem;
+  text-align: center;
+}
+.hook__lead p {
+  font-size: 1.08rem;
+  color: var(--text);
+  line-height: 1.65;
+  margin: 0;
+}
+.hook__lead p b { color: #9353D3; }
+
+.headline-results {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.headline-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.4rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  position: relative;
+}
+.headline-card__label {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9353D3;
+}
+.headline-card__claim {
+  font-family: var(--serif);
+  font-size: 1.42rem;
+  line-height: 1.18;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.headline-card__claim em { font-style: italic; color: #6b3bc4; }
+.headline-card__detail {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.headline-card__pill {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #2f7a3a;
+  background: #e7f6ea;
+  padding: 0.18em 0.6em;
+  border-radius: 3px;
+  align-self: flex-start;
+  margin-top: 0.15rem;
+}
+@media (max-width: 820px) {
+  .headline-results { grid-template-columns: 1fr; }
+}
+
+/* ── Hero comparison video (single MP4) ── */
+.hero-video {
+  position: relative;
+  margin-top: 2rem;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+.hero-video video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.hero-video.missing {
+  background: repeating-linear-gradient(45deg, #faf5ea, #faf5ea 14px, #f0e8d5 14px, #f0e8d5 28px);
+  border: 2px dashed #c9bfab;
+}
+.hero-video.missing video { display: none; }
+.hero-video.missing::before {
+  content: "📌 " attr(data-filename) " — add comparison video here";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  color: #7a5c00;
+  background: rgba(255, 248, 225, 0.92);
+  padding: 0.7em 1.3em;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  section { padding: 3rem 0; }
+  .container { padding: 0 1.2rem; }
+  .hero__badges { flex-wrap: wrap; }
+}
+
+/* ── Tarantino Quote Card (Moodio-specific) ── */
+.quote-card {
+  display: block;
+  position: relative;
+  background: #fff;
+  border: 1px solid #ECECEF;
+  border-radius: 14px;
+  padding: 2rem 2.4rem 1.6rem;
+  margin: 0 auto 2rem;
+  text-align: left;
+  max-width: 920px;
+  box-shadow: 0 8px 28px rgba(20, 16, 30, 0.06), 0 1px 2px rgba(20, 16, 30, 0.04);
+}
+.quote-card__mark {
+  display: block;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 0.6;
+  color: var(--accent);
+  margin-bottom: 1.1rem;
+  letter-spacing: -0.04em;
+  user-select: none;
+}
+.quote-card__text {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: normal;
+  font-size: 1.55rem;
+  line-height: 1.4;
+  color: #1a1a1a;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.6rem;
+  font-weight: 500;
+}
+.quote-card__text em { font-style: italic; }
+.quote-card__footer {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-top: 0.4rem;
+}
+.quote-card__avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--bg-alt);
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.06);
+}
+.quote-card__attrib {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: #4A4550;
+  letter-spacing: -0.005em;
+}
+.quote-card__attrib b {
+  font-style: italic;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+@media (max-width: 600px) {
+  .quote-card { padding: 1.5rem 1.4rem 1.2rem; border-radius: 12px; }
+  .quote-card__text { font-size: 1.02rem; }
+  .quote-card__mark { font-size: 3rem; margin-bottom: 0.7rem; }
+}
+
+/* ── Live demo badge inline pulse ── */
+.btn-pill--live {
+  color: #0E6B34;
+  background: #DCF2E4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+.btn-pill--live::before {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #0E6B34;
+  animation: live-pulse 1.6s ease-out infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14, 107, 52, 0.55); }
+  50%      { box-shadow: 0 0 0 5px rgba(14, 107, 52, 0.00); }
+}
+
+/* ── Tag cluster (for Chat-to-Learn) ── */
+.tag-cluster {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin: 1.8rem 0 0;
+  justify-content: flex-start;
+}
+.tag-pill {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  padding: 0.35em 0.8em;
+  border-radius: 999px;
+  background: var(--accent-light);
+  color: #9353D3;
+  border: 1px solid rgba(147, 83, 211, 0.18);
+}
+.tag-pill--alt {
+  background: #FFF3EC;
+  color: #C04000;
+  border-color: rgba(192, 64, 0, 0.18);
+}
+.tag-pill--neutral {
+  background: var(--bg-alt);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+/* ── 5-aspect tiles (for Chat-to-Inspire) ── */
+.aspect-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.8rem;
+  margin: 2rem 0;
+}
+@media (max-width: 720px) { .aspect-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 420px) { .aspect-row { grid-template-columns: 1fr; } }
+.aspect-tile {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 0.9rem;
+  text-align: center;
+}
+.aspect-tile__icon { font-size: 1.4rem; display: block; margin-bottom: 0.35rem; }
+.aspect-tile__name {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9353D3;
+  margin-bottom: 0.3rem;
+}
+.aspect-tile__desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.45; }
+
+/* ── Contributions (collapsible) ── */
+.contrib-section {
+  background: var(--bg-alt);
+  padding: 3.5rem 0 4.5rem;
+  border-top: 1px solid var(--border);
+}
+.contrib-details {
+  margin: 0 auto;
+}
+.contrib-details > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.4rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: border-color 0.15s ease;
+}
+.contrib-details > summary::-webkit-details-marker { display: none; }
+.contrib-details > summary:hover { border-color: #c9a4f0; }
+.contrib-details[open] > summary {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-color: var(--border);
+}
+.contrib-summary__label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+.contrib-summary__label small {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.contrib-summary__caret {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: transform 0.15s ease;
+}
+.contrib-details[open] .contrib-summary__caret { transform: rotate(180deg); }
+.contrib-body {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-top: 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 1rem 2rem 1.6rem;
+}
+.contrib-body__lead {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  padding: 1rem 0 0.4rem;
+}
+.contrib-body__lead a { font-weight: 600; }
+.contrib-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.2rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+  align-items: baseline;
+}
+.contrib-row:last-of-type { border-bottom: 0; }
+.contrib-row__component {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9353D3;
+  line-height: 1.5;
+}
+.contrib-row__detail {
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+.contrib-row__detail b { color: var(--text); }
+.contrib-row__leads {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+.contrib-row__leads b { color: var(--text); font-weight: 600; }
+.contrib-body__footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.contrib-body__footer b { color: var(--text); }
+@media (max-width: 640px) {
+  .contrib-body { padding: 0.8rem 1.2rem 1.4rem; }
+  .contrib-row { grid-template-columns: 1fr; gap: 0.4rem; padding: 1rem 0; }
+  .contrib-details > summary { font-size: 1.2rem; padding: 0.9rem 1.1rem; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ════════════════════ TOP NAVIGATION ════════════════════ -->
+<nav class="topnav" id="topnav">
+  <div class="topnav__inner">
+    <div class="topnav__brand">
+      <a href="#top">Moodio</a>
+      <span class="topnav__brand-tag">Preprint</span>
+    </div>
+    <button class="topnav__toggle" aria-label="Toggle menu" aria-expanded="false" onclick="
+      const l=document.getElementById('topnav-links');
+      l.classList.toggle('open');
+      this.setAttribute('aria-expanded', l.classList.contains('open'));
+    ">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" width="24" height="24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+    </button>
+    <div class="topnav__links" id="topnav-links">
+      <a href="#overview">Overview</a>
+      <a href="#inspire">Inspire</a>
+      <a href="#learn">Learn</a>
+      <a href="#generate">Generate</a>
+      <a href="#under-the-hood">Under the Hood</a>
+      <a href="#ecosystem">Ecosystem</a>
+      <a href="#why-moodio">Examples</a>
+      <a href="#bibtex">BibTeX</a>
+      <a href="https://app.moodio.art" class="nav-cta">Try Moodio</a>
+    </div>
+  </div>
+</nav>
+
+<span id="top"></span>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<header class="hero">
+<div class="container fade-up">
+  <div class="hero__badges">
+    <div class="hero__badge hero__badge--award">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.536.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
+      Preprint
+    </div>
+    <div class="hero__badge hero__badge--top">Co-Pilot for Video Production</div>
+  </div>
+
+  <!-- Tarantino quote card -->
+  <figure class="quote-card">
+    <span class="quote-card__mark" aria-hidden="true">&ldquo;</span>
+    <blockquote class="quote-card__text">When people ask me if I went to film school, I tell them, <em>&lsquo;no, I went to films.&rsquo;</em></blockquote>
+    <figcaption class="quote-card__footer">
+      <img class="quote-card__avatar"
+           src="images/tarantino.jpg"
+           alt="Quentin Tarantino" />
+      <div class="quote-card__attrib">
+        <b>Quentin Tarantino</b>, Academy Award&ndash;winning writer and director.
+      </div>
+    </figcaption>
+  </figure>
+
+  <h1>Moodio: Making Anyone a<br>Professional Video Studio</h1>
+
+  <p class="hero__subtitle">
+    A reference-first AI film studio. <em>Discover</em>, <em>learn from</em>, and <em>reuse</em> professional cinematic clips — all in one place.
+  </p>
+
+  <p class="hero__authors">
+    <a href="#">Ryan Rao</a><sup>1</sup>,
+    Ruihuang Yang<sup>1</sup>,
+    George Liu<sup>1</sup>,
+    Chancharik Mitra<sup>1</sup>,
+    Siyuan Cen<sup>1</sup>,
+    Yuhan Huang<sup>1</sup>,
+    Shihang Zhu<sup>1</sup>,
+    Jiaxi Li<sup>1</sup>,
+    Ruojin Li<sup>1</sup>,
+    Hewei Wang<sup>1</sup>,
+    Yu Tong Tiffany Ling<sup>1</sup>,
+    Yili Han<sup>1</sup>,
+    <a href="https://yilundu.github.io/">Yilun Du</a><sup>2</sup>,
+    <a href="http://www.phontron.com/">Graham Neubig</a><sup>1</sup>,
+    <a href="https://www.cs.cmu.edu/~deva/">Deva Ramanan</a><sup>1</sup>,
+    <a href="https://linzhiqiu.github.io/">Zhiqiu Lin</a><sup>1</sup>
+  </p>
+  <p class="hero__affiliations">
+    <sup>1</sup>Carnegie Mellon University &nbsp;·&nbsp; <sup>2</sup>Harvard University
+  </p>
+
+  <div class="hero__links">
+    <a href="https://app.moodio.art" class="try-live">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" /></svg>
+      Try Moodio - app.moodio.art
+      <span class="btn-pill btn-pill--live">Live</span>
+    </a>
+    <div class="hero__links-break"></div>
+    <a href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+      Paper
+    </a>
+    <a href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      Code
+    </a>
+    <a href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" /></svg>
+      Dataset
+    </a>
+    <a href="#"><span style="font-size:1.2em;">🤗</span> HuggingFace</a>
+    <div class="hero__links-break"></div>
+    <a href="https://linzhiqiu.github.io/papers/chai/" class="outline">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
+      CHAI
+      <span class="btn-pill btn-pill--award">CVPR'26 Highlight · Top 3%</span>
+    </a>
+    <a href="https://linzhiqiu.github.io/papers/camerabench/" class="outline">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" /></svg>
+      CameraBench
+      <span class="btn-pill btn-pill--award">NeurIPS'25 Spotlight · Top 3%</span>
+    </a>
+  </div>
+</div>
+</header>
+
+<!-- ════════════════════ MOTIVATION ════════════════════ -->
+<!-- ════════════════════ MOTIVATION ════════════════════ -->
+<!-- (Removed; content folded into the Overview section below.) -->
+
+<script>
+  // Show placeholder if the hero comparison video can't load
+  document.querySelectorAll('.hero-video').forEach(block => {
+    const v = block.querySelector('video');
+    if (!v) return;
+    v.addEventListener('error', () => block.classList.add('missing'));
+    // Trigger the error-handler if sources fail
+    v.querySelectorAll('source').forEach(s => {
+      s.addEventListener('error', () => block.classList.add('missing'));
+    });
+  });
+
+  // Auto-close mobile nav when a link is clicked
+  document.querySelectorAll('#topnav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      const l = document.getElementById('topnav-links');
+      const t = document.querySelector('.topnav__toggle');
+      l.classList.remove('open');
+      if (t) t.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+<!-- ════════════════════ OVERVIEW ════════════════════ -->
+<section id="overview">
+<div class="container">
+  <div class="section-label">Overview</div>
+  <div class="section-title">A reference-first workflow for cinematic video creation</div>
+  <p class="section-lead">
+    In filmmaking, <b>visual references are everything.</b> They <em>spark inspiration</em> before you create,
+    they <em>teach techniques</em> by example, and over time they're how you <em>build visual taste</em> —
+    a craft no amount of prompt engineering can substitute for.
+  </p>
+  <p class="section-lead" style="margin-top: 1rem;">
+    But the tools that support this — <em>Shotdeck, Vimeo, and the rest</em> — are stuck on metadata, titles,
+    and tags. <b>Moodio rebuilds the cinematic search engine with modern vision-language models</b>, then
+    plugs it directly into the AI video production workflow through three agent-guided stages:
+    <b>Inspire → Learn → Generate</b>.
+  </p>
+
+  <div class="key-points">
+    <div class="key-point">
+      <div class="key-point__illustration">
+        <!-- search icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#9353D3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+      </div>
+      <div class="key-point__header">
+        <div class="key-point__num">1</div>
+        <h3>Chat-to-Inspire</h3>
+      </div>
+      <p>Natural-language search over fine-grained cinematic content — <b>not just titles and tags, but camera movement, shot composition, focus shifts, and temporal dynamics</b>.</p>
+    </div>
+
+    <div class="key-point">
+      <div class="key-point__illustration">
+        <!-- academic cap icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#9353D3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" /></svg>
+      </div>
+      <div class="key-point__header">
+        <div class="key-point__num">2</div>
+        <h3>Chat-to-Learn</h3>
+      </div>
+      <p>Chat with the agent to understand <em>why</em> a shot works. Inspect <b>predicted cinematic tags</b> and retrieve similar examples for further study.</p>
+    </div>
+
+    <div class="key-point">
+      <div class="key-point__illustration">
+        <!-- film icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#9353D3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" /></svg>
+      </div>
+      <div class="key-point__header">
+        <div class="key-point__num">3</div>
+        <h3>Chat-to-Generate</h3>
+      </div>
+      <p>Reuse a reference's structure across all five aspects — <b>subject, scene, motion, spatial layout, and camera</b> — into a generation prompt for your own content.</p>
+    </div>
+  </div>
+
+  <div class="fig-block" style="margin-top:3rem;">
+    <video muted loop playsinline autoplay preload="metadata" style="padding: 6px 2px 0 0; box-sizing: border-box; background: #fff;" aria-label="Moodio reference-first workflow teaser — Leo user journey">
+      <source src="images/videos/teaser.mov" type="video/mp4">
+      Your browser doesn't support this video.
+    </video>
+    <p class="fig-block__caption"><b>Figure 1.</b> The Moodio user journey. A creator without formal film training (<em>Leo, apparel designer</em>) progresses through three reference-first stages: <b style="color:#6b3bc4;">Chat-to-Inspire</b> (browse cinematic references in natural language), <b style="color:#6b3bc4;">Chat-to-Learn</b> (understand why a reference works via predicted cinematic tags), and <b style="color:#6b3bc4;">Chat-to-Create</b> (transfer its structure into the user's own generation).</p>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ 1 CHAT-TO-INSPIRE ════════════════════ -->
+<section id="inspire">
+<div class="container">
+  <div class="section-label">1 Chat-to-Inspire</div>
+  <div class="section-title">Great videos come from great references — not great prompts</div>
+  <p class="section-lead">
+    Before shooting, every filmmaker studies existing work: browsing Shotdeck, watching movies, building mood boards.
+    This reference-first process is how visual <em>taste</em> develops, yet it's completely absent from AI video
+    tools. <b>Moodio brings it back.</b> Search for
+    <em>"rack focus from foreground treat to background dog with speed ramp"</em> and actually find it.
+  </p>
+
+  <div class="fig-block" style="margin-top:2rem;">
+    <video muted loop playsinline autoplay preload="metadata" style="padding: 6px 4px 4px 4px; box-sizing: border-box; background: #fff;" aria-label="Chat-to-Inspire interface showing cinematic-terminology and temporal-dynamics queries">
+      <source src="images/videos/chat_to_inspire.mov" type="video/mp4">
+      Your browser doesn't support this video.
+    </video>
+    <p class="fig-block__caption"><b>Figure 2.</b> <b>Left:</b> the Chat-to-Inspire interface. Users issue natural-language queries using cinematic terminology (<em>"camera starts focused on a person in the foreground, then rack focuses to someone in the background"</em>) or temporal dynamics (<em>"shot starts indoor and transitions to outdoor"</em>); Moodio surfaces grounded reference clips. <b>Right:</b> the 5-aspect caption schema powering retrieval, grounded by the CameraBench-Pro skill taxonomy.</p>
+  </div>
+
+  <p style="font-size:0.98rem; color:var(--text-muted); margin-top:2.5rem; text-align:center; line-height:1.9;">
+    Moodio's structured retrieval speaks the language of cinema across <b style="color:var(--text);">5 aspects</b>:<br>
+    🧑 <b style="color:var(--text);">Subject</b> &middot; 🏞️ <b style="color:var(--text);">Scene</b> &middot; 🏃 <b style="color:var(--text);">Motion</b> &middot; 📐 <b style="color:var(--text);">Spatial</b> &middot; 🎥 <b style="color:var(--text);">Camera</b>
+  </p>
+
+  <div class="aspect-row">
+    <div class="aspect-tile">
+      <span class="aspect-tile__icon">🧑</span>
+      <div class="aspect-tile__name">Subject</div>
+      <div class="aspect-tile__desc">type, appearance, pose, relationships</div>
+    </div>
+    <div class="aspect-tile">
+      <span class="aspect-tile__icon">🏞️</span>
+      <div class="aspect-tile__name">Scene</div>
+      <div class="aspect-tile__desc">POV, overlays, setting, time of day</div>
+    </div>
+    <div class="aspect-tile">
+      <span class="aspect-tile__icon">🏃</span>
+      <div class="aspect-tile__name">Motion</div>
+      <div class="aspect-tile__desc">actions, interactions, group dynamics</div>
+    </div>
+    <div class="aspect-tile">
+      <span class="aspect-tile__icon">📐</span>
+      <div class="aspect-tile__name">Spatial</div>
+      <div class="aspect-tile__desc">shot size, position, depth, movement</div>
+    </div>
+    <div class="aspect-tile">
+      <span class="aspect-tile__icon">🎥</span>
+      <div class="aspect-tile__name">Camera</div>
+      <div class="aspect-tile__desc">height, angle, lens, focus, movement</div>
+    </div>
+  </div>
+
+  <div class="related-pointer">
+    <div class="related-pointer__icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="30" height="30"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" /></svg>
+    </div>
+    <div>
+      <h4>Structured retrieval, scalable to millions of videos</h4>
+      <p>5-aspect captions are encoded as <b>separate embeddings</b> and pre-indexed offline. At query time, max-pooling across aspects matches the user's intent to whichever dimension it most directly targets — outperforming embedding baselines and matching generative rerankers <em>orders of magnitude faster</em>. <a href="#retrieval-results">See full results &darr;</a></p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ 2 CHAT-TO-LEARN ════════════════════ -->
+<section id="learn">
+<div class="container">
+  <div class="section-label">2 Chat-to-Learn</div>
+  <div class="section-title">Understand <em>why</em> a shot works</div>
+  <p class="section-lead">
+    Found an inspiring reference? Now learn why it works. Moodio displays <b>predicted cinematic tags</b> for each
+    video and lets you chat with the agent to understand how the shot is constructed — what camera movement, angle,
+    focus, and framing choices make it effective. You can also ask <em>"show me more videos with the same camera
+    movement"</em> and the agent retrieves similar examples for further inspiration.
+  </p>
+
+  <div class="fig-block" style="margin-top:2rem;">
+    <video muted loop playsinline autoplay preload="metadata" style="padding: 2px 2px 2px 4px; box-sizing: border-box; background: #fff;" aria-label="Chat-to-Learn — Watch-to-Learn metadata panel and conversational Q&A">
+      <source src="images/videos/chat_to_learn.mov" type="video/mp4">
+      Your browser doesn't support this video.
+    </video>
+    <p class="fig-block__caption"><b>Figure 3.</b> <b>Left (Watch-to-Learn):</b> selecting a reference surfaces structured metadata across all 5 aspects — camera movement, steadiness, height, angle, focus, shot type, shot size, playback speed, POV — up to 225 cinematic tags per video. <b>Right (Chat-to-Learn):</b> a conversational agent explains <em>why</em> the shot works (here, Star-Lord's dolly zoom creating vertigo) and retrieves more shots with matching camera movement on demand.</p>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ 3 CHAT-TO-GENERATE ════════════════════ -->
+<section id="generate">
+<div class="container">
+  <div class="section-label">3 Chat-to-Generate</div>
+  <div class="section-title">Turn references into your own generations</div>
+  <p class="section-lead">
+    Instead of writing cinematic instructions from scratch, <b>select a reference video</b> whose structure you want
+    to reuse. Moodio transfers its <b>subject, scene, motion, spatial layout, and camera behavior</b> into a
+    generation prompt for your own content — across twelve state-of-the-art generators including
+    <em>Seedance, Kling, Wan, Veo, and Sora</em>.
+  </p>
+
+  <div class="fig-block" style="margin-top:2rem;">
+    <video muted loop playsinline autoplay preload="metadata" style="padding: 2px 2px 0 2px; box-sizing: border-box; background: #fff;" aria-label="Chat-to-Generate — three user scenarios (pet treat, VR headset, phone ad)">
+      <source src="images/videos/chat_to_generate.mov" type="video/mp4">
+      Your browser doesn't support this video.
+    </video>
+    <p class="fig-block__caption"><b>Figure 4.</b> Three reference-to-generation transfers. In each scenario the user selects a reference clip (<em>Selected Video</em>) and their own asset (<em>User's Asset</em>), then describes the edit conversationally. Moodio preserves the reference's cinematic structure — <b>rolling top-down motion with rack focus</b> (pet treat), <b>fly-through light-ring transition</b> (VR headset), <b>water-surface tracking shot</b> (phone ad) — while swapping in the user's subject.</p>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ 4 UNDER THE HOOD ════════════════════ -->
+<section id="under-the-hood">
+<div class="container">
+  <div class="section-label">4 Under the Hood</div>
+  <div class="section-title">What powers Moodio</div>
+  <p class="section-lead">
+    Three contributions: a <b>structured retrieval method</b> that matches generative reranker quality at scale, the
+    <b>largest cinematic taxonomy to date</b> (CameraBench-Pro), and a <b>50K-query benchmark</b> covering single
+    keywords through 400-word cinematic scripts in English and Chinese.
+  </p>
+
+  <!-- 1. Structured retrieval (the headline) -->
+  <h3 id="retrieval-results" class="sub-heading" style="margin-top:2.5rem;">
+    <span class="sub-heading__label">Method · Structured Retrieval</span>
+    Five aspects, encoded separately, max-pooled at query time
+  </h3>
+  <p style="color: var(--text-muted); line-height: 1.7;">
+    Each video is captioned along five aspects — <b style="color:var(--text);">subject, scene, motion, spatial,
+    camera</b> — and each caption is encoded into its own Qwen3-Embedding-8B vector. At query time we embed
+    the user query once and score each video by the <b style="color:var(--text);">max cosine similarity</b>
+    across its five vectors, so the query aligns to whichever aspect it most directly targets. All vectors are
+    pre-indexed offline.
+  </p>
+
+  <div style="overflow-x: auto; margin-top: 1.5rem; border: 1px solid var(--border); border-radius: 8px;">
+  <table style="width:100%; min-width: 880px; border-collapse: collapse; font-size: 0.86rem;">
+    <thead>
+      <tr style="background: var(--bg-alt); border-bottom: 2px solid var(--border);">
+        <th rowspan="2" style="text-align:left; padding: 0.55rem 0.7rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; vertical-align: bottom;">Strategy</th>
+        <th rowspan="2" style="text-align:left; padding: 0.55rem 0.7rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; vertical-align: bottom;">Caption Source</th>
+        <th rowspan="2" style="text-align:left; padding: 0.55rem 0.7rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; vertical-align: bottom;">Caption Type</th>
+        <th rowspan="2" style="text-align:center; padding: 0.55rem 0.5rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; vertical-align: bottom;">Scalable</th>
+        <th rowspan="2" style="text-align:center; padding: 0.55rem 0.5rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; vertical-align: bottom;">Time/Query</th>
+        <th colspan="3" style="text-align:center; padding: 0.4rem 0.5rem 0.2rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid var(--border);">Hit</th>
+        <th rowspan="2" style="text-align:center; padding: 0.55rem 0.5rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; vertical-align: bottom;">MRR@10</th>
+      </tr>
+      <tr style="background: var(--bg-alt); border-bottom: 2px solid var(--border);">
+        <th style="text-align:center; padding: 0.3rem 0.5rem 0.55rem; font-family: var(--mono); font-size: 0.66rem;">@1</th>
+        <th style="text-align:center; padding: 0.3rem 0.5rem 0.55rem; font-family: var(--mono); font-size: 0.66rem;">@5</th>
+        <th style="text-align:center; padding: 0.3rem 0.5rem 0.55rem; font-family: var(--mono); font-size: 0.66rem;">@10</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background: #fafafa;">
+        <td colspan="9" style="padding: 0.5rem 0.7rem; font-style: italic; color: var(--text-muted); font-size: 0.82rem;">Off-the-shelf models</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 0.5rem 0.7rem;">Gemini Embedding 2</td>
+        <td style="padding: 0.5rem 0.7rem; color: var(--text-muted);">—</td>
+        <td style="padding: 0.5rem 0.7rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem;">✓</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 0.5rem 0.7rem;">Qwen3-VL Embedding</td>
+        <td style="padding: 0.5rem 0.7rem; color: var(--text-muted);">—</td>
+        <td style="padding: 0.5rem 0.7rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem;">✓</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 0.5rem 0.7rem;">Qwen3-VL Reranker</td>
+        <td style="padding: 0.5rem 0.7rem; color: var(--text-muted);">—</td>
+        <td style="padding: 0.5rem 0.7rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem;">✗</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 0.5rem 0.7rem;">Qwen3 Embedding</td>
+        <td style="padding: 0.5rem 0.7rem;">Qwen3-VL</td>
+        <td style="padding: 0.5rem 0.7rem;">Single-Caption</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem;">✓</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 0.5rem 0.7rem;">Qwen3 Embedding</td>
+        <td style="padding: 0.5rem 0.7rem;">Qwen3-VL</td>
+        <td style="padding: 0.5rem 0.7rem;">Structured-Caption</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem;">✓</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+      </tr>
+      <tr style="background: #fafafa;">
+        <td colspan="9" style="padding: 0.5rem 0.7rem; font-style: italic; color: var(--text-muted); font-size: 0.82rem;">Using Qwen3-VL-SFT captions (ours)</td>
+      </tr>
+      <tr style="border-bottom: 1px solid var(--border);">
+        <td style="padding: 0.5rem 0.7rem;">Qwen3 Embedding</td>
+        <td style="padding: 0.5rem 0.7rem;">Qwen3-VL-SFT</td>
+        <td style="padding: 0.5rem 0.7rem;">Single-Caption</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem;">✓</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+      </tr>
+      <tr style="background: #F2EAFA; border-bottom: 1px solid var(--border);">
+        <td style="padding: 0.5rem 0.7rem;"><b>Qwen3 Embedding</b></td>
+        <td style="padding: 0.5rem 0.7rem;"><b>Qwen3-VL-SFT</b></td>
+        <td style="padding: 0.5rem 0.7rem;"><b>Structured-Caption</b></td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem;"><b>✓</b></td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="fig-block__caption" style="margin-top:0.8rem;"><b>Table 1.</b> Retrieval on the Moodio-T2V benchmark. Our 5-aspect structured-caption retrieval (highlighted) outperforms embedding baselines (Gemini Embedding 2, Qwen3-VL Embedding) and matches Qwen3-VL Reranker quality <em>orders of magnitude faster</em>, since Reranker requires a forward pass per (video, query) pair and is infeasible at million-video scale. <em>Numbers will be filled in upon release.</em></p>
+
+  <!-- 2. CameraBench-Pro taxonomy -->
+  <h3 class="sub-heading" style="margin-top:4rem;">
+    <span class="sub-heading__label">Data · CameraBench-Pro</span>
+    225 cinematic primitives across 17 skill categories
+  </h3>
+  <p style="color: var(--text-muted); line-height: 1.7;">
+    The largest professionally-annotated cinematic video understanding dataset to date — a 4× expansion of CameraBench
+    (NeurIPS '25 Spotlight) from camera motion to the full language of cinema. Co-designed with 100+ professional
+    filmmakers over a year.
+  </p>
+
+  <div class="stats-row" style="margin-top:1.5rem;">
+    <div class="stat-card">
+      <div class="stat-card__num">225</div>
+      <div class="stat-card__label">Cinematic primitives</div>
+      <div class="stat-card__sub">across 17 skill categories</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card__num">1.5M+</div>
+      <div class="stat-card__label">Professional annotations</div>
+      <div class="stat-card__sub">over 10K+ videos</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card__num">100+</div>
+      <div class="stat-card__label">Filmmakers</div>
+      <div class="stat-card__sub">year-long collaboration</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-card__num">50K</div>
+      <div class="stat-card__label">Benchmark queries</div>
+      <div class="stat-card__sub">EN + ZH, keywords → scripts</div>
+    </div>
+  </div>
+
+  <!-- Two-column taxonomy figures (aspect-balanced) -->
+  <div class="two-col--balanced" style="margin-top:2.5rem;">
+    <div style="flex-grow: 1.9797;">
+      <img class="zoomable" src="images/camera_taxonomy.jpg" alt="CameraBench-Pro camera taxonomy — lens distortion, Dutch angle, height, angle, focus, depth of field"
+           data-caption="Camera-side Primitives"
+           style="border-radius: 8px; border: 1px solid var(--border);">
+    </div>
+    <div style="flex-grow: 2.2297;">
+      <img class="zoomable" src="images/shot_taxonomy.jpg" alt="CameraBench-Pro shot taxonomy — POV, shot types, transitions, subject framing, playback speed, shot size, overlays"
+           data-caption="Scene-side Primitives"
+           style="border-radius: 8px; border: 1px solid var(--border);">
+    </div>
+  </div>
+  <p class="fig-block__caption" style="margin-top:1rem;"><b>Figure 5.</b> Excerpts from the CameraBench-Pro taxonomy. <b>Left:</b> camera-side primitives (lens distortion, Dutch angle, camera angle, camera height, focus &amp; depth of field). <b>Right:</b> scene-side primitives (point of view, shot types, shot transitions, subject framing, playback speed, shot size, overlays).</p>
+
+  <!-- 3. Benchmark -->
+  <h3 class="sub-heading" style="margin-top:4rem;">
+    <span class="sub-heading__label">Evaluation · Moodio-T2V Benchmark</span>
+    50K bilingual queries, simulated from real creator search behavior
+  </h3>
+  <p style="color: var(--text-muted); line-height: 1.7;">
+    Prior text-to-video benchmarks (MSR-VTT, LSMDC, DiDeMo) use short, stylistically uniform English queries with
+    one-to-one query-video mappings. Moodio-T2V instead spans single keywords through 400-word cinematic descriptions
+    across four framings (concise / question / request / verbose) and two languages — with pooled relevance sets
+    so multiple videos can satisfy the same intent.
+  </p>
+
+  <div class="fig-block" style="margin-top:1.5rem;">
+    <video muted loop playsinline autoplay preload="metadata" style="padding: 4px; box-sizing: border-box; background: #fff;" aria-label="User-query benchmark — pipeline from video to grounded 5-aspect caption to structured query contents to surface-form queries in English and Chinese">
+      <source src="images/videos/query_benchmark.mov" type="video/mp4">
+      Your browser doesn't support this video.
+    </video>
+    <p class="fig-block__caption"><b>Figure 6.</b> The Moodio-T2V query simulator. Each held-out video is decomposed into a grounded 5-aspect caption, sampled into structured query contents, then rendered into eight surface forms (concise / question / request / verbose × EN / ZH) — yielding 50K diverse queries.</p>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ ECOSYSTEM / RELATED ════════════════════ -->
+<section id="ecosystem">
+<div class="container">
+  <div class="section-label">Ecosystem</div>
+  <div class="section-title">Part of a broader effort</div>
+  <p class="section-lead">
+    Moodio is one pillar of our research program on precise video language for professional video understanding and
+    generation. It builds on <b>CameraBench</b> and shares its annotation platform and post-training recipes with
+    <b>CHAI</b>.
+  </p>
+
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.2rem; margin-top:1.8rem;">
+    <div class="related-pointer" style="margin:0;">
+      <div class="related-pointer__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="30" height="30"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25Z" /></svg>
+      </div>
+      <div>
+        <h4>CHAI <span class="pill">CVPR'26 Highlight · Top 3%</span></h4>
+        <p>Critique-based Human–AI Oversight for precise video captioning. CHAI's 5-aspect specification and scalable oversight framework power Moodio's captioning and retrieval models — <b>Qwen3-VL-8B surpasses Gemini-3.1 and GPT-5</b> on caption and reward accuracy. <a href="https://linzhiqiu.github.io/papers/chai/">Website →</a></p>
+      </div>
+    </div>
+    <div class="related-pointer" style="margin:0;">
+      <div class="related-pointer__icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="30" height="30"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" /></svg>
+      </div>
+      <div>
+        <h4>CameraBench <span class="pill">NeurIPS'25 Spotlight · Top 3%</span></h4>
+        <p>Our predecessor benchmark on camera motion understanding: ~3,000 expert-annotated videos, a taxonomy of motion primitives, and evaluations of SfM and VLM methods. CameraBench-Pro extends this from camera motion to the full language of cinema. <a href="https://linzhiqiu.github.io/papers/camerabench/">Website →</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Collaboration card -->
+  <div class="collab-card">
+    <p class="emphasis">🚀 We are actively advancing Moodio with richer taxonomies, stronger video understanding models, and a growing corpus of professional references.</p>
+    <p>
+      We welcome collaborations and funding opportunities with researchers and practitioners in <b>video
+      understanding, cinematic generation, and multimodal agents for professional-level video content</b>.
+    </p>
+    <p>
+      If you're interested in accessing improved data or models — or in partnering on the Moodio platform — please
+      reach out at <a href="mailto:zhiqiulin98@gmail.com">zhiqiulin98@gmail.com</a>,
+      try the live demo at <a href="https://app.moodio.ai">app.moodio.ai</a>, or open a GitHub Issue.
+    </p>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ ADDITIONAL WORKED EXAMPLES ════════════════════ -->
+<section id="why-moodio" style="background: var(--bg-alt);">
+<div class="container">
+  <div class="section-label">Additional Worked Examples</div>
+  <div class="section-title">From a blank prompt to a cinematic promo</div>
+  <p class="section-lead">
+    Two end-to-end reference-first journeys from real Moodio users — different domains, same workflow.
+  </p>
+
+  <!-- Example 1: Museum VR tour -->
+  <h3 class="sub-heading" style="margin-top:2.5rem;">
+    <span class="sub-heading__label">Example 1 · Museum exhibition</span>
+    A VR tour of ancient Babylon
+  </h3>
+  <div class="fig-block" style="margin-top:1rem;">
+    <video muted loop playsinline autoplay preload="metadata" style="clip-path: inset(0 2px round 8px);" aria-label="User journey — museum VR tour promo, from Chat-to-Inspire to Chat-to-Learn to Chat-to-Create">
+      <source src="images/videos/user_journey_vr.mov" type="video/mp4">
+      Your browser doesn't support this video.
+    </video>
+    <p class="fig-block__caption"><b>Figure 7.</b> A museum exhibition designer searches <em>"entering a new world with VR glasses"</em> to find references (<b>Chat-to-Inspire</b>), then asks Moodio what makes the selected clip feel cinematic — learning that a <b>first-person POV</b>, a <b>dolly-forward through a tunnel</b>, and <b>heavy motion blur</b> converge toward a vanishing point (<b>Chat-to-Learn</b>). Finally, he reuses that POV and warp-tunnel structure but rebuilds the tunnel walls from archaeological excavation layers, bursting into the Babylonian Empire at its peak (<b>Chat-to-Create</b>).</p>
+  </div>
+
+  <!-- Example 2: Pet treat ad -->
+  <h3 class="sub-heading" style="margin-top:3rem;">
+    <span class="sub-heading__label">Example 2 · Pet industry marketing</span>
+    A short product video for dog treats
+  </h3>
+  <div class="fig-block" style="margin-top:1rem;">
+    <video muted loop playsinline autoplay preload="metadata" style="clip-path: inset(0 2px round 8px);" aria-label="User journey — pet treat product video, from Chat-to-Inspire to Chat-to-Learn to Chat-to-Create">
+      <source src="images/videos/user_journey_dogtreat.mov" type="video/mp4">
+      Your browser doesn't support this video.
+    </video>
+    <p class="fig-block__caption"><b>Figure 8.</b> A pet industry marketing specialist wants to create short product videos that make dog treats look irresistible but lacks a professional crew. (<b>Chat-to-Inspire</b>) The user searches for clips of pets going crazy for treats and selects a high-energy reference. (<b>Chat-to-Learn</b>) The user asks what cinematic effects are used; the agent explains the <b>rack focus with shallow depth of field</b> shifting from the treat in the foreground to the dog in the background, combined with a <b>speed ramp from slow motion to normal speed</b> as the dog catches the treat. (<b>Chat-to-Create</b>) The user applies the same camera angle and effects to their own treat image, adding more dogs entering the frame and a camera roll for extra energy.</p>
+  </div>
+
+  <!-- Release summary -->
+  <h3 class="sub-heading" style="margin-top:3rem;">
+    <span class="sub-heading__label">Open release</span>
+    Everything we built
+  </h3>
+  <p style="color: var(--text-muted); line-height: 1.7;">
+    We will release the full pipeline:
+    <b style="color: var(--text);">CameraBench-Pro dataset</b>,
+    the <b style="color: var(--text);">Moodio-T2V benchmark</b>,
+    <b style="color: var(--text);">structured retrieval models</b>,
+    the <b style="color: var(--text);">annotation platform</b>,
+    aggregated <b style="color: var(--text);">anonymized user logs</b>,
+    and all evaluation code.
+    Try the live system at <a href="https://app.moodio.ai">app.moodio.ai</a>.
+  </p>
+</div>
+</section>
+
+<!-- ════════════════════ BIBTEX ════════════════════ -->
+<section id="bibtex">
+<div class="container">
+  <div class="section-label">Citation</div>
+  <div class="section-title">BibTeX</div>
+  <div class="bibtex-block">
+    <button class="copy-btn" onclick="const t=document.getElementById('bibtex-text').textContent;navigator.clipboard.writeText(t);this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500);">Copy</button>
+<pre id="bibtex-text">@misc{rao2026moodio,
+  title={Moodio: Making Anyone a Professional Video Studio},
+  author={Ryan Rao and Ruihuang Yang and George Liu
+          and Chancharik Mitra and Siyuan Cen and Yuhan Huang
+          and Shihang Zhu and Jiaxi Li and Ruojin Li
+          and Hewei Wang and Yu Tong Tiffany Ling and Yili Han
+          and Yilun Du and Graham Neubig and Deva Ramanan
+          and Zhiqiu Lin},
+  year={2026},
+  note={Under review}
+}</pre>
+  </div>
+</div>
+</section>
+
+<!-- ════════════════════ CONTRIBUTIONS (collapsible) ════════════════════ -->
+<section class="contrib-section">
+<div class="container">
+  <details class="contrib-details">
+    <summary>
+      <span class="contrib-summary__label">
+        <small>Author Contributions</small>
+        Who built what
+      </span>
+      <span class="contrib-summary__caret" aria-hidden="true">▾</span>
+    </summary>
+    <div class="contrib-body">
+      <p class="contrib-body__lead">
+        Moodio is a deeply collaborative project. Below is a condensed contribution map; component leads
+        reflect substantial sustained effort beyond the listed tasks. Many components also depend on the
+        concurrent <a href="https://linzhiqiu.github.io/papers/chai/">CHAI</a> work that powers Moodio's data,
+        captioning, and reward modeling.
+      </p>
+
+      <div class="contrib-row">
+        <div class="contrib-row__component">Research Vision</div>
+        <div class="contrib-row__detail">
+          Reframing AI video creation from prompt engineering to <em>learning by watching</em>; grounding professional video understanding in a precise shared cinematic language.
+          <div class="contrib-row__leads"><b>Driver:</b> Zhiqiu Lin &nbsp;·&nbsp; <b>Primary Advisor:</b> Deva Ramanan &nbsp;·&nbsp; <b>Additional Advisors:</b> Graham Neubig, Yilun Du</div>
+        </div>
+      </div>
+
+      <div class="contrib-row">
+        <div class="contrib-row__component">Taxonomy &amp; Captioning Policy</div>
+        <div class="contrib-row__detail">
+          225-primitive cinematic taxonomy across 17 skill categories, decision rules, and the five-aspect captioning framework (subject · scene · motion · spatial · camera) with 35 fine-grained subaspects.
+          <div class="contrib-row__leads"><b>Leads:</b> Zhiqiu Lin, Yuhan Huang &nbsp;·&nbsp; <b>Contributors:</b> Yu Tong Tiffany Ling, Siyuan Cen, Shihang Zhu, Yili Han</div>
+        </div>
+      </div>
+
+      <div class="contrib-row">
+        <div class="contrib-row__component">Annotation Operations</div>
+        <div class="contrib-row__detail">
+          Labeling/captioning platform engineering, annotator recruitment and training (600+ applicants, six-round qualification exam), and execution of <b>1.5M+ primitive labels</b> and <b>~20K caption triplets</b>.
+          <div class="contrib-row__leads"><b>Lead:</b> Zhiqiu Lin &nbsp;·&nbsp; <b>QC Co-Leads:</b> Yuhan Huang, Shihang Zhu &nbsp;·&nbsp; <b>Core Annotators:</b> Hewei Wang, Jiaxi Li, Ruojin Li, Isaac Li, Irene Pi</div>
+        </div>
+      </div>
+
+      <div class="contrib-row">
+        <div class="contrib-row__component">Video Understanding Models</div>
+        <div class="contrib-row__detail">
+          Primitive classifier (Qwen3-VL-8B fine-tuned on 1.2M VQA samples), structured caption generator (SFT/DPO/RLHF-V/GSPO), critique-quality ablations, reward modeling, and inference-time scaling.
+          <div class="contrib-row__leads"><b>Leads:</b> Chancharik Mitra, George Liu</div>
+        </div>
+      </div>
+
+      <div class="contrib-row">
+        <div class="contrib-row__component">Retrieval System</div>
+        <div class="contrib-row__detail">
+          Five-aspect structured retrieval with max-cosine scoring, the user-query simulator and 50K bilingual benchmark, pooled relevance set construction, and the side-by-side user study against Shotdeck.
+          <div class="contrib-row__leads"><b>Leads:</b> Ryan Rao, George Liu</div>
+        </div>
+      </div>
+
+      <div class="contrib-row">
+        <div class="contrib-row__component">Moodio Platform</div>
+        <div class="contrib-row__detail">
+          End-to-end Next.js full-stack platform, GPT-5.3-backed agent orchestrating the three-stage workflow, twelve-model generation integration, asset management, video assembly, and A/B testing infrastructure.
+          <div class="contrib-row__leads"><b>Lead:</b> Ruihuang Yang &nbsp;·&nbsp; <b>Tag Calibration &amp; Corpus:</b> Ryan Rao, Zhiqiu Lin, George Liu</div>
+        </div>
+      </div>
+
+      <div class="contrib-row">
+        <div class="contrib-row__component">Reference-Guided Generation</div>
+        <div class="contrib-row__detail">
+          Re-captioning and Wan2.2-T2V-14B LoRA fine-tuning that supports 400-word professional prompts, with human Likert evaluation showing substantial gains over base Wan and zero-shot-caption baselines.
+          <div class="contrib-row__leads"><b>Lead:</b> Siyuan Cen &nbsp;·&nbsp; <b>Contributor:</b> Zhiqiu Lin</div>
+        </div>
+      </div>
+
+      <div class="contrib-row">
+        <div class="contrib-row__component">User Research</div>
+        <div class="contrib-row__detail">
+          Interviews with active Moodio users and Shotdeck professionals; design of the 5-user side-by-side study; qualitative feedback on long-form queries, motion search, and cinematic technique retrieval.
+          <div class="contrib-row__leads"><b>Lead:</b> Yili Han &nbsp;·&nbsp; <b>Contributors:</b> Yu Tong Tiffany Ling, Zhiqiu Lin</div>
+        </div>
+      </div>
+
+      <div class="contrib-row">
+        <div class="contrib-row__component">Writing &amp; Figures</div>
+        <div class="contrib-row__detail">
+          Drafting of the Moodio and CHAI papers, appendices, taxonomy definitions, and annotation tutorials; design of all teaser figures, workflow diagrams, taxonomy visualizations, and UI screenshots.
+          <div class="contrib-row__leads"><b>Writing Lead:</b> Zhiqiu Lin &nbsp;·&nbsp; <b>Figures Lead:</b> Yu Tong Tiffany Ling &nbsp;·&nbsp; <b>Contributors:</b> All team members</div>
+        </div>
+      </div>
+
+      <p class="contrib-body__footer">
+        <b>Affiliations.</b> All authors are at Carnegie Mellon University except Yilun Du, who is at Harvard University.
+      </p>
+    </div>
+  </details>
+</div>
+</section>
+
+<footer>
+  <div class="container">
+    <span style="color: var(--text-muted); font-size: 0.8rem;">© 2026 &nbsp;·&nbsp; <a href="https://linzhiqiu.github.io/">Zhiqiu Lin</a></span>
+  </div>
+</footer>
+
+<!-- Lightbox modal for zoomable images -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+  <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image" type="button" hidden>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="15 18 9 12 15 6"></polyline></svg>
+  </button>
+  <div class="lightbox__stage">
+    <img class="lightbox__img" id="lightboxImg" alt="">
+    <div class="lightbox__caption" id="lightboxCaption"></div>
+  </div>
+  <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next image" type="button" hidden>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="9 18 15 12 9 6"></polyline></svg>
+  </button>
+  <button class="lightbox__close" id="lightboxClose" aria-label="Close preview" type="button">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+  </button>
+</div>
+<script>
+(function() {
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  const lbCaption = document.getElementById('lightboxCaption');
+  const lbClose = document.getElementById('lightboxClose');
+  const lbPrev = document.getElementById('lightboxPrev');
+  const lbNext = document.getElementById('lightboxNext');
+
+  // Group images by their nearest container (so each figure gets its own gallery)
+  const groups = new Map();
+  document.querySelectorAll('img.zoomable').forEach(img => {
+    const group = img.closest('.two-col--balanced, .fig-block, figure') || document.body;
+    if (!groups.has(group)) groups.set(group, []);
+    groups.get(group).push(img);
+  });
+
+  let currentList = [];
+  let currentIdx = 0;
+
+  function show(idx) {
+    if (!currentList.length) return;
+    if (idx < 0 || idx >= currentList.length) return; // no looping
+    currentIdx = idx;
+    const img = currentList[currentIdx];
+    lbImg.src = img.src;
+    lbImg.alt = img.alt || '';
+    const caption = img.getAttribute('data-caption') || '';
+    lbCaption.textContent = caption;
+    lbCaption.style.display = caption ? '' : 'none';
+    // Show prev only if there's a previous image; next only if there's a next
+    lbPrev.hidden = currentIdx <= 0;
+    lbNext.hidden = currentIdx >= currentList.length - 1;
+  }
+  function open(img) {
+    for (const [, list] of groups) {
+      const i = list.indexOf(img);
+      if (i !== -1) {
+        currentList = list;
+        show(i);
+        break;
+      }
+    }
+    lb.classList.add('open');
+    document.body.classList.add('lightbox-open');
+  }
+  function close() {
+    lb.classList.remove('open');
+    document.body.classList.remove('lightbox-open');
+    setTimeout(() => { if (!lb.classList.contains('open')) lbImg.src = ''; }, 260);
+  }
+
+  document.querySelectorAll('img.zoomable').forEach(img => {
+    img.addEventListener('click', () => open(img));
+  });
+  lbClose.addEventListener('click', close);
+  lbPrev.addEventListener('click', e => { e.stopPropagation(); show(currentIdx - 1); });
+  lbNext.addEventListener('click', e => { e.stopPropagation(); show(currentIdx + 1); });
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft' && currentIdx > 0) show(currentIdx - 1);
+    else if (e.key === 'ArrowRight' && currentIdx < currentList.length - 1) show(currentIdx + 1);
+  });
+})();
+</script>
+
+</body>
+</html>
