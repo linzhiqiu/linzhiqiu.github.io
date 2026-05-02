@@ -241,6 +241,18 @@ section:last-of-type { border-bottom: none; }
   line-height: 1.8;
 }
 .hero__affiliations { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 2rem; }
+.hero__cofirst-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: -0.4rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+.hero__cofirst-note sup { color: var(--accent); font-weight: 700; }
+.hero__authors sup.cofirst {
+  color: var(--accent);
+  font-weight: 700;
+}
 .hero__links {
   display: flex;
   column-gap: 16px;
@@ -1164,6 +1176,7 @@ footer {
   padding: 1rem 0 0.4rem;
 }
 .contrib-body__lead a { font-weight: 600; }
+.contrib-body__lead b { color: var(--text); }
 .contrib-row {
   display: grid;
   grid-template-columns: 200px 1fr;
@@ -1194,6 +1207,7 @@ footer {
   margin-top: 0.3rem;
 }
 .contrib-row__leads b { color: var(--text); font-weight: 600; }
+.contrib-row__leads sup { color: var(--accent); font-weight: 700; }
 .contrib-body__footer {
   margin-top: 1rem;
   padding-top: 1rem;
@@ -1275,9 +1289,9 @@ footer {
   </p>
 
   <p class="hero__authors">
-    <a href="#">Ryan Rao</a><sup>1</sup>,
-    Ruihuang Yang<sup>1</sup>,
-    George Liu<sup>1</sup>,
+    <a href="#">Ryan Rao</a><sup class="cofirst">1,*</sup>,
+    Ruihuang Yang<sup class="cofirst">1,*</sup>,
+    George Liu<sup class="cofirst">1,*</sup>,
     Chancharik Mitra<sup>1</sup>,
     Siyuan Cen<sup>1</sup>,
     Yuhan Huang<sup>1</sup>,
@@ -1294,6 +1308,9 @@ footer {
   </p>
   <p class="hero__affiliations">
     <sup>1</sup>Carnegie Mellon University &nbsp;·&nbsp; <sup>2</sup>Harvard University
+  </p>
+  <p class="hero__cofirst-note">
+    <sup>*</sup>Equal contribution as co-first authors
   </p>
 
   <div class="hero__links">
@@ -1331,7 +1348,6 @@ footer {
 </div>
 </header>
 
-<!-- ════════════════════ MOTIVATION ════════════════════ -->
 <!-- ════════════════════ MOTIVATION ════════════════════ -->
 <!-- (Removed; content folded into the Overview section below.) -->
 
@@ -1378,7 +1394,6 @@ footer {
   <div class="key-points">
     <div class="key-point">
       <div class="key-point__illustration">
-        <!-- search icon -->
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#9353D3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
       </div>
       <div class="key-point__header">
@@ -1390,7 +1405,6 @@ footer {
 
     <div class="key-point">
       <div class="key-point__illustration">
-        <!-- academic cap icon -->
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#9353D3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" /></svg>
       </div>
       <div class="key-point__header">
@@ -1402,7 +1416,6 @@ footer {
 
     <div class="key-point">
       <div class="key-point__illustration">
-        <!-- film icon -->
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#9353D3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" /></svg>
       </div>
       <div class="key-point__header">
@@ -1543,7 +1556,6 @@ footer {
     keywords through 400-word cinematic scripts in English and Chinese.
   </p>
 
-  <!-- 1. Structured retrieval (the headline) -->
   <h3 id="retrieval-results" class="sub-heading" style="margin-top:2.5rem;">
     <span class="sub-heading__label">Method · Structured Retrieval</span>
     Five aspects, encoded separately, max-pooled at query time
@@ -1663,7 +1675,6 @@ footer {
   </div>
   <p class="fig-block__caption" style="margin-top:0.8rem;"><b>Table 1.</b> Retrieval on the Moodio-T2V benchmark. Our 5-aspect structured-caption retrieval (highlighted) outperforms embedding baselines (Gemini Embedding 2, Qwen3-VL Embedding) and matches Qwen3-VL Reranker quality <em>orders of magnitude faster</em>, since Reranker requires a forward pass per (video, query) pair and is infeasible at million-video scale. <em>Numbers will be filled in upon release.</em></p>
 
-  <!-- 2. CameraBench-Pro taxonomy -->
   <h3 class="sub-heading" style="margin-top:4rem;">
     <span class="sub-heading__label">Data · CameraBench-Pro</span>
     225 cinematic primitives across 17 skill categories
@@ -1697,7 +1708,6 @@ footer {
     </div>
   </div>
 
-  <!-- Two-column taxonomy figures (aspect-balanced) -->
   <div class="two-col--balanced" style="margin-top:2.5rem;">
     <div style="flex-grow: 1.9797;">
       <img class="zoomable" src="images/camera_taxonomy.jpg" alt="CameraBench-Pro camera taxonomy — lens distortion, Dutch angle, height, angle, focus, depth of field"
@@ -1712,7 +1722,6 @@ footer {
   </div>
   <p class="fig-block__caption" style="margin-top:1rem;"><b>Figure 5.</b> Excerpts from the CameraBench-Pro taxonomy. <b>Left:</b> camera-side primitives (lens distortion, Dutch angle, camera angle, camera height, focus &amp; depth of field). <b>Right:</b> scene-side primitives (point of view, shot types, shot transitions, subject framing, playback speed, shot size, overlays).</p>
 
-  <!-- 3. Benchmark -->
   <h3 class="sub-heading" style="margin-top:4rem;">
     <span class="sub-heading__label">Evaluation · Moodio-T2V Benchmark</span>
     50K bilingual queries, simulated from real creator search behavior
@@ -1766,7 +1775,6 @@ footer {
     </div>
   </div>
 
-  <!-- Collaboration card -->
   <div class="collab-card">
     <p class="emphasis">🚀 We are actively advancing Moodio with richer taxonomies, stronger video understanding models, and a growing corpus of professional references.</p>
     <p>
@@ -1791,7 +1799,6 @@ footer {
     Two end-to-end reference-first journeys from real Moodio users — different domains, same workflow.
   </p>
 
-  <!-- Example 1: Museum VR tour -->
   <h3 class="sub-heading" style="margin-top:2.5rem;">
     <span class="sub-heading__label">Example 1 · Museum exhibition</span>
     A VR tour of ancient Babylon
@@ -1804,7 +1811,6 @@ footer {
     <p class="fig-block__caption"><b>Figure 7.</b> A museum exhibition designer searches <em>"entering a new world with VR glasses"</em> to find references (<b>Chat-to-Inspire</b>), then asks Moodio what makes the selected clip feel cinematic — learning that a <b>first-person POV</b>, a <b>dolly-forward through a tunnel</b>, and <b>heavy motion blur</b> converge toward a vanishing point (<b>Chat-to-Learn</b>). Finally, he reuses that POV and warp-tunnel structure but rebuilds the tunnel walls from archaeological excavation layers, bursting into the Babylonian Empire at its peak (<b>Chat-to-Create</b>).</p>
   </div>
 
-  <!-- Example 2: Pet treat ad -->
   <h3 class="sub-heading" style="margin-top:3rem;">
     <span class="sub-heading__label">Example 2 · Pet industry marketing</span>
     A short product video for dog treats
@@ -1817,7 +1823,6 @@ footer {
     <p class="fig-block__caption"><b>Figure 8.</b> A pet industry marketing specialist wants to create short product videos that make dog treats look irresistible but lacks a professional crew. (<b>Chat-to-Inspire</b>) The user searches for clips of pets going crazy for treats and selects a high-energy reference. (<b>Chat-to-Learn</b>) The user asks what cinematic effects are used; the agent explains the <b>rack focus with shallow depth of field</b> shifting from the treat in the foreground to the dog in the background, combined with a <b>speed ramp from slow motion to normal speed</b> as the dog catches the treat. (<b>Chat-to-Create</b>) The user applies the same camera angle and effects to their own treat image, adding more dogs entering the frame and a camera roll for extra energy.</p>
   </div>
 
-  <!-- Release summary -->
   <h3 class="sub-heading" style="margin-top:3rem;">
     <span class="sub-heading__label">Open release</span>
     Everything we built
@@ -1873,14 +1878,23 @@ footer {
         Moodio is a deeply collaborative project. Below is a condensed contribution map; component leads
         reflect substantial sustained effort beyond the listed tasks. Many components also depend on the
         concurrent <a href="https://linzhiqiu.github.io/papers/chai/">CHAI</a> work that powers Moodio's data,
-        captioning, and reward modeling.
+        captioning, and reward modeling. <b>Ryan Rao<sup>*</sup>, Ruihuang Yang<sup>*</sup>, and George Liu<sup>*</sup>
+        contributed equally as co-first authors.</b>
       </p>
 
       <div class="contrib-row">
-        <div class="contrib-row__component">Research Vision</div>
+        <div class="contrib-row__component">Retrieval System</div>
         <div class="contrib-row__detail">
-          Reframing AI video creation from prompt engineering to <em>learning by watching</em>; grounding professional video understanding in a precise shared cinematic language.
-          <div class="contrib-row__leads"><b>Driver:</b> Zhiqiu Lin &nbsp;·&nbsp; <b>Primary Advisor:</b> Deva Ramanan &nbsp;·&nbsp; <b>Additional Advisors:</b> Graham Neubig, Yilun Du</div>
+          Five-aspect structured retrieval with max-cosine scoring, the user-query simulator and 50K bilingual benchmark, pooled relevance set construction, and the side-by-side user study against Shotdeck.
+          <div class="contrib-row__leads"><b>Leads:</b> Ryan Rao<sup>*</sup>, George Liu<sup>*</sup></div>
+        </div>
+      </div>
+
+      <div class="contrib-row">
+        <div class="contrib-row__component">Moodio Platform</div>
+        <div class="contrib-row__detail">
+          End-to-end Next.js full-stack platform, GPT-5.3-backed agent orchestrating the three-stage workflow, twelve-model generation integration, asset management, video assembly, and A/B testing infrastructure.
+          <div class="contrib-row__leads"><b>Lead:</b> Ruihuang Yang<sup>*</sup> &nbsp;·&nbsp; <b>Tag Calibration &amp; Corpus:</b> Ryan Rao<sup>*</sup>, Zhiqiu Lin, George Liu<sup>*</sup></div>
         </div>
       </div>
 
@@ -1904,23 +1918,7 @@ footer {
         <div class="contrib-row__component">Video Understanding Models</div>
         <div class="contrib-row__detail">
           Primitive classifier (Qwen3-VL-8B fine-tuned on 1.2M VQA samples), structured caption generator (SFT/DPO/RLHF-V/GSPO), critique-quality ablations, reward modeling, and inference-time scaling.
-          <div class="contrib-row__leads"><b>Leads:</b> Chancharik Mitra, George Liu</div>
-        </div>
-      </div>
-
-      <div class="contrib-row">
-        <div class="contrib-row__component">Retrieval System</div>
-        <div class="contrib-row__detail">
-          Five-aspect structured retrieval with max-cosine scoring, the user-query simulator and 50K bilingual benchmark, pooled relevance set construction, and the side-by-side user study against Shotdeck.
-          <div class="contrib-row__leads"><b>Leads:</b> Ryan Rao, George Liu</div>
-        </div>
-      </div>
-
-      <div class="contrib-row">
-        <div class="contrib-row__component">Moodio Platform</div>
-        <div class="contrib-row__detail">
-          End-to-end Next.js full-stack platform, GPT-5.3-backed agent orchestrating the three-stage workflow, twelve-model generation integration, asset management, video assembly, and A/B testing infrastructure.
-          <div class="contrib-row__leads"><b>Lead:</b> Ruihuang Yang &nbsp;·&nbsp; <b>Tag Calibration &amp; Corpus:</b> Ryan Rao, Zhiqiu Lin, George Liu</div>
+          <div class="contrib-row__leads"><b>Leads:</b> Chancharik Mitra, George Liu<sup>*</sup></div>
         </div>
       </div>
 
@@ -1948,8 +1946,16 @@ footer {
         </div>
       </div>
 
+      <div class="contrib-row">
+        <div class="contrib-row__component">Research Vision</div>
+        <div class="contrib-row__detail">
+          Reframing AI video creation from prompt engineering to <em>learning by watching</em>; grounding professional video understanding in a precise shared cinematic language.
+          <div class="contrib-row__leads"><b>Driver:</b> Zhiqiu Lin &nbsp;·&nbsp; <b>Primary Advisor:</b> Deva Ramanan &nbsp;·&nbsp; <b>Additional Advisors:</b> Graham Neubig, Yilun Du</div>
+        </div>
+      </div>
+
       <p class="contrib-body__footer">
-        <b>Affiliations.</b> All authors are at Carnegie Mellon University except Yilun Du, who is at Harvard University.
+        <b><sup>*</sup>Equal contribution as co-first authors.</b> &nbsp; All authors are at Carnegie Mellon University except Yilun Du, who is at Harvard University.
       </p>
     </div>
   </details>
@@ -2000,7 +2006,7 @@ footer {
 
   function show(idx) {
     if (!currentList.length) return;
-    if (idx < 0 || idx >= currentList.length) return; // no looping
+    if (idx < 0 || idx >= currentList.length) return;
     currentIdx = idx;
     const img = currentList[currentIdx];
     lbImg.src = img.src;
@@ -2008,7 +2014,6 @@ footer {
     const caption = img.getAttribute('data-caption') || '';
     lbCaption.textContent = caption;
     lbCaption.style.display = caption ? '' : 'none';
-    // Show prev only if there's a previous image; next only if there's a next
     lbPrev.hidden = currentIdx <= 0;
     lbNext.hidden = currentIdx >= currentList.length - 1;
   }
