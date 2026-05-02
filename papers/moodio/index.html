@@ -1109,6 +1109,75 @@ footer {
 }
 .aspect-tile__desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.45; }
 
+/* ── Headline result strip (right under hero) ── */
+.result-strip-section {
+  background: linear-gradient(180deg, #fff 0%, #FBF8FF 100%);
+  padding: 1.4rem 0 1.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.result-strip {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 1.2rem 1.6rem;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 10px;
+  box-shadow: 0 4px 18px rgba(147, 83, 211, 0.06);
+}
+.result-strip__label {
+  flex-shrink: 0;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 0.4em 0.7em;
+  border-radius: 4px;
+  line-height: 1;
+}
+.result-strip__claim {
+  flex: 1;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+.result-strip__claim b { font-weight: 600; }
+.result-strip__claim em { color: var(--accent); font-style: italic; font-weight: 600; }
+.result-strip__claim mark {
+  background: linear-gradient(180deg, transparent 60%, rgba(147, 83, 211, 0.18) 60%);
+  padding: 0 0.1em;
+  color: var(--text);
+  font-weight: 600;
+}
+.result-strip__link {
+  flex-shrink: 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+  padding: 0.5em 0.85em;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+.result-strip__link:hover {
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+}
+@media (max-width: 720px) {
+  .result-strip { flex-direction: column; align-items: flex-start; gap: 0.9rem; padding: 1rem 1.2rem; }
+  .result-strip__claim { font-size: 1.02rem; }
+}
+
 /* ── Contributions (collapsible) ── */
 .contrib-section {
   background: var(--bg-alt);
@@ -1286,6 +1355,7 @@ footer {
 
   <p class="hero__subtitle">
     A reference-first AI film studio. <em>Discover</em>, <em>learn from</em>, and <em>reuse</em> professional cinematic clips — all in one place.
+    At its core: a <b>cinematic video search engine</b> that <b>outperforms Gemini Embedding 2 and Qwen3-VL Embedding</b>.
   </p>
 
   <p class="hero__authors">
@@ -1347,6 +1417,20 @@ footer {
   </div>
 </div>
 </header>
+
+<!-- ════════════════════ HEADLINE RESULT STRIP ════════════════════ -->
+<section class="result-strip-section">
+<div class="container">
+  <div class="result-strip">
+    <div class="result-strip__label">Headline Result</div>
+    <div class="result-strip__claim">
+      Our retrieval engine <b>outperforms <mark>Gemini Embedding 2</mark> and <mark>Qwen3-VL Embedding</mark></b>,
+      and <b>matches <mark>Qwen3-VL Reranker</mark></b> quality <em>orders of magnitude faster</em> &mdash; feasible for million-scale corpora.
+    </div>
+    <a class="result-strip__link" href="#retrieval-results">See table &darr;</a>
+  </div>
+</div>
+</section>
 
 <!-- ════════════════════ MOTIVATION ════════════════════ -->
 <!-- (Removed; content folded into the Overview section below.) -->
