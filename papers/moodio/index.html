@@ -21,7 +21,7 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --bg: #F2F0F4;
+  --bg: #F4F3F5;
   --bg-alt: #ECE9EF;
   --bg-dark: #1a1a1a;
   --text: #1a1a1a;
@@ -64,7 +64,7 @@ section:last-of-type { border-bottom: none; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(242, 240, 244, 0.88);
+  background: rgba(244, 243, 245, 0.88);
   backdrop-filter: saturate(180%) blur(10px);
   -webkit-backdrop-filter: saturate(180%) blur(10px);
   border-bottom: 1px solid var(--border);
@@ -85,8 +85,23 @@ section:last-of-type { border-bottom: none; }
   color: var(--text);
   letter-spacing: -0.01em;
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
 }
-.topnav__brand a { color: inherit; font-weight: inherit; text-decoration: none; }
+.topnav__brand a {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+.topnav__brand img {
+  height: 0.85em;
+  width: auto;
+  display: block;
+}
 .topnav__brand-tag {
   display: inline-block;
   font-family: var(--mono);
@@ -94,9 +109,9 @@ section:last-of-type { border-bottom: none; }
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #8A6700;
-  background: #FFEFBE;
-  border: 1px solid #8A6700;
+  color: #6b3bc4;
+  background: var(--accent-light);
+  border: 1px solid var(--accent);
   padding: 0.18em 0.5em;
   border-radius: 3px;
   margin-left: 0.4em;
@@ -107,6 +122,7 @@ section:last-of-type { border-bottom: none; }
   align-items: center;
   gap: 0.3rem;
   flex-wrap: nowrap;
+  min-width: 0;
 }
 .topnav__links a {
   position: relative;
@@ -117,6 +133,13 @@ section:last-of-type { border-bottom: none; }
   padding: 0.45em 0.75em;
   border-radius: 5px;
   transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+@media (min-width: 821px) {
+  .topnav__links a {
+    font-size: clamp(0.62rem, 1.05vw, 0.85rem);
+    padding: 0.45em clamp(0.4em, 0.9vw, 0.85em);
+  }
 }
 .topnav__links a + a:not(.nav-cta)::before {
   content: '';
@@ -163,17 +186,37 @@ section:last-of-type { border-bottom: none; }
     background: #fff;
     border-bottom: 1px solid var(--border);
     padding: 0.5rem 1.2rem 1rem;
-    box-shadow: 0 8px 14px rgba(0,0,0,0.04);
+    box-shadow: none;
     display: none;
   }
   .topnav__links.open { display: flex; }
   .topnav__links a {
     padding: 0.7em 0.4em;
-    border-bottom: 1px solid var(--border);
-    text-align: left;
+    border-bottom: none;
+    text-align: center;
+    box-shadow: none;
   }
   .topnav__links a:last-child { border-bottom: none; }
-  .topnav__links a.nav-cta { margin: 0.6rem 0 0; text-align: center; }
+  .topnav__links a.nav-cta {
+    margin: 0.6rem 0 0;
+    text-align: center;
+    height: 48px;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Hide the leading vertical-bar divider (dash) inside the dropdown */
+  .topnav__links a + a:not(.nav-cta)::before { display: none; }
+
+  /* Hover / tap state: light purple background, dark purple text */
+  .topnav .topnav__links a:not(.nav-cta):hover,
+  .topnav .topnav__links a:not(.nav-cta):active,
+  .topnav .topnav__links a:not(.nav-cta):focus {
+    background: var(--accent-light);
+    color: #6b3bc4;
+  }
 }
 
 /* ── Hero ── */
@@ -185,8 +228,10 @@ section:last-of-type { border-bottom: none; }
 .hero__badges {
   display: inline-flex;
   align-items: stretch;
+  flex-wrap: nowrap;
   gap: 0;
-  margin-bottom: 2.4rem;
+  max-width: 100%;
+  margin-bottom: 1rem;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 1px 0 rgba(0,0,0,0.03);
@@ -196,14 +241,20 @@ section:last-of-type { border-bottom: none; }
   align-items: center;
   gap: 0.6em;
   font-family: var(--mono);
-  font-size: 0.92rem;
+  font-size: clamp(0.55rem, 2.1vw, 0.92rem);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 0.6em 1.2em;
+  padding: 0.6em clamp(0.55em, 2vw, 1.2em);
+  white-space: nowrap;
 }
-.hero__badge--award { color: #8A6700; background: #FFEFBE; }
-.hero__badge--top { color: #fff; background: #C9961A; letter-spacing: 0.08em; }
+.hero__badge svg {
+  width: clamp(11px, 1.6vw, 18px);
+  height: clamp(11px, 1.6vw, 18px);
+  flex-shrink: 0;
+}
+.hero__badge--award { color: #6b3bc4; background: #fff; }
+.hero__badge--top { color: #fff; background: var(--accent); letter-spacing: 0.08em; }
 
 .hero__tagline {
   font-family: 'Instrument Serif', serif;
@@ -256,23 +307,24 @@ section:last-of-type { border-bottom: none; }
 .hero__links {
   display: flex;
   column-gap: 16px;
-  row-gap: 0;
-  justify-content: center;
+  row-gap: 8px;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 .hero__links a {
   display: inline-flex;
   align-items: center;
   gap: 0.7em;
+  height: 44px;
   font-family: var(--mono);
-  font-size: 1rem;
-  padding: 0.6em 1.3em;
+  font-size: 12px;
+  padding: 0 1.3em;
   border-radius: 6px;
   background: var(--bg-dark);
   color: #fff;
   transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s;
 }
-.hero__links-break { flex-basis: 100%; height: 16px; }
+.hero__links-break { flex-basis: 100%; height: 0; }
 .hero__links a:hover { text-decoration: none; }
 .hero__links a:not(.outline):not(.try-live):hover {
   background: var(--accent);
@@ -671,9 +723,14 @@ body.lightbox-open { overflow: hidden; }
 /* ── Stat cards ── */
 .stats-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   margin-top: 2rem;
+}
+@media (min-width: 800px) {
+  .stats-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 .stat-card {
   background: #fff;
@@ -734,7 +791,7 @@ body.lightbox-open { overflow: hidden; }
   padding: 1.5rem 1.8rem;
   display: flex;
   gap: 1.2rem;
-  align-items: center;
+  align-items: flex-start;
   margin: 2rem 0;
 }
 .related-pointer__icon {
@@ -962,7 +1019,28 @@ footer {
 @media (max-width: 600px) {
   section { padding: 3rem 0; }
   .container { padding: 0 1.2rem; }
-  .hero__badges { flex-wrap: wrap; }
+  .hero__links { row-gap: 8px; column-gap: 8px; }
+  .hero__links-break { display: none; }
+  .hero__links a {
+    justify-content: center;
+    text-align: center;
+  }
+  .hero__links a.try-live {
+    flex: 1 1 100%;
+  }
+  .hero__links a:not(.try-live):not(.outline) {
+    flex: 0 1 calc(50% - 4px);
+  }
+  .hero__links a.outline {
+    flex: 1 1 100%;
+  }
+
+}
+@media (min-width: 601px) {
+  .hero__links {
+    justify-content: center;
+    column-gap: 8px;
+  }
 }
 
 /* ── Tarantino Quote Card (Moodio-specific) ── */
@@ -1028,7 +1106,7 @@ footer {
 }
 @media (max-width: 600px) {
   .quote-card { padding: 1.5rem 1.4rem 1.2rem; border-radius: 12px; }
-  .quote-card__text { font-size: 1.02rem; }
+  .quote-card__text { font-size: 1.35rem; }
   .quote-card__mark { font-size: 3rem; margin-bottom: 0.7rem; }
 }
 
@@ -1088,8 +1166,24 @@ footer {
   gap: 0.8rem;
   margin: 2rem 0;
 }
-@media (max-width: 720px) { .aspect-row { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 420px) { .aspect-row { grid-template-columns: 1fr; } }
+@media (max-width: 720px) and (min-width: 601px) {
+  .aspect-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .aspect-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .aspect-row .aspect-tile {
+    flex: 0 0 calc(50% - 0.4rem);
+  }
+}
+@media (max-width: 420px) {
+  .aspect-row .aspect-tile {
+    flex: 0 0 100%;
+  }
+}
 .aspect-tile {
   background: #fff;
   border: 1px solid var(--border);
@@ -1108,75 +1202,6 @@ footer {
   margin-bottom: 0.3rem;
 }
 .aspect-tile__desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.45; }
-
-/* ── Headline result strip (right under hero) ── */
-.result-strip-section {
-  background: linear-gradient(180deg, #fff 0%, #FBF8FF 100%);
-  padding: 1.4rem 0 1.6rem;
-  border-bottom: 1px solid var(--border);
-}
-.result-strip {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 1.4rem;
-  padding: 1.2rem 1.6rem;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--accent);
-  border-radius: 10px;
-  box-shadow: 0 4px 18px rgba(147, 83, 211, 0.06);
-}
-.result-strip__label {
-  flex-shrink: 0;
-  font-family: var(--mono);
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: var(--accent-light);
-  padding: 0.4em 0.7em;
-  border-radius: 4px;
-  line-height: 1;
-}
-.result-strip__claim {
-  flex: 1;
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 1.15rem;
-  line-height: 1.45;
-  color: var(--text);
-}
-.result-strip__claim b { font-weight: 600; }
-.result-strip__claim em { color: var(--accent); font-style: italic; font-weight: 600; }
-.result-strip__claim mark {
-  background: linear-gradient(180deg, transparent 60%, rgba(147, 83, 211, 0.18) 60%);
-  padding: 0 0.1em;
-  color: var(--text);
-  font-weight: 600;
-}
-.result-strip__link {
-  flex-shrink: 0;
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--accent);
-  white-space: nowrap;
-  padding: 0.5em 0.85em;
-  border: 1px solid var(--accent);
-  border-radius: 6px;
-  transition: background 0.15s, color 0.15s;
-}
-.result-strip__link:hover {
-  background: var(--accent);
-  color: #fff;
-  text-decoration: none;
-}
-@media (max-width: 720px) {
-  .result-strip { flex-direction: column; align-items: flex-start; gap: 0.9rem; padding: 1rem 1.2rem; }
-  .result-strip__claim { font-size: 1.02rem; }
-}
 
 /* ── Contributions (collapsible) ── */
 .contrib-section {
@@ -1300,7 +1325,7 @@ footer {
 <nav class="topnav" id="topnav">
   <div class="topnav__inner">
     <div class="topnav__brand">
-      <a href="#top">Moodio</a>
+      <a href="#top"><img src="images/logo.svg" alt="Moodio logo">Moodio</a>
       <span class="topnav__brand-tag">Preprint</span>
     </div>
     <button class="topnav__toggle" aria-label="Toggle menu" aria-expanded="false" onclick="
@@ -1331,10 +1356,12 @@ footer {
 <div class="container fade-up">
   <div class="hero__badges">
     <div class="hero__badge hero__badge--award">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.536.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
       Preprint
     </div>
-    <div class="hero__badge hero__badge--top">Co-Pilot for Video Production</div>
+    <div class="hero__badge hero__badge--top">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.536.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" /></svg>
+      Co-Pilot for Video Production
+    </div>
   </div>
 
   <!-- Tarantino quote card -->
@@ -1418,20 +1445,7 @@ footer {
 </div>
 </header>
 
-<!-- ════════════════════ HEADLINE RESULT STRIP ════════════════════ -->
-<section class="result-strip-section">
-<div class="container">
-  <div class="result-strip">
-    <div class="result-strip__label">Headline Result</div>
-    <div class="result-strip__claim">
-      Our retrieval engine <b>outperforms <mark>Gemini Embedding 2</mark> and <mark>Qwen3-VL Embedding</mark></b>,
-      and <b>matches <mark>Qwen3-VL Reranker</mark></b> quality <em>orders of magnitude faster</em> &mdash; feasible for million-scale corpora.
-    </div>
-    <a class="result-strip__link" href="#retrieval-results">See table &darr;</a>
-  </div>
-</div>
-</section>
-
+<!-- ════════════════════ MOTIVATION ════════════════════ -->
 <!-- ════════════════════ MOTIVATION ════════════════════ -->
 <!-- (Removed; content folded into the Overview section below.) -->
 
@@ -1478,6 +1492,7 @@ footer {
   <div class="key-points">
     <div class="key-point">
       <div class="key-point__illustration">
+        <!-- search icon -->
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#9353D3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
       </div>
       <div class="key-point__header">
@@ -1489,6 +1504,7 @@ footer {
 
     <div class="key-point">
       <div class="key-point__illustration">
+        <!-- academic cap icon -->
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#9353D3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" /></svg>
       </div>
       <div class="key-point__header">
@@ -1500,6 +1516,7 @@ footer {
 
     <div class="key-point">
       <div class="key-point__illustration">
+        <!-- film icon -->
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.3" stroke="#9353D3" width="48" height="48"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" /></svg>
       </div>
       <div class="key-point__header">
@@ -1511,7 +1528,7 @@ footer {
   </div>
 
   <div class="fig-block" style="margin-top:3rem;">
-    <video muted loop playsinline autoplay preload="metadata" style="padding: 6px 2px 0 0; box-sizing: border-box; background: #fff;" aria-label="Moodio reference-first workflow teaser — Leo user journey">
+    <video muted loop playsinline autoplay preload="metadata" style="padding: 4px 2px 0 0; box-sizing: border-box; background: #fff;" aria-label="Moodio reference-first workflow teaser — Leo user journey">
       <source src="images/videos/teaser.mov" type="video/mp4">
       Your browser doesn't support this video.
     </video>
@@ -1533,7 +1550,7 @@ footer {
   </p>
 
   <div class="fig-block" style="margin-top:2rem;">
-    <video muted loop playsinline autoplay preload="metadata" style="padding: 6px 4px 4px 4px; box-sizing: border-box; background: #fff;" aria-label="Chat-to-Inspire interface showing cinematic-terminology and temporal-dynamics queries">
+    <video muted loop playsinline autoplay preload="metadata" style="padding: 4px 4px 4px 4px; box-sizing: border-box; background: #fff;" aria-label="Chat-to-Inspire interface showing cinematic-terminology and temporal-dynamics queries">
       <source src="images/videos/chat_to_inspire.mov" type="video/mp4">
       Your browser doesn't support this video.
     </video>
@@ -1579,7 +1596,7 @@ footer {
     </div>
     <div>
       <h4>Structured retrieval, scalable to millions of videos</h4>
-      <p>5-aspect captions are encoded as <b>separate embeddings</b> and pre-indexed offline. At query time, max-pooling across aspects matches the user's intent to whichever dimension it most directly targets — outperforming embedding baselines and matching generative rerankers <em>orders of magnitude faster</em>. <a href="#retrieval-results">See full results &darr;</a></p>
+      <p>5-aspect captions are encoded as <b>separate embeddings</b> and pre-indexed offline. At query time, max-pooling across aspects matches the user's intent to whichever dimension it most directly targets — outperforming embedding baselines and matching generative rerankers <em>orders of magnitude faster</em>.<br><a href="#retrieval-results">See full results &darr;</a></p>
     </div>
   </div>
 </div>
@@ -1640,6 +1657,7 @@ footer {
     keywords through 400-word cinematic scripts in English and Chinese.
   </p>
 
+  <!-- 1. Structured retrieval (the headline) -->
   <h3 id="retrieval-results" class="sub-heading" style="margin-top:2.5rem;">
     <span class="sub-heading__label">Method · Structured Retrieval</span>
     Five aspects, encoded separately, max-pooled at query time
@@ -1652,7 +1670,7 @@ footer {
     pre-indexed offline.
   </p>
 
-  <div style="overflow-x: auto; margin-top: 1.5rem; border: 1px solid var(--border); border-radius: 8px;">
+  <div style="overflow-x: auto; margin-top: 1.5rem; border: 1px solid var(--border);">
   <table style="width:100%; min-width: 880px; border-collapse: collapse; font-size: 0.86rem;">
     <thead>
       <tr style="background: var(--bg-alt); border-bottom: 2px solid var(--border);">
@@ -1672,7 +1690,7 @@ footer {
     </thead>
     <tbody>
       <tr style="background: #fafafa;">
-        <td colspan="9" style="padding: 0.5rem 0.7rem; font-style: italic; color: var(--text-muted); font-size: 0.82rem;">Off-the-shelf models</td>
+        <td colspan="9" style="padding: 0.5rem 0.7rem; font-style: italic; color: var(--text-muted); font-size: 0.82rem;"><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background: var(--text-muted); margin-right:0.55em; vertical-align:middle;"></span>Off-the-shelf models</td>
       </tr>
       <tr style="border-bottom: 1px solid var(--border);">
         <td style="padding: 0.5rem 0.7rem;">Gemini Embedding 2</td>
@@ -1730,10 +1748,10 @@ footer {
         <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
       </tr>
       <tr style="background: #fafafa;">
-        <td colspan="9" style="padding: 0.5rem 0.7rem; font-style: italic; color: var(--text-muted); font-size: 0.82rem;">Using Qwen3-VL-SFT captions (ours)</td>
+        <td colspan="9" style="padding: 0.5rem 0.7rem; font-style: italic; color: var(--text-muted); font-size: 0.82rem; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); border-right: 2px solid var(--accent);"><span style="display:inline-block; width:8px; height:8px; border-radius:50%; background: var(--accent); margin-right:0.55em; vertical-align:middle;"></span>Using Qwen3-VL-SFT captions (ours)</td>
       </tr>
-      <tr style="border-bottom: 1px solid var(--border);">
-        <td style="padding: 0.5rem 0.7rem;">Qwen3 Embedding</td>
+      <tr>
+        <td style="padding: 0.5rem 0.7rem; border-left: 2px solid var(--accent);">Qwen3 Embedding</td>
         <td style="padding: 0.5rem 0.7rem;">Qwen3-VL-SFT</td>
         <td style="padding: 0.5rem 0.7rem;">Single-Caption</td>
         <td style="text-align:center; padding: 0.5rem 0.5rem;">✓</td>
@@ -1741,24 +1759,25 @@ footer {
         <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
         <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
         <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
-        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted); border-right: 2px solid var(--accent);">—</td>
       </tr>
-      <tr style="background: #F2EAFA; border-bottom: 1px solid var(--border);">
-        <td style="padding: 0.5rem 0.7rem;"><b>Qwen3 Embedding</b></td>
-        <td style="padding: 0.5rem 0.7rem;"><b>Qwen3-VL-SFT</b></td>
-        <td style="padding: 0.5rem 0.7rem;"><b>Structured-Caption</b></td>
-        <td style="text-align:center; padding: 0.5rem 0.5rem;"><b>✓</b></td>
-        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
-        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
-        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
-        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
-        <td style="text-align:center; padding: 0.5rem 0.5rem; color: var(--text-muted);">—</td>
+      <tr style="background: #F2EAFA; color: #6b3bc4; font-weight: 700;">
+        <td style="padding: 0.5rem 0.7rem; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent);">Qwen3 Embedding</td>
+        <td style="padding: 0.5rem 0.7rem; border-bottom: 2px solid var(--accent);">Qwen3-VL-SFT</td>
+        <td style="padding: 0.5rem 0.7rem; border-bottom: 2px solid var(--accent);">Structured-Caption</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; border-bottom: 2px solid var(--accent);">✓</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; border-bottom: 2px solid var(--accent);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; border-bottom: 2px solid var(--accent);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; border-bottom: 2px solid var(--accent);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; border-bottom: 2px solid var(--accent);">—</td>
+        <td style="text-align:center; padding: 0.5rem 0.5rem; border-right: 2px solid var(--accent); border-bottom: 2px solid var(--accent);">—</td>
       </tr>
     </tbody>
   </table>
   </div>
   <p class="fig-block__caption" style="margin-top:0.8rem;"><b>Table 1.</b> Retrieval on the Moodio-T2V benchmark. Our 5-aspect structured-caption retrieval (highlighted) outperforms embedding baselines (Gemini Embedding 2, Qwen3-VL Embedding) and matches Qwen3-VL Reranker quality <em>orders of magnitude faster</em>, since Reranker requires a forward pass per (video, query) pair and is infeasible at million-video scale. <em>Numbers will be filled in upon release.</em></p>
 
+  <!-- 2. CameraBench-Pro taxonomy -->
   <h3 class="sub-heading" style="margin-top:4rem;">
     <span class="sub-heading__label">Data · CameraBench-Pro</span>
     225 cinematic primitives across 17 skill categories
@@ -1792,6 +1811,7 @@ footer {
     </div>
   </div>
 
+  <!-- Two-column taxonomy figures (aspect-balanced) -->
   <div class="two-col--balanced" style="margin-top:2.5rem;">
     <div style="flex-grow: 1.9797;">
       <img class="zoomable" src="images/camera_taxonomy.jpg" alt="CameraBench-Pro camera taxonomy — lens distortion, Dutch angle, height, angle, focus, depth of field"
@@ -1806,6 +1826,7 @@ footer {
   </div>
   <p class="fig-block__caption" style="margin-top:1rem;"><b>Figure 5.</b> Excerpts from the CameraBench-Pro taxonomy. <b>Left:</b> camera-side primitives (lens distortion, Dutch angle, camera angle, camera height, focus &amp; depth of field). <b>Right:</b> scene-side primitives (point of view, shot types, shot transitions, subject framing, playback speed, shot size, overlays).</p>
 
+  <!-- 3. Benchmark -->
   <h3 class="sub-heading" style="margin-top:4rem;">
     <span class="sub-heading__label">Evaluation · Moodio-T2V Benchmark</span>
     50K bilingual queries, simulated from real creator search behavior
@@ -1845,7 +1866,7 @@ footer {
       </div>
       <div>
         <h4>CHAI <span class="pill">CVPR'26 Highlight · Top 3%</span></h4>
-        <p>Critique-based Human–AI Oversight for precise video captioning. CHAI's 5-aspect specification and scalable oversight framework power Moodio's captioning and retrieval models — <b>Qwen3-VL-8B surpasses Gemini-3.1 and GPT-5</b> on caption and reward accuracy. <a href="https://linzhiqiu.github.io/papers/chai/">Website →</a></p>
+        <p>Critique-based Human–AI Oversight for precise video captioning. CHAI's 5-aspect specification and scalable oversight framework power Moodio's captioning and retrieval models — <b>Qwen3-VL-8B surpasses Gemini-3.1 and GPT-5</b> on caption and reward accuracy.<br><a href="https://linzhiqiu.github.io/papers/chai/">Website →</a></p>
       </div>
     </div>
     <div class="related-pointer" style="margin:0;">
@@ -1854,11 +1875,12 @@ footer {
       </div>
       <div>
         <h4>CameraBench <span class="pill">NeurIPS'25 Spotlight · Top 3%</span></h4>
-        <p>Our predecessor benchmark on camera motion understanding: ~3,000 expert-annotated videos, a taxonomy of motion primitives, and evaluations of SfM and VLM methods. CameraBench-Pro extends this from camera motion to the full language of cinema. <a href="https://linzhiqiu.github.io/papers/camerabench/">Website →</a></p>
+        <p>Our predecessor benchmark on camera motion understanding: ~3,000 expert-annotated videos, a taxonomy of motion primitives, and evaluations of SfM and VLM methods. CameraBench-Pro extends this from camera motion to the full language of cinema.<br><a href="https://linzhiqiu.github.io/papers/camerabench/">Website →</a></p>
       </div>
     </div>
   </div>
 
+  <!-- Collaboration card -->
   <div class="collab-card">
     <p class="emphasis">🚀 We are actively advancing Moodio with richer taxonomies, stronger video understanding models, and a growing corpus of professional references.</p>
     <p>
@@ -1868,7 +1890,7 @@ footer {
     <p>
       If you're interested in accessing improved data or models — or in partnering on the Moodio platform — please
       reach out at <a href="mailto:zhiqiulin98@gmail.com">zhiqiulin98@gmail.com</a>,
-      try the live demo at <a href="https://app.moodio.ai">app.moodio.ai</a>, or open a GitHub Issue.
+      try the live demo at <a href="https://app.moodio.art">app.moodio.art</a>, or open a GitHub Issue.
     </p>
   </div>
 </div>
@@ -1883,6 +1905,7 @@ footer {
     Two end-to-end reference-first journeys from real Moodio users — different domains, same workflow.
   </p>
 
+  <!-- Example 1: Museum VR tour -->
   <h3 class="sub-heading" style="margin-top:2.5rem;">
     <span class="sub-heading__label">Example 1 · Museum exhibition</span>
     A VR tour of ancient Babylon
@@ -1895,6 +1918,7 @@ footer {
     <p class="fig-block__caption"><b>Figure 7.</b> A museum exhibition designer searches <em>"entering a new world with VR glasses"</em> to find references (<b>Chat-to-Inspire</b>), then asks Moodio what makes the selected clip feel cinematic — learning that a <b>first-person POV</b>, a <b>dolly-forward through a tunnel</b>, and <b>heavy motion blur</b> converge toward a vanishing point (<b>Chat-to-Learn</b>). Finally, he reuses that POV and warp-tunnel structure but rebuilds the tunnel walls from archaeological excavation layers, bursting into the Babylonian Empire at its peak (<b>Chat-to-Create</b>).</p>
   </div>
 
+  <!-- Example 2: Pet treat ad -->
   <h3 class="sub-heading" style="margin-top:3rem;">
     <span class="sub-heading__label">Example 2 · Pet industry marketing</span>
     A short product video for dog treats
@@ -1907,6 +1931,7 @@ footer {
     <p class="fig-block__caption"><b>Figure 8.</b> A pet industry marketing specialist wants to create short product videos that make dog treats look irresistible but lacks a professional crew. (<b>Chat-to-Inspire</b>) The user searches for clips of pets going crazy for treats and selects a high-energy reference. (<b>Chat-to-Learn</b>) The user asks what cinematic effects are used; the agent explains the <b>rack focus with shallow depth of field</b> shifting from the treat in the foreground to the dog in the background, combined with a <b>speed ramp from slow motion to normal speed</b> as the dog catches the treat. (<b>Chat-to-Create</b>) The user applies the same camera angle and effects to their own treat image, adding more dogs entering the frame and a camera roll for extra energy.</p>
   </div>
 
+  <!-- Release summary -->
   <h3 class="sub-heading" style="margin-top:3rem;">
     <span class="sub-heading__label">Open release</span>
     Everything we built
@@ -1919,7 +1944,7 @@ footer {
     the <b style="color: var(--text);">annotation platform</b>,
     aggregated <b style="color: var(--text);">anonymized user logs</b>,
     and all evaluation code.
-    Try the live system at <a href="https://app.moodio.ai">app.moodio.ai</a>.
+    Try the live system at <a href="https://app.moodio.art">app.moodio.art</a>.
   </p>
 </div>
 </section>
@@ -2090,7 +2115,7 @@ footer {
 
   function show(idx) {
     if (!currentList.length) return;
-    if (idx < 0 || idx >= currentList.length) return;
+    if (idx < 0 || idx >= currentList.length) return; // no looping
     currentIdx = idx;
     const img = currentList[currentIdx];
     lbImg.src = img.src;
@@ -2098,6 +2123,7 @@ footer {
     const caption = img.getAttribute('data-caption') || '';
     lbCaption.textContent = caption;
     lbCaption.style.display = caption ? '' : 'none';
+    // Show prev only if there's a previous image; next only if there's a next
     lbPrev.hidden = currentIdx <= 0;
     lbNext.hidden = currentIdx >= currentList.length - 1;
   }
