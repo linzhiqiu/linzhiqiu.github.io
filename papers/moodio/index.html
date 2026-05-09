@@ -459,6 +459,35 @@ section:last-of-type { border-bottom: none; }
 .key-point p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
 .key-point p b { color: var(--text); }
 
+@media (min-width: 821px) {
+  .key-points {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    align-items: stretch;
+  }
+  .key-point {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    row-gap: 0.8rem;
+    align-content: start;
+    height: 100%;
+  }
+  .key-point__illustration {
+    grid-row: auto;
+    aspect-ratio: auto;
+    height: 110px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .key-point__illustration svg {
+    width: 56px !important;
+    height: 56px !important;
+    max-width: none;
+  }
+}
+
 /* ── Figure blocks ── */
 .fig-block { margin: 2.5rem 0; }
 .fig-block img,
@@ -1412,7 +1441,7 @@ footer {
     <sup>*</sup>Equal contribution as co-first authors
   </p>
 
-  <div style="max-width: 720px; margin: 0 auto 1.6rem; padding: 0.95rem 1.3rem; background: var(--accent-light); border: 1px solid rgba(147, 83, 211, 0.22); border-radius: 8px; text-align: center;">
+  <div style="max-width: 720px; margin: 0 auto 1.6rem; padding: 0.95rem 1.3rem; background: #ffffff; border-radius: 8px; text-align: center;">
     <p style="font-size: 0.96rem; line-height: 1.55; margin: 0; color: #4a3170;">
       We find that Moodio's <b style="color: #6b3bc4;">retrieve-then-generate workflow yields more compelling final videos with fewer prompt iterations</b> than text-only generation. Want to see for yourself?
     </p>
@@ -1497,8 +1526,8 @@ footer {
     <b>Inspire → Learn → Generate</b>.
   </p>
 
-  <p class="section-lead" style="margin-top: 1.5rem; padding: 1rem 1.3rem; background: var(--accent-light); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; font-size: 1rem;">
-    <b style="color: #6b3bc4;">Does it actually help?</b> In a controlled A/B study with 30 active creators, Moodio's retrieve-then-generate workflow produces more compelling final videos, incorporates roughly <b>4×</b> more cinematic techniques, and cuts prompt iterations by <b>55%</b>, which roughly halves total wall-clock per finished video.
+  <p class="section-lead" style="margin-top: 1.5rem; padding: 1rem 1.3rem; background: #ffffff; border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; font-size: 1rem;">
+    <b style="color: #6b3bc4;">Does it actually help?</b><br>In a controlled A/B study with 30 active creators, Moodio's retrieve-then-generate workflow produces more compelling final videos, incorporates roughly <b>4×</b> more cinematic techniques, and cuts prompt iterations by <b>55%</b>, which roughly halves total wall-clock per finished video.
   </p>
 
   <div class="key-points">
