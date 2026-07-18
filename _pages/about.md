@@ -228,7 +228,7 @@ Hi! I am a final year PhD student at Robotics Institute of Carnegie Mellon Unive
 - *2016.09 - 2020.06*, Undergraduate, Cornell University.
 
 # 💬 Invited Talks
-- *2026.06-07*, I presented *Scalable Oversight Across Generative Visual AI: Toward Visual Storytelling for Everyone* at [Sooth Labs](https://soothlabs.com/) (thanks **[Russ Salakhutdinov](https://www.cs.cmu.edu/~rsalakhu/)** for inviting me and [Yaser Sheikh](https://www.cs.cmu.edu/~yaser/) for hosting!) and [Runway](https://runwayml.com/) (thanks **[Jimei Yang](https://jimeiyang.github.io/)** for inviting me!).
+- *2026.06-07*, I presented *Scalable Oversight Across Generative Visual AI: Toward Visual Storytelling for Everyone* at [Sooth Labs](https://soothlabs.com/) (thanks [Russ Salakhutdinov](https://www.cs.cmu.edu/~rsalakhu/) for inviting me and [Yaser Sheikh](https://www.cs.cmu.edu/~yaser/) for hosting!) and [Runway](https://runwayml.com/) (thanks [Jimei Yang](https://jimeiyang.github.io/) for inviting me!).
 - *2024.10-11*, I presented *Evaluating and Improving Vision-Language Generative Models* at the [Princeton Visual AI Lab](https://visualai.princeton.edu/) and [Cornell University](https://www.cornell.edu/) (thanks [Xindi Wu](https://xindiwu.github.io/) and [CUAI](https://cuai.github.io/) for inviting me!).
 - *2024.06*, I presented [GenAI-Bench Benchmark](https://linzhiqiu.github.io/papers/genai_bench/) at the CVPR'24 Workshop on Synthetic Data.
 - *2022.06*, I presented [CLEAR Benchmark](https://linzhiqiu.gitbook.io/the-clear-benchmark/) at the [CVPR'22 2nd Workshop on Open World Vision](https://www.cs.cmu.edu/~shuk/vplow.html).
